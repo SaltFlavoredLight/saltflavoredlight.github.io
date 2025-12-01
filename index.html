@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>link tree of Rayzhi</title>
+    <!-- OG and X --> 
+    <meta name="google-site-verification" content="ItFreJJJUERiC44OxgD1KLxVNBJFXybHSHvoIjH9H80" />
+    <meta property="og:url" content="https://rayzhi1130.surge.sh">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ray Studio 1130 -- Rayzhi">
+    <meta property="og:description" content="Welcome! Share something I want. hello, this is Ray, and I'm like Art, Codings, Music and Math! PS: I'm a Christian">
+    <meta property="og:image" content="">
+    <!-- style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/theme-colors.css">
+    <link rel="stylesheet" href="/styles/link-style.css">
+	
+	
+	
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for custom colors (optional, but good practice) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // A sky-related blue/cyan color
+                        'sky-relevant': '#87CEEB',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom style to ensure the background image covers the area and is fixed -->
+    <style>
+        .sky-banner {
+            /* Set the specific height requested */
+            height: 50vh; 
+            min-height: 300px; /* Ensure a minimum height for smaller screens */
+            background-image: url('https://cdn.wallpapersafari.com/59/10/J8HDVO.jpg');
+            background-size: cover;
+            background-position: center;
+            /* Optional: Add a slight fixed effect for parallax feel */
+            background-attachment: fixed; 
+        }
+    </style>
+</head>
+
+<body class="green-theme">
+
+
+    <section class="sky-banner flex items-center justify-center p-4 rounded-b-xl shadow-2xl overflow-hidden">
+        
+        <!-- Overlay for better text readability, using a relevant sky color for the border/accent -->
+        <div class="bg-black bg-opacity-50 backdrop-blur-sm p-8 md:p-12 rounded-2xl border-4 border-sky-relevant shadow-xl text-center max-w-4xl w-full mx-4">
+            
+            <h1 class="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight tracking-tight">
+                WELCOME TO NEW WEBSITE!
+            </h1>
+            
+            <p class="text-lg sm:text-2xl md:text-3xl font-light text-sky-relevant mb-6">
+                <span class="font-bold block sm:inline">raystudio.net</span> is our new domain name!
+            </p>
+            
+            <p class="text-sm sm:text-base md:text-lg font-mono text-gray-300 italic mb-6">
+                (before is rayzhi1130.surge.sh)
+            </p>
+        </div>
+    </section>
+	
+	
+	
+    <!-- for the website... -->
+    <div class="head">
+        <div class="icon">
+            <img src="/images/Icon.webp" alt="Rayzhi's Icon">
+        </div>
+        <h1 style="font-weight: 900;"> Rayzhi </h1>
+        <p>Share something I want. <br>
+           hello, this is Ray, and I'm like Art, Codings, Music and Math!<br>
+           <span onclick="openPopup('popup1')">PS: I'm a Christian</span></p>
+    </div>
+
+    <div class="banners">
+        <a href="https://ccbcmarylandsample.surge.sh" target="_blank" class="banner">
+            <div class="banner-left">
+            </div>
+            <div class="banner-text"> Go there for another website MADE BY ME! </div>
+            <div class="banner-right">  </div>
+        </a>
+		
+        <div class="banner banner-disable-hover" style="height: 350px;">
+            <iframe width="100%" height="300" src="https://www.youtube.com/embed/moL1-jPVKEU?si=HMrzGIX2gt01foQZ&amp;start=94" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <hr>
+    <h3> do you want to play math game? </h3>
+
+    <div class="banners">
+        <a href="/math-game/QESG" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/math.svg" alt="math symbol">
+            </div>
+            <div class="banner-text"> Quadratic Equation Solving Game </div>
+            <div class="banner-right">  </div>
+        </a>
+
+        <a href="/math-game/MSTG" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/abacus.svg" alt="abacus">
+            </div>
+            <div class="banner-text"> Mutiple Slover Testing Game  </div>
+            <div class="banner-right">  </div>
+        </a>
+
+
+        <a href="/math-game/ASR" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/plus.svg" alt="abacus">
+            </div>
+            <div class="banner-text"> Addition Speed Run! (Recently released.) </div>
+            <div class="banner-right">  </div>
+        </a>
+    </div>
+
+    <hr>
+    <h3> more thing... </h3>
+
+    <div class="banners">
+        <a href="https://youtube.com/@RayStudio1130" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/youtube-color.png" alt="headphones">
+            </div>
+            <div class="banner-text"> My youtube channel (see all my videos!) </div>
+            <div class="banner-right">  </div>
+        </a>
+
+        <a href="https://musescore.com/user/101427901" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/headphones.svg" alt="headphones">
+            </div>
+            <div class="banner-text"> My all music on musescore </div>
+            <div class="banner-right">  </div>
+        </a>
+
+        <a href="mailto:rayzhi1130@gmail.com" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/mail-opened.svg" alt="mail opened">
+            </div>
+            <div class="banner-text"> Email me: rayzhi1130@gmail.com </div>
+            <div class="banner-right">  </div>
+        </a>
+    </div>
+
+    <hr>
+    <h3> sites-settings </h3>
+
+    <div class="banners r2-grids">
+        <div class="banner r2-grid banner-disable-hover gray-theme">
+            <div class="banner-text"> Change themes? (upcoming) </div>
+        </div>
+
+        <a href="https://forms.gle/tUSECSCn4PTzTqxQ8" target="_blank" class="banner r2-grid">
+            <div class="banner-text"> Feedback? cilck there! </div>
+        </a>
+    </div>
+
+    <footer>
+        <p>Copyright &copy; 2025 RayStudio. All rights reserved. </p>
+        <p>Love the Lord your God with all your heart and with all your soul and with all your mind. <br>
+           (<span onclick="openPopup('popup2')">cheating</span> from Matthew 22:37)</p>
+    </footer>
+
+    <!-- now those are pop up window div, those will set: .popup-overlay!-->
+    <div class="popup-overlay" id="popup1">
+        <div class="popup-content">
+            <h2>Congratulations on finding this hidden button! I'd love to share my story with you...</h2>
+            <p>Before I came to faith in Jesus, I was deeply resistant to Him for more than <strong>one year</strong>. At that time, I didn't believe in God at all-not in Jesus, not in anything spiritual.<br>
+               The thought of becoming religious seemed so far from who I was.</p>
+            <p>But something incredible happened.<br>
+               God's power is profound-He makes the impossible possible. One day, He changed my heart so deeply that I could feel it. Since that moment, I've been a believer. It wasn't a decision I expected to make, but it transformed me.</p>
+            <p><a href="https://www.willowcreek.org/2023/09/a-great-prayer-to-accept-jesus">Check out this article to see what others have said about their experiences coming to believe.</a> and if you start to feel something stirring within, I'd love to hear from you. Feel free to <a href="mailto:rayzhi1130@gmail.com">email me your thoughts</a>.</p>
+            <button onclick="closePopup('popup1')" class="popup-close-button">Close</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="popup2">
+        <div class="popup-content">
+            <h2>where you found it?</h2>
+            <p>OK those is testing page which means they should not to public. but you can peek it! <a href="/interactive-video-player/play">that is testing</a></p>
+            <button onclick="closePopup('popup2')" class="popup-close-button">Close</button>
+          </div>
+    </div>
+
+    <div class="popup-overlay" id="popup3">
+        <div class="popup-content">
+            <p>OK, bless You will continue to grow in the love he gives you. Amen. <br>
+               there, <strong>read it Deeply as much as you can</strong>, You don't need to say it.(You just need to recite it silently.) Don't worry, God won't force you. He just wants you to do your best. after that, You will officially enter God's family.</p>
+            <p><i>Father, I know I've sinned and can't save myself. Thank you for loving me enough to send Jesus, who lived without sin, to take my place on the cross so I can be forgiven and gain eternal life. I believe in Jesus-His words, His wisdom, as written in the Bible. Today, I give You my day, Lord. I commit to following You every day until I see Your face in Heaven. In Jesus' name, Amen.</i></p>
+            <p>(you maybe think that a Christian should get baptized, you are right, but acknowledging the existence of God in the deepest part of your heart is your first step.)</p>
+            <button onclick="closePopup('popup3')" class="popup-close-button">Amen</button>
+        </div>
+    </div>
+
+    <!-- AFTER ALL show those, now make it like a program
+        that's JS, you will see <script> on there! -->
+    <script>
+        function openPopup(popupId) {
+            document.querySelector(`#${popupId}`).classList.add('active');
+        }
+
+        function closePopup(popupId) {
+            document.querySelector(`#${popupId}`).classList.remove('active');
+        }
+    </script>
+    <script>
+    //document.body.classList.add("your-class-name");
+    </script>
+    <!-- there:
+         1, change theme
+         2, add a tag... -->
+</body>
+
+</html> 

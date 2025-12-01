@@ -1,0 +1,45 @@
+:root {
+    --background-color: #FFDE59;
+    --theme-color-button: #FFECA1;
+    --theme-color-button-hover: #FFE684;
+    --theme-color-border: #F4C301;
+    --theme-color-border-hover: #FDCB03;
+    --theme-color-text: #000000;
+    --theme-color-text-hover: #393838;
+    --theme-color-popup: #F6E4A2;
+}
+
+/* you can change theme */
+.green-theme {
+    --background-color: #89EAC6;
+    --theme-color-button: #14C483;
+    --theme-color-button-hover: #0AEE9B;
+    --theme-color-border: #3E8D70;
+    --theme-color-border-hover: #5AC09B;
+    --theme-color-text: #000000;
+    --theme-color-text-hover: #566D65;
+    --theme-color-popup: #BCEAD9;
+}
+
+.red-theme {
+    --background-color: #EE8C8C;
+    --theme-color-button: #9D9FA6;
+    --theme-color-button-hover: #DBDBDC;
+    --theme-color-border: #3F434C;
+    --theme-color-border-hover: #666666;
+    --theme-color-text: #555;
+    --theme-color-text-hover: #566D65;
+    --theme-color-popup: #F1B5B5;
+}
+
+.gray-theme {
+    --background-color: #CBC8C8;
+    --theme-color-button: #77777B;
+    --theme-color-button-hover: #4D4D51;
+    --theme-color-border: #999;
+    --theme-color-border-hover: #313132;
+    --theme-color-text: #AAA;
+    --theme-color-text-hover: #FFF;
+    --theme-color-popup: #A1A1A1;
+}
+
