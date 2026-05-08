@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js Solar System</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #050505; }
+        .ui-container {
+            position: fixed;
+            bottom: 40px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+            gap: 30px;
+        }
+        .glass-btn {
+            pointer-events: auto;
+            padding: 14px 32px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 600;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .glass-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <div class="ui-container">
+        <button class="glass-btn" id="btnPause">Play / Pause</button>
+        <button class="glass-btn">Earth</button>
+        <button class="glass-btn">Whole system</button>
+    </div>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+          }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        // --- 1. START AND INITIALIZE ---
+        const scene = new THREE.Scene();
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        document.body.appendChild(renderer.domElement);
+
+        // --- 2. OBJECTS ---
+        
+        // 2.1 Sun (Glows using Emissive)
+        const sunGeometry = new THREE.SphereGeometry(100, 32, 32);
+        const sunMaterial = new THREE.MeshStandardMaterial({ 
+            emissive: 0xffff00, 
+            emissiveIntensity: 2, 
+            color: 0x000000 
+        });
+        const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+        scene.add(sun);
+
+        // 2.2 Earth (Reacts to Light)
+        const earthGeometry = new THREE.SphereGeometry(30, 32, 32);
+        const earthMaterial = new THREE.MeshStandardMaterial({ color: 0x2233ff });
+        const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+        earth.receiveShadow = true;
+        earth.castShadow = true;
+        scene.add(earth);
+        
+        //2.3 Ring:
+        const RING_COLOR = 0x444444;
+
+        const innerRadius = 399;   // slightly smaller to make it look like a line
+        const outerRadius = 400;
+
+        const geometry = new THREE.RingGeometry(innerRadius, outerRadius, 128);
+
+        const material = new THREE.MeshBasicMaterial({
+            color: RING_COLOR,
+            side: THREE.DoubleSide
+        });
+
+        const ring = new THREE.Mesh(geometry, material);
+
+        ring.rotation.x = -Math.PI / 2;
+
+        ring.position.set(0, 0, 0);
+
+        scene.add(ring);
+
+
+        //2.4 MOON + MOON RING
+
+        // Only variable you change:
+        const moonOrbitRadius = 80;   // distance from Earth
+
+        // Moon sphere (inherits defaults)
+        const moonGeometry = new THREE.SphereGeometry(10, 32, 32);
+        const moonMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa });
+        const moon = new THREE.Mesh(moonGeometry, moonMaterial);
+        moon.castShadow = true;
+        moon.receiveShadow = true;
+
+        // Add moon to scene
+        scene.add(moon);
+
+        // Moon ring (inherits your ring style)
+        const MOON_RING_COLOR = RING_COLOR; // inherits Earth ring color
+
+        const moonInner = moonOrbitRadius - 1;
+        const moonOuter = moonOrbitRadius;
+
+        const moonRingGeo = new THREE.RingGeometry(moonInner, moonOuter, 64);
+        const moonRingMat = new THREE.MeshBasicMaterial({
+            color: MOON_RING_COLOR,
+            side: THREE.DoubleSide
+        });
+
+        const moonRing = new THREE.Mesh(moonRingGeo, moonRingMat);
+        moonRing.rotation.x = -Math.PI / 2;
+        scene.add(moonRing);
+
+
+        // --- 3. LIGHT ---
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.1); // Dim light so night isn't pitch black
+        scene.add(ambientLight);
+
+        const sunLight = new THREE.PointLight(0xffffff, 1000000); // Powerful light at center
+        sunLight.position.set(0, 0, 0);
+        sunLight.castShadow = true;
+        scene.add(sunLight);
+
+        // --- 4. CAMERA SETTING ---
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000);
+        camera.position.set(0, 600, 0);
+        camera.lookAt(0, 0, 0);
+
+        // --- 5. LOGIC SETTING ---
+        const state = {
+            isPaused: false,
+            angle: 0,
+            orbitSpeed: -0.005,
+            orbitRadius: 400
+        };
+        const moonState = {
+            angle: 0,
+            speed: -0.005 * 12 ,
+            radius: moonOrbitRadius
+        };
+
+        // Handle the Pause Button
+        document.getElementById('btnPause').addEventListener('click', () => {
+            state.isPaused = !state.isPaused;
+        });
+
+        // --- 6. ANIMATION LOOP ---
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (!state.isPaused) {
+                state.angle += state.orbitSpeed;
+                
+                // Circular Math
+                earth.position.x = Math.cos(state.angle) * state.orbitRadius;
+                earth.position.z = Math.sin(state.angle) * state.orbitRadius;
+
+                // Rotations
+                sun.rotation.y += 0.005;
+                earth.rotation.y += 0.02;
+
+                // --- Moon orbit ---
+                moonState.angle += moonState.speed;
+
+                moon.position.x = earth.position.x + Math.cos(moonState.angle) * moonState.radius;
+                moon.position.z = earth.position.z + Math.sin(moonState.angle) * moonState.radius;
+
+                // Keep moon ring centered on Earth
+                moonRing.position.set(earth.position.x, 0, earth.position.z);
+                
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
