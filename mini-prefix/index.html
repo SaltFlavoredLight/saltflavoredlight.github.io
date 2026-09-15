@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Try some Post Fix Stuff</title>
+    <style>
+        table, th, td {
+        border: 1px solid #212121;
+        }
+        
+        .stackThinking {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #212121;
+        }
+
+        .stackThinking div {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            border-right: 1px solid #212121;
+            height: 50px;
+            min-width: 50px;
+            justify-content: center;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1> Enter your prefix here!</h1>
+    <input type="text" id="tokenInput">
+    <button id="startButton">Start</button>
+
+    <p> Created by Ray within 30 minutes </p>
+
+    <br>
+    
+    <div class="stackThinking" id="stack">
+        <div> 1 </div>
+    </div>
+
+    <br> 
+
+    <table id="table">
+        <tr>
+            <th> Token </th>
+            <th> Calculation Needed </th>
+            <th> Snapshot of the Stack </th>
+        </tr>
+    </table>
+
+    <script>
+        const input = document.getElementById("tokenInput");
+        const table = document.getElementById("table");
+        const stackListElement = document.getElementById("stack");
+        let tokenList = [];
+        let stackInstance;
+
+        class stackGroup {
+            constructor(stackListElement) {
+                if (!(stackListElement instanceof HTMLElement)) {
+                    throw new Error("stackListElement must be a valid DOM element");
+                }
+                this.stack = [];
+                this.stackList = stackListElement;
+            }
+
+            pop() {
+                if (this.stack.length === 0) {
+                    console.warn("Stack is empty. Nothing to pop.");
+                    return null;
+                }
+                const result = this.stack.pop();
+                this.updateHTML();
+                return result;
+            }
+
+            push(token) {
+                this.stack.push(token);
+                this.updateHTML();
+            }
+
+            updateHTML() {
+                // Clear the list
+                this.stackList.innerHTML = "";
+                // Rebuild stack display
+                this.stack.forEach((value) => {
+                    const newDiv = document.createElement("div");
+                    newDiv.textContent = value; // safer than innerHTML
+                    this.stackList.appendChild(newDiv);
+                });
+            }
+        }
+
+
+        function init() {
+            stackInstance = new stackGroup(stackListElement);
+
+            table.innerHTML = `
+            <tr>
+                <th> Token </th>
+                <th> Snapshot of the Stack </th>
+            </tr>`
+
+            stackListElement.innerHTML = ``;
+            tokenList = input.value.split(" ");
+            console.log(tokenList);
+        };
+
+        function calculateEachStep () {
+
+            // step 1: read the first token I know.
+            if (tokenList.length === 0) {
+                return;
+            }
+
+            let token = tokenList.shift();
+
+            // step 2: is that a operator or a operends?
+            if (token === "+"){
+                let b = stackInstance.pop();
+                let a = stackInstance.pop();
+                stackInstance.push(a + b);
+
+            } else if (token === "-"){
+                let b = stackInstance.pop();
+                let a = stackInstance.pop();
+                stackInstance.push(a - b);
+
+            } else if (token === "^"){
+                let b = stackInstance.pop();
+                let a = stackInstance.pop();
+                stackInstance.push(a ^ b);
+
+            } else if (token === "*"){
+                let b = stackInstance.pop();
+                let a = stackInstance.pop();
+                stackInstance.push(a * b);
+
+            } else if (token === "/"){
+                let b = stackInstance.pop();
+                let a = stackInstance.pop();
+                stackInstance.push(a / b);
+            } else {
+                stackInstance.push(parseInt(token))
+            }
+
+
+            // step 0: forgot last one log, log first!
+            let snapshot = stackInstance.stack;
+            
+            //pop + push again
+
+            const newLog = document.createElement("tr");
+            newLog.innerHTML = `
+                <th> ${token} </th>
+                <th> ${JSON.stringify(snapshot)} </th>
+            `;
+            table.appendChild(newLog);            
+
+            // popup the last 2, if it's not operends I will add it back.
+            console.log(token)
+
+            setTimeout(calculateEachStep, 1000);
+                
+        };
+
+        function startCalculation() {
+            init();
+            calculateEachStep();
+        };
+
+        document.getElementById("startButton").addEventListener("click", startCalculation);
+    </script>
+</body>
+</html>
