@@ -60,12 +60,14 @@
 </head>
 <body>
 
-    <h1> Enter your Post Fix here!</h1>
+    <h1> Enter your Tokens here!</h1>
 
     <input type="text" id="tokenInput"><br>
     <div>
-    <input type="radio" id="checkReverse">
-    <label for="checkReverse">Click Me if you are enter the Prefix Form (Reverse Token)</label>
+    
+    <label for="checkReverse"><input type="radio" id="checkReverse" name="whichOne">Prefix Form</label>
+    <label for="checkNotReverse"><input type="radio" id="checkNotReverse" checked name="whichOne">Postfix Form</label>   
+    
     </div><br>
     <button id="startButton">Start</button>
     <p> Make sure you enter space between each token! like "3 3 +" not "33+"</p>
