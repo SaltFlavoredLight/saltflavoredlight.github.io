@@ -37,7 +37,7 @@ a {
 /* for links */
 .banners {
     display: grid;
-    width: 100%
+    width: 100%;
     max-width: 600px;
     padding: 16px;
 }
@@ -54,7 +54,7 @@ a {
     border-radius: 41px;
     border: 6px solid var(--theme-color-border);
     background-color: var(--theme-color-button);
-    transition: border 0.7s ease, box-shadow 0.7s ease, color 0.7s ease, background-color 0.7s ease;
+    transition: border 0.7s ease, box-shadow 0.7s ease, color 0.7s ease, background-color 0.7s ease, transform 0.7s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     /*testing*/
     margin: 10px;
