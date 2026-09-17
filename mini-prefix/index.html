@@ -65,8 +65,8 @@
     <input type="text" id="tokenInput"><br>
     <div>
     
-    <!-- <label for="checkReverse"><input type="radio" id="checkReverse" name="whichOne">Prefix Form</label> 
-    <label for="checkNotReverse"><input type="radio" id="checkNotReverse" checked name="whichOne">Postfix Form</label>   -->
+    <label for="checkReverse"><input type="radio" id="checkReverse" name="whichOne">Prefix Form</label> 
+    <label for="checkNotReverse"><input type="radio" id="checkNotReverse" checked name="whichOne">Postfix Form</label>
     
     </div><br>
     <button id="startButton">Start</button>
@@ -96,7 +96,7 @@
         const input = document.getElementById("tokenInput");
         const table = document.getElementById("table");
         const stackListElement = document.getElementById("stack");
-        const checkReverse = false; //document.getElementById("checkReverse");
+        const checkReverse = document.getElementById("checkReverse");
         let tokenList = [];
         let stackInstance;
 
@@ -164,51 +164,59 @@
             }
 
             let token = tokenList.shift();
+            
+            let a;
+            let b;
 
             // step 2: is that a operator or a operends?
             if (token === "+"){
                 if (checkReverse.checked === true) {
-                    let a = stackInstance.pop();
-                    let b = stackInstance.pop();
-                }                
-                let b = stackInstance.pop();
-                let a = stackInstance.pop();
+                    a = stackInstance.pop();
+                    b = stackInstance.pop();
+                } else {
+                	b = stackInstance.pop();
+                	a = stackInstance.pop();
+                }
                 stackInstance.push(a + b);
 
             } else if (token === "-"){
                 if (checkReverse.checked === true) {
-                    let a = stackInstance.pop();
-                    let b = stackInstance.pop();
-                }                  
-                let b = stackInstance.pop();
-                let a = stackInstance.pop();
+                    a = stackInstance.pop();
+                    b = stackInstance.pop();
+                } else {
+                	b = stackInstance.pop();
+                	a = stackInstance.pop();
+                }
                 stackInstance.push(a - b);
 
             } else if (token === "^"){
                 if (checkReverse.checked === true) {
-                    let a = stackInstance.pop();
-                    let b = stackInstance.pop();
-                } 
-                let b = stackInstance.pop();
-                let a = stackInstance.pop();
+                    a = stackInstance.pop();
+                    b = stackInstance.pop();
+                } else {
+                	b = stackInstance.pop();
+                	a = stackInstance.pop();
+                }
                 stackInstance.push(a ^ b);
 
             } else if (token === "*"){
                 if (checkReverse.checked === true) {
-                    let a = stackInstance.pop();
-                    let b = stackInstance.pop();
-                } 
-                let b = stackInstance.pop();
-                let a = stackInstance.pop();
+                    a = stackInstance.pop();
+                    b = stackInstance.pop();
+                } else {
+                	b = stackInstance.pop();
+                	a = stackInstance.pop();
+                }
                 stackInstance.push(a * b);
 
             } else if (token === "/"){
                 if (checkReverse.checked === true) {
-                    let a = stackInstance.pop();
-                    let b = stackInstance.pop();
-                } 
-                let b = stackInstance.pop();
-                let a = stackInstance.pop();
+                    a = stackInstance.pop();
+                    b = stackInstance.pop();
+                } else {
+                	b = stackInstance.pop();
+                	a = stackInstance.pop();
+                }
                 stackInstance.push(a / b);
             } else {
                 stackInstance.push(parseInt(token))
