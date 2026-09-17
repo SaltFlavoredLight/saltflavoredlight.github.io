@@ -167,26 +167,46 @@
 
             // step 2: is that a operator or a operends?
             if (token === "+"){
+                if (checkReverse.checked === true) {
+                    let a = stackInstance.pop();
+                    let b = stackInstance.pop();
+                }                
                 let b = stackInstance.pop();
                 let a = stackInstance.pop();
                 stackInstance.push(a + b);
 
             } else if (token === "-"){
+                if (checkReverse.checked === true) {
+                    let a = stackInstance.pop();
+                    let b = stackInstance.pop();
+                }                  
                 let b = stackInstance.pop();
                 let a = stackInstance.pop();
                 stackInstance.push(a - b);
 
             } else if (token === "^"){
+                if (checkReverse.checked === true) {
+                    let a = stackInstance.pop();
+                    let b = stackInstance.pop();
+                } 
                 let b = stackInstance.pop();
                 let a = stackInstance.pop();
                 stackInstance.push(a ^ b);
 
             } else if (token === "*"){
+                if (checkReverse.checked === true) {
+                    let a = stackInstance.pop();
+                    let b = stackInstance.pop();
+                } 
                 let b = stackInstance.pop();
                 let a = stackInstance.pop();
                 stackInstance.push(a * b);
 
             } else if (token === "/"){
+                if (checkReverse.checked === true) {
+                    let a = stackInstance.pop();
+                    let b = stackInstance.pop();
+                } 
                 let b = stackInstance.pop();
                 let a = stackInstance.pop();
                 stackInstance.push(a / b);
