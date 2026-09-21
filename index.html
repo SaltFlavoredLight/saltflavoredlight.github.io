@@ -30,7 +30,7 @@
         <h1 style="font-weight: 900;"> Rayzhi </h1>
         <p>Share something I want. <br>
            hello, this is Ray, and I'm like Art, Codings, Music and Math!<br>
-           <span onclick="openPopup('popup1')">PS: I'm a Christian</span></p>
+           <span>PS: I'm a Christian</span></p>
     </div>
 
     <div class="banners">
@@ -121,57 +121,8 @@
     <footer>
         <p>Copyright &copy; 2025 RayStudio. All rights reserved. </p>
         <p>Love the Lord your God with all your heart and with all your soul and with all your mind. <br>
-           (<span onclick="openPopup('popup2')">cheating</span> from Matthew 22:37)</p>
+           from Matthew 22:37)</p>
     </footer>
-
-    <!-- now those are pop up window div, those will set: .popup-overlay!-->
-    <div class="popup-overlay" id="popup1">
-        <div class="popup-content">
-            <h2>Congratulations on finding this hidden button! I'd love to share my story with you...</h2>
-            <p>Before I came to faith in Jesus, I was deeply resistant to Him for more than <strong>one year</strong>. At that time, I didn't believe in God at all-not in Jesus, not in anything spiritual.<br>
-               The thought of becoming religious seemed so far from who I was.</p>
-            <p>But something incredible happened.<br>
-               God's power is profound-He makes the impossible possible. One day, He changed my heart so deeply that I could feel it. Since that moment, I've been a believer. It wasn't a decision I expected to make, but it transformed me.</p>
-            <p><a href="https://www.willowcreek.org/2023/09/a-great-prayer-to-accept-jesus">Check out this article to see what others have said about their experiences coming to believe.</a> and if you start to feel something stirring within, I'd love to hear from you. Feel free to <a href="mailto:rayzhi1130@gmail.com">email me your thoughts</a>.</p>
-            <button onclick="closePopup('popup1')" class="popup-close-button">Close</button>
-        </div>
-    </div>
-
-    <div class="popup-overlay" id="popup2">
-        <div class="popup-content">
-            <h2>where you found it?</h2>
-            <p>OK those is testing page which means they should not to public. but you can peek it! <a href="/interactive-video-player/play">that is testing</a></p>
-            <button onclick="closePopup('popup2')" class="popup-close-button">Close</button>
-          </div>
-    </div>
-
-    <div class="popup-overlay" id="popup3">
-        <div class="popup-content">
-            <p>OK, bless You will continue to grow in the love he gives you. Amen. <br>
-               there, <strong>read it Deeply as much as you can</strong>, You don't need to say it.(You just need to recite it silently.) Don't worry, God won't force you. He just wants you to do your best. after that, You will officially enter God's family.</p>
-            <p><i>Father, I know I've sinned and can't save myself. Thank you for loving me enough to send Jesus, who lived without sin, to take my place on the cross so I can be forgiven and gain eternal life. I believe in Jesus-His words, His wisdom, as written in the Bible. Today, I give You my day, Lord. I commit to following You every day until I see Your face in Heaven. In Jesus' name, Amen.</i></p>
-            <p>(you maybe think that a Christian should get baptized, you are right, but acknowledging the existence of God in the deepest part of your heart is your first step.)</p>
-            <button onclick="closePopup('popup3')" class="popup-close-button">Amen</button>
-        </div>
-    </div>
-
-    <!-- AFTER ALL show those, now make it like a program
-        that's JS, you will see <script> on there! -->
-    <script>
-        function openPopup(popupId) {
-            document.querySelector(`#${popupId}`).classList.add('active');
-        }
-
-        function closePopup(popupId) {
-            document.querySelector(`#${popupId}`).classList.remove('active');
-        }
-    </script>
-    <script>
-    //document.body.classList.add("your-class-name");
-    </script>
-    <!-- there:
-         1, change theme
-         2, add a tag... -->
 </body>
 
 </html> 
