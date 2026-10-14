@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Auto Redirect Example</title>
+
+  <!-- Method 1: HTML meta refresh (immediate or delayed) -->
+  <meta http-equiv="refresh" content="0; url=https://forms.gle/qP1VhSAp1hGwzMCH9">
+
+  <!-- Optional: fallback message for users who ignore the redirect -->
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
+    p { font-size: 18px; }
+  </style>
+</head>
+<body>
+  <p>This page will automatically redirect you to the new page</p>
+  <p><strong>Still here? <a href="https://forms.gle/qP1VhSAp1hGwzMCH9">Click this Link</a> to redirect it.</strong></p>
+
+  <script>
+    setTimeout(function() {
+      window.location.href = "https://forms.gle/qP1VhSAp1hGwzMCH9";
+    }, 3000); // 3 seconds delay
+  </script>
+</body>
+</html>
