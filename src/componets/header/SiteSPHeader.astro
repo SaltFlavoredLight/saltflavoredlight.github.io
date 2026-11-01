@@ -1,0 +1,72 @@
+---
+import "../../styles/main.css";
+import "../../styles/themes.css";
+import "../../styles/core.css";
+
+import BrandLogo from "./BrandLogo.astro";
+import CTAButton from "./CTAButton.astro"
+---
+
+<header>
+    <div class="header-inner">
+        <BrandLogo />
+        <div class="header-right">
+            <CTAButton />
+        </div>
+    </div>
+</header>
+
+<style>
+    /* 1. Outer wrapper handles sticky positioning, full-width span, and desktop floating margins */
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+        background: var(--theme-primary);
+        border-bottom: 2px solid var(--theme-primary);
+    }
+
+    /* 2. Inner container handles max-width, absolute center alignment, padding, and flex */
+    header .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        max-width: 1400px;
+        margin: 0 auto;
+        color: var(--bg-primary);
+        padding: var(--spacing-xs);
+    }
+
+    /* Spacer container for mobile right side elements */
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding-right: var(--spacing-md);
+        padding-left: var(--spacing-sm);
+    }
+
+  
+
+    @media (min-width: 900px) {
+        header {
+            top: var(--spacing-sm);
+            border-radius: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1500px;
+            width: calc(100% - var(--spacing-md) * 2);
+            padding-left: var(--spacing-md);
+            padding-right: var(--spacing-md);
+        }
+
+        .header-right {
+            gap: var(--spacing-sm);
+            padding-right: 0;
+        }
+
+    }
+</style>

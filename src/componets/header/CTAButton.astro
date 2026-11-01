@@ -2,10 +2,13 @@
 import "../../styles/main.css";
 import "../../styles/themes.css";
 import "../../styles/core.css";
+
+const { link = "/contact/", label = "Contact Me" } = Astro.props;
 ---
 
 <!-- CTA Button sits directly on header for mobile -->
-<a href="/contact" class="cta-button" aria-label="Contact Me"> Contact Me </a>
+<a href={link} class="cta-button" aria-label={label}> {label} </a>
+
 <style>
     /* --- Mobile Navigation Dropdown with clip-path --- */
 
