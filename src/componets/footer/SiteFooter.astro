@@ -2,12 +2,17 @@
 import "../../styles/main.css";
 import "../../styles/themes.css";
 import "../../styles/core.css";
-
 ---
 
 <footer>
-    <div></div>
-    <div></div>
+    <div>
+        <div></div>
+        <div></div>
+    </div>
+    <hr />
+    <div class="footer-bottom">
+        <p>@SaltFlavoredLight</p>
+    </div>
 </footer>
 
 <style>
@@ -16,5 +21,36 @@ import "../../styles/core.css";
         min-height: 50px;
 
         background: var(--theme-primary);
+        color: var(--bg-primary);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    footer > div {
+        padding-left: var(--spacing-xl);
+        padding-right: var(--spacing-xl);
+        width: 100%;
+        max-width: 1400px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    @media (min-width: 800px) {
+        footer > div {
+            flex-direction: row;
+            justify-content: stretch;
+            align-items: center;
+        }
+    }
+
+    
+    footer p {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
     }
 </style>
