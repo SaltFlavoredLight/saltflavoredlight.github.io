@@ -1,17 +1,15 @@
-# Astro Starter Kit: Basics
+# Welcome to my New Website!
 
-```sh
-npm create astro@latest -- --template basics
-```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This is Ray's new website, as a project for lean Astro.
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+Should be like this.
 
 ```text
 /
+├── dist/
+│
 ├── public/
 │   └── favicon.svg
 ├── src
@@ -26,11 +24,12 @@ Inside of your Astro project, you'll see the following folders and files:
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+> When publish, make sure you are using `main` branch at `dist`
 
-## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+## 🧞 Cheat Sheet (commands)
+
+Quick Cheat Sheet (in case I forgot):
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
@@ -41,6 +40,5 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Easter eggs?
+Try to find it, it may just right in `robots.txt`
