@@ -1,0 +1,77 @@
+---
+import "../../styles/main.css";
+import "../../styles/themes.css";
+import "../../styles/core.css";
+
+const pageTree = [
+    { title: "Works", href: "/works/" },
+    { title: "Information", href: "/info/" },
+    { title: "Projects", href: "/projects/" },
+    { title: "About Me", href: "/about/" },
+];
+---
+
+<div class="nav" id="nav-menu">
+    {pageTree.map((item) => <a href={item.href}>{item.title}</a>)}
+</div>
+
+<style>
+    .nav {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: var(--theme-primary);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: var(--spacing-sm) 0;
+        border: 0;
+        border-top: 2px solid var(--bg-primary);
+        outline: none;
+
+        /* Clip-path hidden state */
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: clip-path 0.3s ease-in-out;
+        pointer-events: none;
+    }
+
+    .nav.active {
+        /* Clip-path revealed state */
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        pointer-events: auto;
+    }
+
+    a {
+        background-color: transparent;
+        color: inherit;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-family: inherit;
+        cursor: pointer;
+        transition: color var(--transition-speed);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--text-primary);
+    }
+
+    @media (min-width: 900px) {
+        .nav {
+            position: static;
+            flex-direction: row;
+            width: auto;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0;
+            flex: 1;
+
+            /* Reset clip-path for desktop */
+            clip-path: none !important;
+            pointer-events: auto;
+        }
+    }
+</style>
