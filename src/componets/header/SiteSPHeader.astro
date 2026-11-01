@@ -16,16 +16,6 @@ import CTAButton from "./CTAButton.astro"
     </div>
 </header>
 
-<script>
-    const toggleButton = document.getElementById("menu-toggle");
-    const navMenu = document.getElementById("nav-menu");
-
-    toggleButton?.addEventListener("click", () => {
-        navMenu?.classList.toggle("active");
-        toggleButton?.classList.toggle("active");
-    });
-</script>
-
 <style>
     /* 1. Outer wrapper handles sticky positioning, full-width span, and desktop floating margins */
     header {
