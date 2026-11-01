@@ -2,16 +2,20 @@
 import "../../styles/main.css";
 import "../../styles/themes.css";
 import "../../styles/core.css";
+
+import FooterNav from "./FooterNav.astro";
+import FooterProfile from "./FooterProfile.astro";
 ---
 
 <footer>
-    <div>
-        <div></div>
-        <div></div>
+    <div class="footer-top">
+        <FooterProfile />
+        <FooterNav />
     </div>
     <hr />
     <div class="footer-bottom">
-        <p>@SaltFlavoredLight</p>
+        <p>Rayzhi | @SaltFlavoredLight</p>
+        <p>Soical Link here......</p>
     </div>
 </footer>
 
@@ -27,14 +31,26 @@ import "../../styles/core.css";
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        box-shadow: 0 0 20px var(--text-primary);
     }
 
+    footer a {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0;
+        font: inherit;
+    }
+
+    footer a:hover {
+        color: var(--text-primary)
+    }
 
     footer > div {
         padding-left: var(--spacing-xl);
         padding-right: var(--spacing-xl);
         width: 100%;
-        max-width: 1400px;
+        max-width: 1300px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -42,15 +58,42 @@ import "../../styles/core.css";
 
     @media (min-width: 800px) {
         footer > div {
+            gap: var(--spacing-lg);
             flex-direction: row;
-            justify-content: stretch;
+            justify-content: space-between;
             align-items: center;
         }
     }
 
-    
-    footer p {
+    footer p,
+    h2,
+    h1,
+    h3,
+    li,
+    ul,
+    ol {
         background: var(--theme-primary);
         color: var(--bg-primary);
+        margin: 0;
+        padding: 0;
+    }
+
+    h3 {
+        font-size: 1.2em;
+    }
+
+    .footer-top {
+        padding-top: var(--spacing-lg);
+    }
+
+    .footer-top div {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .footer-bottom {
+        padding-bottom: var(--spacing-sm);
     }
 </style>

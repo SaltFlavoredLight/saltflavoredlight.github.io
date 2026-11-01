@@ -1,0 +1,91 @@
+---
+import "../../styles/main.css";
+import "../../styles/themes.css";
+import "../../styles/core.css";
+
+const footerMap = [
+    {
+        name: "Project",
+        lists: [
+            {
+                href: "/math/", name: "Math Games"
+            },{
+                href: "/info/", name: "RaySite Infomation"
+            },{
+                href: "/eoc/", name: "EoC app"
+            },
+        ],
+    },{
+        name: "About me",
+        lists: [
+            {
+                href: "/about/", name: "Who Am I?"
+            },{
+                href: "/faith/", name: "My Faith"
+            },{
+                href: "/about/facts/", name: "Fact Sheet"
+            },
+        ],
+    },
+];
+---
+
+<div class="site-links">
+    {footerMap.map((item) => 
+        <div>
+            <h3>{item.name}</h3>
+            <ul>
+                {item.lists.map((labels) =>
+                    <li>
+                        <a href={labels.href}>{labels.name}</a>
+                    </li>
+                )}
+            </ul>
+        </div>      
+    )}
+</div>
+
+<style>
+    a {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0;
+        font: inherit;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--text-primary);
+    }
+
+    p,
+    h2,
+    h1,
+    h3,
+    li,
+    ul,
+    ol {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0;
+        padding: 0;
+    }
+
+    h3 {
+        font-size: 1.2em;
+    }
+
+    .site-links {
+        display: flex;
+        flex-direction: row;
+        gap: var(--spacing-md);
+    }
+
+    .site-links {
+        text-align: right;
+    }
+
+    .site-links ul {
+        width: 100%;
+    }
+</style>
