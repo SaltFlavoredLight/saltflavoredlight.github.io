@@ -1,10 +1,21 @@
 {
-  "name": "",
-  "type": "module",
+  "name": "saltflavoredlight.github.io",
   "version": "0.0.1",
-  "engines": {
-    "node": ">=22.23.4"
+  "description": "My Personal Website",
+  "keywords": [
+    "Website"
+  ],
+  "homepage": "https://github.com/SaltFlavoredLight/saltflavoredlight.github.io#readme",
+  "bugs": {
+    "url": "https://github.com/SaltFlavoredLight/saltflavoredlight.github.io/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaltFlavoredLight/saltflavoredlight.github.io.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Ray",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -13,5 +24,9 @@
   },
   "dependencies": {
     "astro": "^7.4.4"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=22.23.4"
   }
 }
