@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full-Width Breakout Section Example</title>
+  <style>
+    /* 1. Global Box-Sizing & Body Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    /* 2. Main element with side margins */
+    main {
+      margin-left: 2rem;
+      margin-right: 2rem;
+      max-width: 900px;
+      margin-inline: auto; /* Centers it if screen is wider than 900px + margins */
+      /* Note: To demonstrate the margin effect clearly, let's look at standard content */
+    }
+
+    /* Standard content inside main */
+    .normal-content {
+      background-color: #f4f4f5;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+
+    /* 3. The Breakout Section (Negative Margin Trick) */
+    .full-width-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      
+      /* Styling for the breakout banner */
+      background: linear-gradient(135deg, #4f46e5, #9333ea);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <div class="normal-content">
+      <h1>Regular Constrained Content</h1>
+      <p>This content lives inside the <code>&lt;main&gt;</code> element, which has a max-width and margins constraining it away from the absolute edges of the page.</p>
+    </div>
+
+    <!-- This section breaks out to full screen width -->
+    <section class="full-width-section">
+      <h2>Full-Width Breakout Section!</h2>
+      <p>Even though I am nested inside the <code>&lt;main&gt;</code> container, I stretch completely edge-to-edge across the viewport using viewport units and negative margins.</p>
+    </section>
+
+    <div class="normal-content">
+      <h1>Back to Regular Layout</h1>
+      <p>Content goes back to aligning neatly with the rest of your container.</p>
+    </div>
+  </main>
+
+</body>
+</html>

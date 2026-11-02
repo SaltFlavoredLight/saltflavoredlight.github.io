@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breakout Demo (No Grid)</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: #334155;
+    }
+
+    /* 1. Your constrained <main> container with a max-width and centering */
+    main {
+      max-width: 800px;
+      margin-inline: auto; /* Centers the container */
+      padding: 0 1.5rem;   /* Padding acting as your side margins */
+    }
+
+    /* Standard content blocks */
+    .content-block {
+      background: white;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    /* 
+      2. The Breakout Class
+         This forces the element to stretch full screen-width, 
+         even if it's nested deep inside a max-width centered <main>.
+    */
+    .breakout-section {
+      width: 100vw;
+      position: relative;
+      left: calc(-50vw + 50%);
+      
+      /* Visual styling for your banner/section */
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: white;
+      padding: 4rem 1.5rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <div class="content-block">
+      <h2>Normal Content</h2>
+      <p>This lives inside the constrained, centered <code>&lt;main&gt;</code> tag.</p>
+    </div>
+
+    <!-- This can be its own Astro component -->
+    <section class="breakout-section">
+      <h2>Full-Width Breakout Section!</h2>
+      <p>No grid required. No variables needed from the parent layout.</p>
+    </section>
+
+    <div class="content-block">
+      <h2>Back to Normal</h2>
+      <p>Content goes right back to aligning with the center column.</p>
+    </div>
+  </main>
+
+</body>
+</html>
