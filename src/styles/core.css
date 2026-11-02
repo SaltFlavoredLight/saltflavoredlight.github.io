@@ -140,22 +140,6 @@ tr:nth-child(even) {
     background-color: var(--bg-alt);
 }
 
-.card {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.groups {
-    display: flex;
-    gap: var(--spacing-xs);
-    flex-wrap: wrap;
-    padding: var(--spacing-m);
-}
-
-
 hr {
   width: 100%;          /* Forces the hr to span the full width of its container */
   border: none;         /* Removes the browser's default shaded border */
