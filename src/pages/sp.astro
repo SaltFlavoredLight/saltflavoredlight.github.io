@@ -4,17 +4,21 @@ import "../styles/themes.css";
 import "../styles/core.css";
 
 import PageBody from "../layouts/PageBodySP.astro";
+import Card from "../componets/Card.astro";
+import Group from "../componets/Group.astro";
+import Button from "../componets/Button.astro";
 ---
 
 <PageBody pageTitle="Infomation">
-    <p>
-        The Roman Catholic tradition includes a number of devotions to Jesus
-        Christ. Like all Catholic devotions, these prayer forms are not part of
-        the official public liturgy of the church but are based on the popular
-        spiritual practices of Roman Catholics. Many are officially approved by
-        the Holy See as suitable for spiritual growth but not necessary for
-        salvation.
-    </p>
+    
+    <Card hover="both">
+            The Roman Catholic tradition includes a number of devotions to Jesus
+            Christ. Like all Catholic devotions, these prayer forms are not part
+            of the official public liturgy of the church but are based on the
+            popular spiritual practices of Roman Catholics. Many are officially
+            approved by the Holy See as suitable for spiritual growth but not
+            necessary for salvation.
+    </Card>
     <p>
         Some devotions arise from private revelations, or personal religious
         experiences of saints. The church has a tradition of thorough
@@ -24,6 +28,10 @@ import PageBody from "../layouts/PageBodySP.astro";
         an approved devotion of the church relates to a particular prayer form,
         or an image.
     </p>
+    <Group>
+        <Button href="https://en.wikipedia.org/wiki/Catholic_Church">See Also: Catholic Church</Button>
+        <Button href="https://en.wikipedia.org/wiki/Catholic_devotions_to_Jesus" format="border">Learn more on this article</Button>
+    </Group>
     <h2 id="devotion-to-the-holy-name-of-jesus">
         Devotion to the Holy Name of Jesus
     </h2>
