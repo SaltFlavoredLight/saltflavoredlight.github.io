@@ -3,7 +3,8 @@ import "../styles/main.css";
 import "../styles/themes.css";
 import "../styles/core.css";
 
-import SiteSPHeader from "../componets/header/SiteSPHeader.astro";
+import SiteHeaderSP from "../componets/header/SiteHeaderSP.astro";
+import SiteFooterSP from "../componets/footer/SiteFooterSP.astro";
 
 const {
     pageTitle,
@@ -57,11 +58,12 @@ if (darkMode) {
         <meta property="og:url" content={canonicalURL} />
     </head>
     <body class={bodyClass}>
-        <SiteSPHeader />
+        <SiteHeaderSP />
         <main>
             <h1>{pageTitle}</h1>
             <slot />
         </main>
+        <SiteFooterSP />
     </body>
 </html>
 
