@@ -1,0 +1,93 @@
+---
+import "../../styles/main.css";
+import "../../styles/themes.css";
+import "../../styles/core.css";
+
+const links = {};
+
+const motto =
+    "Love the Lord your God with all your heart, and with all your soul, and with all your mind.";
+---
+
+<div class="footer-bottom">
+    <p>Rayzhi | @SaltFlavoredLight</p>
+    <p>
+        <a href="/">Home Page</a> | <a
+            href="https://www.youtube.com/@SaltFlavoredLight">YouTube</a
+        > | <a href="https://www.github.com/SaltFlavoredLight"> Github</a>
+    </p>
+</div>
+
+<div class="footer-notes">
+    <small>Bulit by Ray</small>
+    <small>{motto}</small>
+</div>
+
+<style>
+    .footer-bottom {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+    }
+
+    a {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0;
+        font: inherit;
+    }
+
+    a:hover {
+        color: var(--text-primary);
+    }
+
+    .footer-bottom,
+    .footer-notes {
+        padding-top: var(--spacing-sm);
+        padding-left: var(--spacing-xl);
+        padding-right: var(--spacing-xl);
+        width: 100%;
+        max-width: 1230px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-notes {
+        padding-top: var(--spacing-xs);
+        padding-bottom: var(--spacing-md);
+    }
+
+    @media (max-width: 800px) {
+        .footer-bottom,
+        .footer-notes {
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    @media (min-width: 800px) {
+        .footer-bottom,
+        .footer-notes {
+            gap: var(--spacing-lg);
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    p,
+    small {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0;
+        padding: 0;
+    }
+
+    /* another part */
+
+    @media (max-width: 800px) {
+        .footer-notes {
+            justify-content: center;
+        }
+    }
+</style>

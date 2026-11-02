@@ -46,6 +46,14 @@ import { Image } from "astro:assets";
         width: 150px;
         aspect-ratio: 1 / 1;
         object-fit: cover;
-        border-radius: var(--spacing-xs);
+        border-radius: var(--spacing-sm);
+    }
+
+
+    
+    @media (max-width: 800px) {
+        div {
+            align-items: center;
+        }
     }
 </style>

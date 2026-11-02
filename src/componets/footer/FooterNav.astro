@@ -8,22 +8,33 @@ const footerMap = [
         name: "Project",
         lists: [
             {
-                href: "/math/", name: "Math Games"
-            },{
-                href: "/info/", name: "RaySite Infomation"
-            },{
-                href: "/eoc/", name: "EoC app"
+                href: "/math/",
+                name: "Math Games",
+            },
+            {
+                href: "/info/",
+                name: "RaySite Infomation",
+            },
+            {
+                href: "/eoc/",
+                name: "EoC app",
             },
         ],
-    },{
+    },
+    {
         name: "About me",
         lists: [
             {
-                href: "/about/", name: "Who Am I?"
-            },{
-                href: "/faith/", name: "My Faith"
-            },{
-                href: "/about/facts/", name: "Fact Sheet"
+                href: "/about/",
+                name: "Who Am I?",
+            },
+            {
+                href: "/faith/",
+                name: "My Faith",
+            },
+            {
+                href: "/about/facts/",
+                name: "Fact Sheet",
             },
         ],
     },
@@ -31,18 +42,20 @@ const footerMap = [
 ---
 
 <div class="site-links">
-    {footerMap.map((item) => 
-        <div>
-            <h3>{item.name}</h3>
-            <ul>
-                {item.lists.map((labels) =>
-                    <li>
-                        <a href={labels.href}>{labels.name}</a>
-                    </li>
-                )}
-            </ul>
-        </div>      
-    )}
+    {
+        footerMap.map((item) => (
+            <div>
+                <h3>{item.name}</h3>
+                <ul>
+                    {item.lists.map((labels) => (
+                        <li>
+                            <a href={labels.href}>{labels.name}</a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        ))
+    }
 </div>
 
 <style>
@@ -79,13 +92,23 @@ const footerMap = [
         display: flex;
         flex-direction: row;
         gap: var(--spacing-md);
-    }
-
-    .site-links {
         text-align: right;
+        flex-wrap: wrap;
     }
 
     .site-links ul {
         width: 100%;
+        min-width: 150px;
+    }
+
+    @media (max-width: 800px) {
+        .site-links {
+            text-align: center;
+            gap: var(--spacing-xs);
+        }
+
+        .site-links ul {
+            width: 50%;
+        }
     }
 </style>
