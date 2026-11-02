@@ -1,22 +1,30 @@
 ---
 interface Props {
     /** when blank, disaled, otherwise, the name appeared here will be applied to style, Option: color, move, both */
-    hover?: '' | 'color' | 'move' | 'both';
+    hover?: "" | "color" | "move" | "both";
+
+    /** this is theme for the card, default is light, where also have Dark, Border and Middle option */
+    theme?: "" | "dark" | "border" | "middle";
+
+    /** true if you hate border */
+    borderless?: "true" | "false";
 }
 
 import "../styles/main.css";
 import "../styles/themes.css";
 import "../styles/core.css";
 
-const {hover} = Astro.props;
+const { hover = "", theme = "", borderless = "false" } = Astro.props;
 
-let finalClass ="";
+let finalClass = "";
 
 finalClass += "card ";
 
-finalClass +=  hover ? `hover-${hover} ` : ` `;
-
+finalClass += hover ? `hover-${hover} ` : ` `;
+finalClass += theme ? `theme-${theme} ` : ` `;
+finalClass += borderless === "true" ? `borderless ` : ` `;
 ---
+
 <div class={finalClass}>
     <slot />
 </div>
@@ -25,16 +33,63 @@ finalClass +=  hover ? `hover-${hover} ` : ` `;
     .card {
         --bg-color-default: var(--bg-surface);
         --bg-color-border: var(--border-color);
-        --bg-color-text: inherit;
+        --text-color-default: var(--text-primary);
+        --bg-color-hover: var(--bg-alt);
 
-        color: var(--bg-color-text);
+        color: var(--text-color-default);
         background-color: var(--bg-color-default);
         margin-bottom: var(--spacing-md);
         border: 1px solid var(--bg-color-border);
         padding: var(--spacing-lg);
         border-radius: var(--border-radius);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         width: 100%;
         height: fit-content;
+
+        transform: translateY(0px);
+        transition: all 0.2 ease-in-out;
+    }
+
+    div.theme-dark {
+        --bg-color-default: var(--text-primary);
+        --bg-color-border: var(--border-color);
+        --text-color-default: var(--bg-primary);
+        --bg-color-hover: var(--text-muted);
+    }
+
+    div.theme-border {
+        --bg-color-default: transparent;
+        --bg-color-border: var(--border-color);
+        --text-color-default: inherit;
+        --bg-color-hover: var(--bg-surface);
+    }
+
+    div.theme-middle {
+        --bg-color-default: var(--bg-alt);
+        --bg-color-border: var(--border-color);
+        --text-color-default: inherit;
+        --bg-color-hover: var(--theme-primary);
+        --text-color-hover: var(--bg-primary);
+    }
+
+    div.borderless {
+        border: 0;
+    }
+
+    div.hover-move:hover {
+        transform: translateY(-4px);
+    }
+
+    div.hover-color:hover {
+        background-color: var(--bg-color-hover);
+        color: var(--text-color-hover, --text-color-default);
+    }
+
+    div.hover-both:hover {
+        transform: translateY(-4px);
+        box-shadow: 4px 10px 24px rgba(0, 0, 0, 0.35);
+
+        background-color: var(--bg-color-hover);
+        color: var(--text-color-hover, --text-color-default);
     }
 </style>
