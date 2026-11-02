@@ -1,0 +1,115 @@
+---
+import "../../styles/main.css";
+import "../../styles/themes.css";
+import "../../styles/core.css";
+
+const links = [
+    {
+        name: "Home Page",
+        href: "/"
+    },{
+        name: "YouTube",
+        href: "https://www.youtube.com/@SaltFlavoredLight"
+    },{
+        name: "Github",
+        href: "https://www.github.com/SaltFlavoredLight"
+    },
+];
+
+const motto =
+    "Love the Lord your God with all your heart, and with all your soul, and with all your mind.";
+
+---
+
+<div class="footer-bottom">
+    <p>Rayzhi | @SaltFlavoredLight</p>
+    <p>
+        {links.map((link, index) => (
+            <>
+                <a href={link.href}>{link.name}</a>
+                {index < links.length - 1 && <span class="separator"> | </span>}
+            </>
+        ))}
+    </p>
+</div>
+
+<div class="footer-notes">
+    <small>Bulit by Ray</small>
+    <small>{motto}</small>
+</div>
+
+<style>
+    .footer-bottom {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+    }
+
+    a {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0;
+        font: inherit;
+    }
+
+    a:hover {
+        color: var(--text-primary);
+    }
+
+    .separator {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0 0.25rem;
+    }
+
+    .footer-bottom,
+    .footer-notes {
+        padding-top: var(--spacing-sm);
+        padding-left: var(--spacing-xl);
+        padding-right: var(--spacing-xl);
+        width: 100%;
+        max-width: 1230px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-notes {
+        padding-top: var(--spacing-xs);
+        padding-bottom: var(--spacing-md);
+    }
+
+    @media (max-width: 800px) {
+        .footer-bottom,
+        .footer-notes {
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    @media (min-width: 800px) {
+        .footer-bottom,
+        .footer-notes {
+            gap: var(--spacing-lg);
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    p,
+    small,
+    span {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0;
+        padding: 0;
+    }
+
+    /* another part */
+
+    @media (max-width: 800px) {
+        .footer-notes {
+            justify-content: center;
+        }
+    }
+</style>

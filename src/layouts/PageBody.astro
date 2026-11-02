@@ -4,6 +4,7 @@ import "../styles/themes.css";
 import "../styles/core.css";
 
 import SiteHeader from "../componets/header/SiteHeader.astro";
+import SiteFooter from "../componets/footer/SiteFooter.astro";
 
 const {
     pageTitle,
@@ -58,10 +59,13 @@ if (darkMode) {
     </head>
     <body class={bodyClass}>
         <SiteHeader />
+        
         <main>
             <h1>{pageTitle}</h1>
             <slot />
         </main>
+
+        <SiteFooter/>
     </body>
 </html>
 
