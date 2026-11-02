@@ -3,18 +3,33 @@ import "../../styles/main.css";
 import "../../styles/themes.css";
 import "../../styles/core.css";
 
-const links = {};
+const links = [
+    {
+        name: "Home Page",
+        href: "/"
+    },{
+        name: "YouTube",
+        href: "https://www.youtube.com/@SaltFlavoredLight"
+    },{
+        name: "Github",
+        href: "https://www.github.com/SaltFlavoredLight"
+    },
+];
 
 const motto =
     "Love the Lord your God with all your heart, and with all your soul, and with all your mind.";
+
 ---
 
 <div class="footer-bottom">
     <p>Rayzhi | @SaltFlavoredLight</p>
     <p>
-        <a href="/">Home Page</a> | <a
-            href="https://www.youtube.com/@SaltFlavoredLight">YouTube</a
-        > | <a href="https://www.github.com/SaltFlavoredLight"> Github</a>
+        {links.map((link, index) => (
+            <>
+                <a href={link.href}>{link.name}</a>
+                {index < links.length - 1 && <span class="separator"> | </span>}
+            </>
+        ))}
     </p>
 </div>
 
@@ -38,6 +53,12 @@ const motto =
 
     a:hover {
         color: var(--text-primary);
+    }
+
+    .separator {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0 0.25rem;
     }
 
     .footer-bottom,
@@ -76,7 +97,8 @@ const motto =
     }
 
     p,
-    small {
+    small,
+    span {
         background: var(--theme-primary);
         color: var(--bg-primary);
         margin: 0;
