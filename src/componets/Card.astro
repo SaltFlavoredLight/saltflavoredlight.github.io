@@ -25,16 +25,36 @@ finalClass +=  hover ? `hover-${hover} ` : ` `;
     .card {
         --bg-color-default: var(--bg-surface);
         --bg-color-border: var(--border-color);
-        --bg-color-text: inherit;
+        --text-color-default: inherit;
+        --bg-color-hover: var(--bg-alt);
 
-        color: var(--bg-color-text);
+        color: var(--text-color-default);
         background-color: var(--bg-color-default);
         margin-bottom: var(--spacing-md);
         border: 1px solid var(--bg-color-border);
         padding: var(--spacing-lg);
         border-radius: var(--border-radius);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         width: 100%;
         height: fit-content;
+
+        transform: translateY(0px);
+        transition: all 0.2 ease-in-out;
+    }
+
+    div.hover-move:hover {
+        transform: translateY(-4px);
+    }
+
+    
+    div.hover-color:hover {
+        background-color: var(--bg-color-hover);
+    }
+    
+    div.hover-both:hover {
+        transform: translateY(-4px);
+        box-shadow: 4px 10px 24px rgba(0, 0, 0, 0.35);
+
+        background-color: var(--bg-color-hover);
     }
 </style>
