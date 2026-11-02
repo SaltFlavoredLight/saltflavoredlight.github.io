@@ -1,0 +1,40 @@
+---
+interface Props {
+    /** when blank, disaled, otherwise, the name appeared here will be applied to style, Option: color, move, both */
+    hover?: '' | 'color' | 'move' | 'both';
+}
+
+import "../styles/main.css";
+import "../styles/themes.css";
+import "../styles/core.css";
+
+const {hover} = Astro.props;
+
+let finalClass ="";
+
+finalClass += "card ";
+
+finalClass +=  hover ? `hover-${hover} ` : ` `;
+
+---
+<div class={finalClass}>
+    <slot />
+</div>
+
+<style>
+    .card {
+        --bg-color-default: var(--bg-surface);
+        --bg-color-border: var(--border-color);
+        --bg-color-text: inherit;
+
+        color: var(--bg-color-text);
+        background-color: var(--bg-color-default);
+        margin-bottom: var(--spacing-md);
+        border: 1px solid var(--bg-color-border);
+        padding: var(--spacing-lg);
+        border-radius: var(--border-radius);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        height: fit-content;
+    }
+</style>
