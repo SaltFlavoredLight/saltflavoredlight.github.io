@@ -1,0 +1,56 @@
+---
+import "../styles/main.css";
+import "../styles/themes.css";
+import "../styles/core.css";
+
+export interface Props {
+    id: string;
+    privacy?: boolean | 'false' | 'true';
+    title?: string;
+    nopadding?: boolean | 'false' | 'true';
+}
+
+const {
+    id,
+    title = "YouTube video player",
+    nopadding = false,
+    privacy = false,
+} = Astro.props;
+
+// Convert potential string booleans (from Astro attributes) into actual booleans
+const isPrivacy = privacy === true || privacy === 'true';
+const isNoPadding = nopadding === true || nopadding === 'true';
+
+const embedUrl = isPrivacy
+    ? `https://www.youtube-nocookie.com/embed/${id}`
+    : `https://www.youtube.com/embed/${id}`;
+
+const className = ["video-container", !isNoPadding ? "has-margin" : ""]
+    .filter(Boolean)
+    .join(" ");
+---
+
+<div class={className}>
+    <iframe
+        src={embedUrl}
+        title={title}
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+</div>
+
+<style>
+    .video-container {
+        width: 100%;
+    }
+
+    .has-margin {
+        padding-bottom: var(--spacing-md);
+    }
+
+    .video-container iframe {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+    }
+</style>
