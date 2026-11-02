@@ -5,9 +5,9 @@ import "../styles/core.css";
 
 export interface Props {
     id: string;
-    privacy?: boolean | 'false' | 'true';
+    privacy?: boolean | "false" | "true";
     title?: string;
-    noBottomMargin?: boolean | 'false' | 'true';
+    noBottomMargin?: boolean | "false" | "true";
 }
 
 const {
@@ -18,8 +18,8 @@ const {
 } = Astro.props;
 
 // Convert potential string booleans (from Astro attributes) into actual booleans
-const isPrivacy = privacy === true || privacy === 'true';
-const isNoBottomMargin = noBottomMargin === true || noBottomMargin === 'true';
+const isPrivacy = privacy === true || privacy === "true";
+const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
 
 const embedUrl = isPrivacy
     ? `https://www.youtube-nocookie.com/embed/${id}`
@@ -32,6 +32,7 @@ const className = ["video-container", !isNoBottomMargin ? "has-margin" : ""]
 
 <div class={className}>
     <iframe
+        loading="lazy"
         src={embedUrl}
         title={title}
         frameborder="0"
