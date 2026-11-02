@@ -36,7 +36,7 @@ finalClass += "card ";
 finalClass += hover ? `hover-${hover} ` : ` `;
 finalClass += theme ? `theme-${theme} ` : ` `;
 finalClass += borderless === "true" ? `borderless ` : ` `;
-finalClass += isNoBottomMargin ? `has-margin ` : ` `;
+finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
 finalClass += isMorePadding ? `morepadding ` : ` `;
 ---
 
