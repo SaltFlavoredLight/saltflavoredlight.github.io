@@ -8,6 +8,7 @@ import Card from "../componets/Card.astro";
 import Group from "../componets/Group.astro";
 import Button from "../componets/Button.astro";
 import YouTube from "../componets/YouTube.astro";
+import CardLink from "../componets/CardLink.astro";
 ---
 
 <PageBody pageTitle="Infomation">
@@ -266,7 +267,8 @@ import YouTube from "../componets/YouTube.astro";
     <h2 id="references">Watch Video</h2>
     <YouTube id="qAsGWVk51Jk" privacy/>
     <h2 id="references">References</h2>
-    <ul>
-        <li><a href="https://en.wikipedia.org">Wikipedia</a></li>
-    </ul>
+
+    <CardLink title="Wikipedia" href="https://en.wikipedia.org/wiki/Catholic_devotions_to_Jesus">
+        More infomation will be shown here.
+    </CardLink>
 </PageBody>
