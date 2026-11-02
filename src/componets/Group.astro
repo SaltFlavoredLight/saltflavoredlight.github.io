@@ -15,7 +15,7 @@ interface Props {
     /** Length as width px when vertical, or height px when not vertical */
     length?: number | string;
     /** No margin bottom toggle, defaults to true */
-    nopadding?: boolean;
+    noBottomMargin?: boolean;
 }
 
 const {
@@ -24,7 +24,7 @@ const {
     vertical = false,
     align = "left",
     length,
-    nopadding = false,
+    noBottomMargin = false,
 } = Astro.props;
 
 // Format length to a valid CSS string (e.g. 100 -> "100px")
@@ -42,7 +42,7 @@ const className = [
     takeFull && !vertical ? "take-full" : "",
     vertical ? "vertical" : "horizontal",
     `align-${align.replace(" ", "-")}`,
-    !nopadding ? "has-margin" : "",
+    !noBottomMargin ? "has-margin" : "",
 ]
     .filter(Boolean)
     .join(" ");
