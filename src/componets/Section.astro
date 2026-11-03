@@ -8,18 +8,31 @@ interface Props {
     theme?: "" | "border" | "middle" | "dark" | "full" | "fill";
 
     /** Apply top/bottom borders */
-    border?: boolean | string;
+    border?: boolean | 'true' | 'false';
     margin?: "" | "none" | "top" | "bottom" | "both";
+
+    minWidth?: boolean | 'true' | 'false';
 }
 
-const { theme = "middle", border = true, margin = 'both' } = Astro.props;
+const { 
+    theme = "middle", 
+    border = true, 
+    margin = 'both',
+    minWidth = true 
+} = Astro.props;
 
-// Dynamic class builder
-let sectionClass = "section ";
-sectionClass += theme ? ` theme-${theme} ` : "";
-sectionClass += !border ? ` no-border ` : "";
-sectionClass += margin === "top" || margin === "both" ? ` has-margin-top ` : " ";
-sectionClass += margin === "bottom" || margin === "both" ? ` has-margin-bottom ` : " ";
+// 1. Collect all potential classes in an array
+const classList = [
+    "section",
+    theme ? `theme-${theme}` : "",
+    (border === false || border === 'false') ? "no-border" : "",
+    (margin === "top" || margin === "both") ? "has-margin-top" : "",
+    (margin === "bottom" || margin === "both") ? "has-margin-bottom" : "",
+    (minWidth === true || minWidth === 'true') ? "has-min-width" : ""
+];
+
+// 2. Filter out empty strings and join them cleanly with a single space
+const sectionClass = classList.filter(Boolean).join(" ");
 ---
 
 <section class={sectionClass}>
@@ -27,6 +40,7 @@ sectionClass += margin === "bottom" || margin === "both" ? ` has-margin-bottom `
         <slot />
     </div>
 </section>
+
 <style>
     /* 1. Full-width breakout wrapper */
     section {
@@ -59,7 +73,6 @@ sectionClass += margin === "bottom" || margin === "both" ? ` has-margin-bottom `
     
     /* 2. Inner container constrains content */
     .inner {
-        max-width: 1000px;
         margin-inline: auto;
         width: 100%;
         box-sizing: border-box;
@@ -67,6 +80,12 @@ sectionClass += margin === "bottom" || margin === "both" ? ` has-margin-bottom `
 
         /* Ensure slotted children inherit the active text color variable */
         color: var(--text-color-default);
+    }
+
+    
+    .has-min-width .inner {
+        max-width: 1000px;
+
     }
 
     /* Target all elements inside the slot to override global stylesheet colors */
