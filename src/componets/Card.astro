@@ -72,6 +72,12 @@ finalClass += isMorePadding ? `morepadding ` : ` `;
         padding: var(--spacing-lg);
     }
 
+
+    .inner :global(p, li, code, small) {
+        color: inherit;
+    }
+
+
     div.theme-dark {
         --bg-color-default: var(--text-primary);
         --bg-color-border: var(--border-color);

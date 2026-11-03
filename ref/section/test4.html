@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Max-Width Main Breakout (No Position)</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: #334155;
+    }
+
+    /* 
+      Your exact structure: 
+      <main> has max-width and is centered 
+    */
+    main {
+      max-width: 900px;
+      margin-inline: auto;
+      padding: 0 1.5rem; /* Gutters for regular content */
+    }
+
+    .normal-content {
+      background: white;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    /* 
+      THE BREAKOUT SOLUTION (NO position property used!):
+      We use width: 100vw and negative calc margins to stretch 
+      across the screen, even though we are trapped inside a 900px <main>.
+    */
+    .breakout-section {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      
+      /* Visual styling */
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: white;
+      padding: 4rem 1.5rem;
+      text-align: center;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <main style="max-width: 900px;">
+    <div class="normal-content">
+      <h2>Normal Content inside &lt;main&gt;</h2>
+      <p>Constrained nicely to the 900px max-width centered container.</p>
+    </div>
+
+    <!-- Breaks out edge-to-edge with ZERO position rules -->
+    <section class="breakout-section">
+      <h2>Edge-to-Edge Breakout!</h2>
+      <p>No <code>position: relative/absolute</code>, no CSS grid, and it works straight out of a 900px max-width <code>&lt;main&gt;</code>.</p>
+    </section>
+
+    <div class="normal-content">
+      <h2>Back to Normal</h2>
+      <p>Content aligns right back with the 900px container.</p>
+    </div>
+  </main>
+
+</body>
+</html>

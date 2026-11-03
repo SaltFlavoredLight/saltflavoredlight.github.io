@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body-Padded Breakout Demo</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    /* 1. Body takes 100% width, reset margins, and set global padding as your gutter */
+    body {
+      margin: 0;
+      width: 100%;
+      max-width: 1500px;       /* Your max width constraint */
+      margin-inline: auto;     /* Centers the whole page container */
+      padding-inline: 2rem;    /* Global side padding/gutters */
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* Standard content blocks stay safely inside the padded body bounds */
+    .normal-content {
+      background: #f1f5f9;
+      padding: 2rem;
+      margin-block: 2rem;
+      border-radius: 8px;
+    }
+
+    /* 
+      2. The Breakout Section:
+         Because the body has 2rem padding on each side, 
+         we counteract it by adding 2rem to width and pulling it left/right by -2rem.
+    */
+    .breakout-section {
+      width: calc(100% + 4rem); /* 100% of body plus left and right padding */
+      margin-left: -2rem;       /* Pulls left edge to screen border */
+      margin-right: -2rem;      /* Pulls right edge to screen border */
+      
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: white;
+      padding: 4rem 2rem;       /* Internal padding keeps text aligned nicely */
+      margin-block: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="normal-content">
+    <h2>Normal Content</h2>
+    <p>This content stays neatly inside the body's global padding bounds.</p>
+  </div>
+
+  <!-- Breaks out completely edge-to-edge of the viewport -->
+  <section class="breakout-section">
+    <h2>Edge-to-Edge Breakout!</h2>
+    <p>Achieved using only width, padding, and negative margins.</p>
+  </section>
+
+  <div class="normal-content">
+    <h2>Back to Normal</h2>
+    <p>Aligns right back with the body margins.</p>
+  </div>
+
+</body>
+</html>
