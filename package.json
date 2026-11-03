@@ -31,8 +31,5 @@
     },
     "engines": {
         "node": ">=22.23.4"
-    },
-    "devDependencies": {
-        "cross-env": "^10.1.0"
     }
 }
