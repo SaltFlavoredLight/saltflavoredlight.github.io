@@ -50,6 +50,12 @@ finalClass += borderless === "true" ? `borderless ` : ` `;
         transition: all 0.2 ease-in-out;
     }
 
+
+    .inner :global(p, li, code, small) {
+        color: inherit;
+    }
+
+
     div.theme-dark {
         --bg-color-default: var(--text-primary);
         --bg-color-border: var(--border-color);

@@ -4,6 +4,7 @@ import "../styles/themes.css";
 import "../styles/core.css";
 
 import PageBody from "../layouts/PageBody.astro";
+import Section from "../componets/Section.astro";
 import Card from "../componets/Card.astro";
 import Group from "../componets/Group.astro";
 import Button from "../componets/Button.astro";
@@ -12,12 +13,12 @@ import YouTube from "../componets/YouTube.astro";
 
 <PageBody pageTitle="Infomation">
     <Card hover="both">
-            The Roman Catholic tradition includes a number of devotions to Jesus
-            Christ. Like all Catholic devotions, these prayer forms are not part
-            of the official public liturgy of the church but are based on the
-            popular spiritual practices of Roman Catholics. Many are officially
-            approved by the Holy See as suitable for spiritual growth but not
-            necessary for salvation.
+        The Roman Catholic tradition includes a number of devotions to Jesus
+        Christ. Like all Catholic devotions, these prayer forms are not part of
+        the official public liturgy of the church but are based on the popular
+        spiritual practices of Roman Catholics. Many are officially approved by
+        the Holy See as suitable for spiritual growth but not necessary for
+        salvation.
     </Card>
     <p>
         Some devotions arise from private revelations, or personal religious
@@ -29,8 +30,13 @@ import YouTube from "../componets/YouTube.astro";
         or an image.
     </p>
     <Group>
-        <Button href="https://en.wikipedia.org/wiki/Catholic_Church">See Also: Catholic Church</Button>
-        <Button href="https://en.wikipedia.org/wiki/Catholic_devotions_to_Jesus" format="border">Learn more on this article</Button>
+        <Button href="https://en.wikipedia.org/wiki/Catholic_Church"
+            >See Also: Catholic Church</Button
+        >
+        <Button
+            href="https://en.wikipedia.org/wiki/Catholic_devotions_to_Jesus"
+            format="border">Learn more on this article</Button
+        >
     </Group>
     <h2 id="devotion-to-the-holy-name-of-jesus">
         Devotion to the Holy Name of Jesus
@@ -52,22 +58,24 @@ import YouTube from "../componets/YouTube.astro";
         15th century as a private devotion, and was formally approved for public
         recitation in 1862 by Pope Pius IX.
     </p>
-    <h2 id="infant-jesus-of-prague">Infant Jesus of Prague</h2>
-    <p>
-        The Infant Jesus of Prague is a famous statue of infant Jesus in the
-        Church of Our Lady Victorious in Malá Strana, Prague. In 1639, the
-        residents of Prague credited the Infant Jesus for protecting the city
-        during a siege by Swedish troops. The tradition of the Infant Jesus
-        procession and coronation continues to this day. Devotion to Jesus under
-        the title Infant of Prague spread. It is popular in Ireland under the
-        name &quot;Child of Prague&quot;.
-    </p>
-    <p>
-        A customary practice is to make a Christmas novena to the Infant of
-        Prague from December 16–24. The Feast of the Holy Name of Jesus is the
-        principal feast of the miraculous Infant. Similarly, the Santo Bambino
-        of Aracoeli is venerated in Rome.
-    </p>
+    <Section>
+        <h2 id="infant-jesus-of-prague">Infant Jesus of Prague</h2>
+        <p>
+            The Infant Jesus of Prague is a famous statue of infant Jesus in the
+            Church of Our Lady Victorious in Malá Strana, Prague. In 1639, the
+            residents of Prague credited the Infant Jesus for protecting the
+            city during a siege by Swedish troops. The tradition of the Infant
+            Jesus procession and coronation continues to this day. Devotion to
+            Jesus under the title Infant of Prague spread. It is popular in
+            Ireland under the name &quot;Child of Prague&quot;.
+        </p>
+        <p>
+            A customary practice is to make a Christmas novena to the Infant of
+            Prague from December 16–24. The Feast of the Holy Name of Jesus is
+            the principal feast of the miraculous Infant. Similarly, the Santo
+            Bambino of Aracoeli is venerated in Rome.
+        </p>
+    </Section>
     <h2 id="eucharistic-adoration">Eucharistic Adoration</h2>
     <p>
         One of the first possible references to reserving the Blessed Sacrament
@@ -264,7 +272,7 @@ import YouTube from "../componets/YouTube.astro";
         <li>First Fridays Devotion</li>
     </ul>
     <h2 id="references">Watch Video</h2>
-    <YouTube id="qAsGWVk51Jk" privacy/>
+    <YouTube id="qAsGWVk51Jk" privacy />
     <h2 id="references">References</h2>
     <ul>
         <li><a href="https://en.wikipedia.org">Wikipedia</a></li>

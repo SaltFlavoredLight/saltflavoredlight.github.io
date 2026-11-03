@@ -12,6 +12,7 @@ body {
     line-height: 1.75;
 
     transition: all var(--transition-speed) ease-in-out;
+    overflow-x: hidden;
 }
 
 body.font-roboto {
