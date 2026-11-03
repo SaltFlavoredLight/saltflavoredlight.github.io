@@ -1,0 +1,134 @@
+---
+import "../styles/main.css";
+import "../styles/themes.css";
+import "../styles/core.css";
+
+interface Props {
+    /** Theme for the section */
+    theme?: "" | "border" | "middle" | "dark" | "full" | "fill";
+
+    /** Apply top/bottom borders */
+    border?: boolean | 'true' | 'false';
+    margin?: "" | "none" | "top" | "bottom" | "both";
+
+    minWidth?: boolean | 'true' | 'false';
+}
+
+const { 
+    theme = "middle", 
+    border = true, 
+    margin = 'both',
+    minWidth = true 
+} = Astro.props;
+
+// 1. Collect all potential classes in an array
+const classList = [
+    "section",
+    theme ? `theme-${theme}` : "",
+    (border === false || border === 'false') ? "no-border" : "",
+    (margin === "top" || margin === "both") ? "has-margin-top" : "",
+    (margin === "bottom" || margin === "both") ? "has-margin-bottom" : "",
+    (minWidth === true || minWidth === 'true') ? "has-min-width" : ""
+];
+
+// 2. Filter out empty strings and join them cleanly with a single space
+const sectionClass = classList.filter(Boolean).join(" ");
+---
+
+<section class={sectionClass}>
+    <div class="inner">
+        <slot />
+    </div>
+</section>
+
+<style>
+    /* 1. Full-width breakout wrapper */
+    section {
+        --bg-color-default: var(--bg-surface);
+        --bg-color-border: var(--border-color);
+        --text-color-default: var(--text-primary);
+
+        color: var(--text-color-default);
+        background-color: var(--bg-color-default);
+        border-top: 1px solid var(--bg-color-border);
+        border-bottom: 1px solid var(--bg-color-border);
+        height: fit-content;
+
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        transition: all 0.2s ease-in-out;
+    }
+
+
+    .has-margin-top {
+        margin-top: var(--spacing-lg, 3rem);
+
+    }
+
+    .has-margin-bottom {
+        margin-bottom: var(--spacing-lg, 3rem);
+    }
+
+    
+    /* 2. Inner container constrains content */
+    .inner {
+        margin-inline: auto;
+        width: 100%;
+        box-sizing: border-box;
+        padding: var(--spacing-lg);
+
+        /* Ensure slotted children inherit the active text color variable */
+        color: var(--text-color-default);
+    }
+
+    
+    .has-min-width .inner {
+        max-width: 1000px;
+
+    }
+
+    /* Target all elements inside the slot to override global stylesheet colors */
+    .inner :global(p, li, code, small) {
+        color: inherit;
+    }
+
+    /* Modifiers */
+    section.has-border {
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Theme Variants */
+    section.theme-dark {
+        --bg-color-default: var(--text-primary);
+        --bg-color-border: var(--border-color);
+        --text-color-default: var(--bg-primary);
+    }
+
+    section.theme-border {
+        --bg-color-default: transparent;
+        --bg-color-border: var(--border-color);
+        --text-color-default: inherit;
+    }
+
+    section.theme-middle {
+        --bg-color-default: var(--bg-alt);
+        --bg-color-border: var(--border-color);
+        --text-color-default: inherit;
+    }
+
+    section.theme-full {
+        --bg-color-default: var(--theme-primary);
+        --bg-color-border: var(--bg-alt);
+        --text-color-default: var(--bg-primary);
+    }
+
+    section.theme-full :global(h1, h2, h3, h4, h5, h6) {
+        color: inherit;
+    }
+
+    .no-border {
+        border: 0;
+    }
+</style>

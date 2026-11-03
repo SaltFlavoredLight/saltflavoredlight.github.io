@@ -1,0 +1,6 @@
+---
+import Button from "../Button.astro";
+
+const { link = "/contact/", label = "Contact Me" } = Astro.props;
+---
+<Button href={link} format="bg">{label}</Button>

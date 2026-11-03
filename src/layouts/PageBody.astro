@@ -1,0 +1,78 @@
+---
+import "../styles/main.css";
+import "../styles/themes.css";
+import "../styles/core.css";
+
+import SiteHeader from "../componets/header/SiteHeader.astro";
+import SiteFooter from "../componets/footer/SiteFooter.astro";
+
+const {
+    pageTitle,
+    themeColor = "rose",
+    darkMode = false,
+    description = "A Website About Ray. Hi! This is Ray and I love to share something!",
+    slug = "/",                  // Slug input (e.g. "/about" or "")
+    imagePath = "/cover.png", // Image path relative to your domain
+} = Astro.props;
+
+// Get domain from Astro config (with a fallback placeholder if not set)
+const domain = Astro.site ? Astro.site.href : "https://raystudio.net";
+
+// Combine domain with slug and image path
+const canonicalURL = new URL(slug, domain).href;
+const image = new URL(imagePath, domain).href;
+
+// Standard variables (not input props)
+const keywords = "Ray, Website, Personal";
+const iconPath = "/favicon.png"; // Standard fixed variable for the site icon
+const iconURL = new URL(iconPath, domain).href;
+
+// ready the factory:
+let bodyClass = "";
+
+bodyClass += `theme-${themeColor}`;
+
+if (darkMode) {
+    bodyClass += ` dark-mode`;
+}
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <!-- Favicon / Site Icon -->
+        <link rel="icon" href={iconURL} />
+
+        <!-- SEO Meta Tags -->
+        <title>{pageTitle} | Rayzhi</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+        <link rel="canonical" href={canonicalURL} />
+        
+        <!-- Open Graph / Social Sharing SEO -->
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={image} />
+        <meta property="og:url" content={canonicalURL} />
+    </head>
+    <body class={bodyClass}>
+        <SiteHeader />
+        
+        <main>
+            <h1>{pageTitle}</h1>
+            <slot />
+        </main>
+
+        <SiteFooter/>
+    </body>
+</html>
+
+<style>
+main {
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin: 0 auto;
+    max-width: 1000px;
+}
+</style>

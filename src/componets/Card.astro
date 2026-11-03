@@ -1,0 +1,123 @@
+---
+interface Props {
+    /** when blank, disaled, otherwise, the name appeared here will be applied to style, Option: color, move, both */
+    hover?: "" | "color" | "move" | "both";
+
+    /** this is theme for the card, default is light, where also have Dark, Border and Middle option */
+    theme?: "" | "dark" | "border" | "middle";
+
+    /** true if you hate border */
+    borderless?: "true" | "false" | Boolean;
+
+    noBottomMargin?: boolean | "false" | "true";
+
+    morepadding?: boolean | "false" | "true";
+}
+
+import "../styles/main.css";
+import "../styles/themes.css";
+import "../styles/core.css";
+
+const {
+    hover = "",
+    theme = "",
+    borderless = "false",
+    noBottomMargin = false,
+    morepadding = true
+} = Astro.props;
+
+const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
+const isMorePadding = morepadding === true || morepadding === "true";
+
+let finalClass = "";
+
+finalClass += "card ";
+
+finalClass += hover ? `hover-${hover} ` : ` `;
+finalClass += theme ? `theme-${theme} ` : ` `;
+finalClass += borderless === "true" ? `borderless ` : ` `;
+finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
+finalClass += isMorePadding ? `morepadding ` : ` `;
+---
+
+<div class={finalClass}>
+    <slot />
+</div>
+
+<style>
+    .card {
+        --bg-color-default: var(--bg-surface);
+        --bg-color-border: var(--border-color);
+        --text-color-default: var(--text-primary);
+        --bg-color-hover: var(--bg-alt);
+
+        color: var(--text-color-default);
+        background-color: var(--bg-color-default);
+        border: 1px solid var(--bg-color-border);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        height: fit-content;
+
+        transform: translateY(0px);
+        transition: all 0.2 ease-in-out;
+    }
+
+    div.has-margin {
+        margin-bottom: var(--spacing-md);
+    }
+
+    div.morepadding {
+        padding: var(--spacing-lg);
+    }
+
+
+    .inner :global(p, li, code, small) {
+        color: inherit;
+    }
+
+
+    div.theme-dark {
+        --bg-color-default: var(--text-primary);
+        --bg-color-border: var(--border-color);
+        --text-color-default: var(--bg-primary);
+        --bg-color-hover: var(--text-muted);
+    }
+
+    div.theme-border {
+        --bg-color-default: transparent;
+        --bg-color-border: var(--border-color);
+        --text-color-default: inherit;
+        --bg-color-hover: var(--bg-surface);
+    }
+
+    div.theme-middle {
+        --bg-color-default: var(--bg-alt);
+        --bg-color-border: var(--border-color);
+        --text-color-default: inherit;
+        --bg-color-hover: var(--theme-primary);
+        --text-color-hover: var(--bg-primary);
+    }
+
+    div.borderless {
+        border: 0;
+    }
+
+    div.hover-move:hover {
+        transform: translateY(-4px);
+    }
+
+    div.hover-color:hover {
+        background-color: var(--bg-color-hover);
+        color: var(--text-color-hover, --text-color-default);
+    }
+
+    div.hover-both:hover {
+        transform: translateY(-4px);
+        box-shadow: 4px 10px 24px rgba(0, 0, 0, 0.35);
+
+        background-color: var(--bg-color-hover);
+        color: var(--text-color-hover, --text-color-default);
+    }
+</style>

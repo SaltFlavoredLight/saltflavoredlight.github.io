@@ -1,0 +1,176 @@
+:root {
+    /* Persistent Shine Color (Always Gold - Colorplete Library Only) */
+    --colorplete-gold: #FFEB60;
+    --colorplete-gold-light: #FFF8B0;
+    --colorplete-gold-glow: rgba(255, 235, 96, 0.45);
+    --colorplete-cafe: #8b5a19;
+
+    /* Typography & Spacing */
+    --font-primary: "Cardo", "Times New Roman", Times, serif; 
+    --font-secondary: "Roboto", sans-serif;                    
+    --font-code: "Courier New", Courier, monospace;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2.5rem;
+    --spacing-xl: 4rem;
+
+    --border-radius: 4px;
+    --transition-speed: 0.3s;
+
+    /* #region colors*/
+    /* ------------------------------------------
+       THEME 1: ROSE RED
+       ------------------------------------------ */
+    --rose-dark-1: #111;
+    --rose-dark-2: #111;
+    --rose-dark-3: #111;
+
+    --rose-light-1: #FFFFFF;
+    --rose-light-2: #F9F2F2; 
+    --rose-light-3: #F0DCDC; 
+
+    --rose-theme-1: #771111; 
+    --rose-theme-2: #3E0909; 
+    --rose-theme-3: #A82424; 
+
+ /* ------------------------------------------
+       THEME 2: GRASS GREEN
+       ------------------------------------------ */
+    --green-dark-1: #111;
+    --green-dark-2: #111;
+    --green-dark-3: #111;
+
+    --green-light-1: #FFFFFF;
+    --green-light-2: #F2F7F2; 
+    --green-light-3: #DCEFE0; 
+
+    --green-theme-1: #388a4e; 
+    --green-theme-2: #142812; 
+    --green-theme-3: #437C3D;
+
+    /* ------------------------------------------
+       THEME 3: GOLD YELLOW
+       ------------------------------------------ */
+    --gold-dark-1: #111;
+    --gold-dark-2: #111;
+    --gold-dark-3: #111;
+
+    --gold-light-1: #FFFFFF;
+    --gold-light-2: #F8F7F0; 
+    --gold-light-3: #EDE9D0; 
+
+    --gold-theme-1: #8C7300; 
+    --gold-theme-2: #3D3200; 
+    --gold-theme-3: #C2A300; 
+
+    /* ------------------------------------------
+       THEME 4: FLOWER PURPLE
+       ------------------------------------------ */
+    --purple-dark-1: #111;
+    --purple-dark-2: #111;
+    --purple-dark-3: #111;
+
+    --purple-light-1: #FFFFFF;
+    --purple-light-2: #F6F2F7; 
+    --purple-light-3: #E6DCE8; 
+
+    --purple-theme-1: #4A2E7D; 
+    --purple-theme-2: #211436; 
+    --purple-theme-3: #6C42B3; 
+    /* #endregion */
+}
+
+body, .theme-rose {
+    --bg-primary: var(--rose-light-1);
+    --bg-surface: var(--rose-light-2);
+    --bg-alt: var(--rose-light-3);
+    --text-primary: var(--rose-dark-1);
+    --text-muted: var(--rose-theme-2);
+    --theme-primary: var(--rose-theme-1);
+    --theme-dark: var(--rose-theme-2);
+    --theme-light: var(--rose-theme-3);
+    --border-color: var(--rose-theme-3);
+}
+
+.theme-rose.dark-mode {
+    --bg-primary: var(--rose-dark-1);
+    --bg-surface: var(--rose-theme-2);
+    --bg-alt: var(--rose-dark-3);
+    --text-primary: var(--rose-light-1);
+    --text-muted: var(--rose-light-2);
+    --theme-primary: var(--rose-theme-3);
+    --theme-dark: var(--rose-theme-1);
+    --theme-light: var(--rose-light-3);
+    --border-color: var(--rose-theme-1);
+}
+
+.theme-green {
+    --bg-primary: var(--green-light-1);
+    --bg-surface: var(--green-light-2);
+    --bg-alt: var(--green-light-3);
+    --text-primary: var(--green-dark-1);
+    --text-muted: var(--green-theme-2);
+    --theme-primary: var(--green-theme-1);
+    --theme-dark: var(--green-theme-2);
+    --theme-light: var(--green-theme-3);
+    --border-color: var(--green-theme-3);
+}
+.theme-green.dark-mode {
+    --bg-primary: var(--green-dark-1);
+    --bg-surface: var(--green-theme-2);
+    --bg-alt: var(--green-dark-3);
+    --text-primary: var(--green-light-1);
+    --text-muted: var(--green-light-2);
+    --theme-primary: var(--green-theme-3);
+    --theme-dark: var(--green-theme-1);
+    --theme-light: var(--green-light-3);
+    --border-color: var(--green-theme-1);
+}
+
+.theme-gold {
+    --bg-primary: var(--gold-light-1);
+    --bg-surface: var(--gold-light-2);
+    --bg-alt: var(--gold-light-3);
+    --text-primary: var(--gold-dark-1);
+    --text-muted: var(--gold-theme-2);
+    --theme-primary: var(--gold-theme-1);
+    --theme-dark: var(--gold-theme-2);
+    --theme-light: var(--gold-theme-3);
+    --border-color: var(--gold-theme-3);
+}
+.theme-gold.dark-mode {
+    --bg-primary: var(--gold-dark-1);
+    --bg-surface: var(--gold-theme-2);
+    --bg-alt: var(--gold-dark-3);
+    --text-primary: var(--gold-light-1);
+    --text-muted: var(--gold-light-2);
+    --theme-primary: var(--gold-theme-3);
+    --theme-dark: var(--gold-theme-1);
+    --theme-light: var(--gold-light-3);
+    --border-color: var(--gold-theme-1);
+}
+
+.theme-purple {
+    --bg-primary: var(--purple-light-1);
+    --bg-surface: var(--purple-light-2);
+    --bg-alt: var(--purple-light-3);
+    --text-primary: var(--purple-dark-1);
+    --text-muted: var(--purple-theme-2);
+    --theme-primary: var(--purple-theme-1);
+    --theme-dark: var(--purple-theme-2);
+    --theme-light: var(--purple-theme-3);
+    --border-color: var(--purple-theme-3);
+}
+.theme-purple.dark-mode {
+    --bg-primary: var(--purple-dark-1);
+    --bg-surface: var(--purple-theme-2);
+    --bg-alt: var(--purple-dark-3);
+    --text-primary: var(--purple-light-1);
+    --text-muted: var(--purple-light-2);
+    --theme-primary: var(--purple-theme-3);
+    --theme-dark: var(--purple-theme-1);
+    --theme-light: var(--purple-light-3);
+    --border-color: var(--purple-theme-1);
+}

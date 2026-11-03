@@ -1,0 +1,56 @@
+---
+import "../styles/main.css";
+import "../styles/themes.css";
+import "../styles/core.css";
+
+export interface Props {
+    src: string;
+    height?: number;
+    title?: string;
+    noBottomMargin?: boolean | "false" | "true";
+    allow?: string;
+    sandbox?: string;
+}
+
+const {
+    src,
+    title = "Embed from 3rd party website",
+    noBottomMargin = false,
+    allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+    sandbox = "allow-scripts allow-same-origin allow-presentation",
+} = Astro.props;
+
+// Convert potential string booleans into actual booleans
+const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
+
+const className = ["video-container", !isNoBottomMargin ? "has-margin" : ""]
+    .filter(Boolean)
+    .join(" ");
+---
+
+<div class={className}>
+    <iframe
+        loading="lazy"
+        src={src}
+        title={title}
+        frameborder="0"
+        allow={allow}
+        sandbox={sandbox}
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+</div>
+
+<style>
+    .video-container {
+        width: 100%;
+    }
+
+    .has-margin {
+        padding-bottom: var(--spacing-md);
+    }
+
+    .video-container iframe {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+    }
+</style>

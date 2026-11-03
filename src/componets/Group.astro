@@ -1,0 +1,109 @@
+---
+import "../styles/main.css";
+import "../styles/themes.css";
+import "../styles/core.css";
+
+interface Props {
+    /** Wrap means you push element to next one when overflow */
+    wrap?: "" | "wrap" | "wrap-reverse";
+    /** Take 100% in width, unavailable when vertical is true */
+    takeFull?: boolean;
+    /** Vertical direction */
+    vertical?: boolean;
+    /** Alignment options */
+    align?: "left" | "center" | "right" | "stretch" | "space evenly";
+    /** Length as width px when vertical, or height px when not vertical */
+    length?: number | string;
+    /** No margin bottom toggle, defaults to true */
+    noBottomMargin?: boolean;
+}
+
+const {
+    wrap = "",
+    takeFull = false,
+    vertical = false,
+    align = "left",
+    length,
+    noBottomMargin = false,
+} = Astro.props;
+
+// Format length to a valid CSS string (e.g. 100 -> "100px")
+const lengthValue =
+    length !== undefined
+        ? typeof length === "number"
+            ? `${length}px`
+            : length
+        : "";
+
+// Process all classes cleanly in JS first
+const className = [
+    "groups",
+    wrap ? `wrap-${wrap}` : "",
+    takeFull && !vertical ? "take-full" : "",
+    vertical ? "vertical" : "horizontal",
+    `align-${align.replace(" ", "-")}`,
+    !noBottomMargin ? "has-margin" : "",
+]
+    .filter(Boolean)
+    .join(" ");
+---
+
+<div class={className}>
+    <slot />
+</div>
+
+<style define:vars={{ lengthValue }}>
+    .groups {
+        display: flex;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-m);
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .groups.has-margin {
+        margin-bottom: var(--spacing-md);
+    }
+
+    /* Wrap variations */
+    .groups.wrap-wrap {
+        flex-wrap: wrap;
+    }
+    .groups.wrap-wrap-reverse {
+        flex-wrap: wrap-reverse;
+    }
+
+    /* Direction & Length variations using Astro's define:vars */
+    .groups.vertical {
+        flex-direction: column;
+        width: var(--lengthValue);
+    }
+
+    .groups.horizontal {
+        flex-direction: row;
+        height: var(--lengthValue);
+    }
+
+    /* Take Full (only applies when horizontal) */
+    .groups.take-full {
+        width: 100%;
+    }
+
+    /* Alignment variations */
+    .groups.align-left {
+        justify-content: flex-start;
+    }
+    .groups.align-center {
+        justify-content: center;
+    }
+    .groups.align-right {
+        justify-content: flex-end;
+    }
+    .groups.align-stretch {
+        justify-content: stretch;
+    }
+    .groups.align-space-evenly {
+        justify-content: space-evenly;
+    }
+</style>

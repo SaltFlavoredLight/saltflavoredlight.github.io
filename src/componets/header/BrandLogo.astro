@@ -1,0 +1,47 @@
+---
+import "../../styles/main.css";
+import "../../styles/themes.css";
+import "../../styles/core.css";
+
+import { Image } from "astro:assets";
+import logo from "../../assets/logo.png";
+---
+
+<a href="/" class="brand-container">
+    <Image src={logo} alt="Ray's Internet Avatar" loading="eager" loading="lazy" class="avatar" />
+    <span class="site-title">Rayzhi</span>
+</a>
+
+<style>
+    .site-title {
+        margin: 0;
+    }
+
+    .brand-container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+    }
+
+    .avatar {
+        height: 100%;
+        width: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: var(--spacing-xs);
+    }
+
+    a {
+        text-decoration: none;
+        transition: all var(--transition-speed) ease-in-out;
+        font-size: var(--spacing-md);
+        font-weight: 600;
+        color: var(--bg-primary);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--text-primary);
+    }
+</style>

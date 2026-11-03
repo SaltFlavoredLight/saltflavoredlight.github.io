@@ -1,0 +1,59 @@
+---
+import "../../styles/main.css";
+import "../../styles/themes.css";
+import "../../styles/core.css";
+
+import logo from "../../assets/logo.png";
+import { Image } from "astro:assets";
+---
+
+<div class="site-info">
+    <Image alt="Ray's Avatar" src={logo} class="avatar" />
+    <h2>Rayzhi's Website</h2>
+    <p>I love Math, Computer Science and Arts</p>
+</div>
+
+<style>
+    a {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0;
+        font: inherit;
+    }
+
+    a:hover {
+        color: var(--text-primary);
+    }
+
+    p,
+    h2 {
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        margin: 0;
+        padding: 0;
+    }
+
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .avatar {
+        height: 150px;
+        width: 150px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: var(--spacing-sm);
+    }
+
+
+    
+    @media (max-width: 800px) {
+        div {
+            align-items: center;
+        }
+    }
+</style>
