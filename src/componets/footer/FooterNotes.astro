@@ -3,21 +3,11 @@ import "../../styles/main.css";
 import "../../styles/themes.css";
 import "../../styles/core.css";
 
-const links = [
-    {
-        name: "Home Page",
-        href: "/"
-    },{
-        name: "YouTube",
-        href: "https://www.youtube.com/@SaltFlavoredLight"
-    },{
-        name: "Github",
-        href: "https://www.github.com/SaltFlavoredLight"
-    },
-];
+import { siteConfig } from '../../config/siteConfig.js';
 
-const motto =
-    "Love the Lord your God with all your heart, and with all your soul, and with all your mind.";
+
+const links = siteConfig.socialLinks;
+const motto = siteConfig.motto;
 
 ---
 
