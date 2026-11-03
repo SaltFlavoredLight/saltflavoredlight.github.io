@@ -6,31 +6,40 @@ import "../../styles/core.css";
 import BrandLogo from "./BrandLogo.astro";
 import Nav from "./Nav.astro";
 import Hamburger from "./Hamburger.astro";
-import CTAButton from "./CTAButton.astro"
+import CTAButton from "./CTAButton.astro";
+
+interface Props {
+    landing?: boolean;
+    singlePage?: string;
+}
+
+const { landing = false } = Astro.props;
 ---
 
 <header>
     <div class="header-inner">
         <BrandLogo />
 
-        <Nav />
+        {!landing && <Nav />}
 
         <div class="header-right">
             <CTAButton />
-            <Hamburger />
+            {!landing && <Hamburger />}
         </div>
     </div>
 </header>
 
-<script>
-    const toggleButton = document.getElementById("menu-toggle");
-    const navMenu = document.getElementById("nav-menu");
+{!landing && (
+    <script>
+        const toggleButton = document.getElementById("menu-toggle");
+        const navMenu = document.getElementById("nav-menu");
 
-    toggleButton?.addEventListener("click", () => {
-        navMenu?.classList.toggle("active");
-        toggleButton?.classList.toggle("active");
-    });
-</script>
+        toggleButton?.addEventListener("click", () => {
+            navMenu?.classList.toggle("active");
+            toggleButton?.classList.toggle("active");
+        });
+    </script>
+)}
 
 <style>
     /* 1. Outer wrapper handles sticky positioning, full-width span, and desktop floating margins */
@@ -64,8 +73,6 @@ import CTAButton from "./CTAButton.astro"
         padding-left: var(--spacing-sm);
     }
 
-  
-
     @media (min-width: 900px) {
         header {
             top: var(--spacing-sm);
@@ -74,7 +81,7 @@ import CTAButton from "./CTAButton.astro"
             margin-left: auto;
             margin-right: auto;
             max-width: 1250px;
-            width: calc(100% - var(--spacing-md) * 2);
+            width: calc(100% - (var(--spacing-md) * 2));
             padding-left: var(--spacing-md);
             padding-right: var(--spacing-md);
         }
@@ -83,6 +90,5 @@ import CTAButton from "./CTAButton.astro"
             gap: var(--spacing-sm);
             padding-right: 0;
         }
-
     }
 </style>

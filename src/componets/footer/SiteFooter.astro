@@ -5,10 +5,17 @@ import "../../styles/core.css";
 
 import FooterTop from "./FooterTop.astro";
 import FooterNotes from "./FooterNotes.astro";
+
+interface Props {
+    landing?: boolean;
+    singlePage?: string; // Or use your specific SiteLayout union type here too
+}
+
+const { landing = false } = Astro.props;
 ---
 
 <footer>
-    <FooterTop />
+    { !landing && <FooterTop /> }
     <hr />
     <FooterNotes />
 </footer>
