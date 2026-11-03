@@ -2,6 +2,12 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
+/**
+ * Helper function to determine the site URL using environment variables
+ * @param {boolean} isDev 
+ * @param {boolean} isPreview 
+ * @returns {string}
+ */
 function determineSiteUrl(isDev, isPreview) {
     const devSite = 'http://localhost:2237/';
     const defaultSite = 'https://www.raystudio.net';
@@ -11,10 +17,8 @@ function determineSiteUrl(isDev, isPreview) {
         return devSite;
     }
 
-    // Check for a custom --domain flag passed via CLI
-    const args = process.argv;
-    const domainIndex = args.indexOf('--domain');
-    const customDomain = domainIndex !== -1 && args[domainIndex + 1];
+    // Read from environment variable (bulletproof across local & CI/CD)
+    const customDomain = process.env.SITE_DOMAIN;
 
     if (customDomain) {
         return customDomain.startsWith('http') ? customDomain : `https://${customDomain}`;

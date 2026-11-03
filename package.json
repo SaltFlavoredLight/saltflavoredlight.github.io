@@ -18,11 +18,10 @@
     "type": "module",
     "scripts": {
         "dev": "astro dev --port 2237",
+        "build": "astro build",
         "preview": "astro preview --port 2237",
-        "build": "astro build --domain raystudio.net",
-        "build:github": "astro build --domain saltflavoredlight.github.io",
-        "build:regional": "astro build --domain raystudio.net",
-        "astro": "astro"
+        "build:github": "SITE_DOMAIN=saltflavoredlight.github.io astro build",
+        "build:regional": "SITE_DOMAIN=raystudio.net astro build"
     },
     "dependencies": {
         "@astrojs/markdown-satteri": "^0.4.6",
