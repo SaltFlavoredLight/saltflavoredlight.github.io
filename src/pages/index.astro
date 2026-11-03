@@ -10,6 +10,7 @@ import Group from "../componets/Group.astro";
 import Button from "../componets/Button.astro";
 import YouTube from "../componets/YouTube.astro";
 import CardLink from "../componets/CardLink.astro";
+import HStack from "../componets/HStack.astro";
 ---
 
 <PageBody pageTitle="Infomation">
@@ -275,8 +276,18 @@ import CardLink from "../componets/CardLink.astro";
     <h2 id="references">Watch Video</h2>
     <YouTube id="qAsGWVk51Jk" privacy />
     <h2 id="references">References</h2>
-
-    <CardLink title="Wikipedia" href="https://en.wikipedia.org/wiki/Catholic_devotions_to_Jesus">
-        More infomation will be shown here.
-    </CardLink>
+    <HStack>
+        <CardLink
+            title="Wikipedia"
+            href="https://en.wikipedia.org/"
+        >
+            Go to wikipedia
+        </CardLink>
+        <CardLink
+            title="Catholic Answers"
+            href="https://www.catholic.com"
+        >
+            Best Guide for find something faithful
+        </CardLink>
+    </HStack>
 </PageBody>
