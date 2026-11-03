@@ -3,7 +3,7 @@ import "../styles/main.css";
 import "../styles/themes.css";
 import "../styles/core.css";
 
-import PageBody from "../layouts/PageBody.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import Section from "../componets/Section.astro";
 import Card from "../componets/Card.astro";
 import Group from "../componets/Group.astro";
@@ -13,7 +13,7 @@ import CardLink from "../componets/CardLink.astro";
 import HStack from "../componets/HStack.astro";
 ---
 
-<PageBody pageTitle="Infomation">
+<PageLayout pageTitle="Infomation">
     <Card hover="both">
         The Roman Catholic tradition includes a number of devotions to Jesus
         Christ. Like all Catholic devotions, these prayer forms are not part of
@@ -290,4 +290,4 @@ import HStack from "../componets/HStack.astro";
             Best Guide for find something faithful
         </CardLink>
     </HStack>
-</PageBody>
+</PageLayout>

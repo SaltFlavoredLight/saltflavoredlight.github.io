@@ -1,0 +1,28 @@
+---
+import "../styles/main.css";
+import "../styles/themes.css";
+import "../styles/core.css";
+
+import BaseLayout from "./BaseLayout.astro";
+
+const {
+    pageTitle,
+    themeColor = "rose",
+    darkMode = false,
+    description = "A Website About Ray. Hi! This is Ray and I love to share something!",
+    slug = "/", // Slug input (e.g. "/about" or "")
+    imagePath = "/cover.png", // Image path relative to your domain
+} = Astro.props;
+---
+
+<BaseLayout
+    pageTitle={pageTitle}
+    themeColor={themeColor}
+    darkMode={darkMode}
+    description={description}
+    slug={slug}
+    imagePath={imagePath}
+>
+    <h1>{pageTitle}</h1>
+    <slot />
+</BaseLayout>
