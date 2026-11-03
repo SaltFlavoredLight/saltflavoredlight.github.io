@@ -3,12 +3,11 @@ import "../../styles/main.css";
 import "../../styles/themes.css";
 import "../../styles/core.css";
 
-const pageTree = [
-    { title: "Works", href: "/works/" },
-    { title: "Information", href: "/info/" },
-    { title: "Projects", href: "/projects/" },
-    { title: "About Me", href: "/about/" },
-];
+
+import { siteConfig } from '../../config/siteConfig.js';
+
+
+const pageTree = siteConfig.pageTree;
 ---
 
 <div class="nav" id="nav-menu">
