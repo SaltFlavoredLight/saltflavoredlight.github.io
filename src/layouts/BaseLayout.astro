@@ -13,6 +13,7 @@ const {
     description = "A Website About Ray. Hi! This is Ray and I love to share something!",
     slug = "/",                  // Slug input (e.g. "/about" or "")
     imagePath = "/cover.png", // Image path relative to your domain
+    singlePage = false
 } = Astro.props;
 
 // Get domain from Astro config (with a fallback placeholder if not set)
@@ -26,6 +27,8 @@ const image = new URL(imagePath, domain).href;
 const keywords = "Ray, Website, Personal";
 const iconPath = "/favicon.png"; // Standard fixed variable for the site icon
 const iconURL = new URL(iconPath, domain).href;
+
+
 
 // ready the factory:
 let bodyClass = "";
@@ -58,13 +61,14 @@ if (darkMode) {
         <meta property="og:url" content={canonicalURL} />
     </head>
     <body class={bodyClass}>
-        <SiteHeader />
+        <SiteHeader singlePage='false' />
         
+
         <main>
             <slot />
         </main>
 
-        <SiteFooter/>
+        <SiteFooter  singlePage='false'/>
     </body>
 </html>
 
