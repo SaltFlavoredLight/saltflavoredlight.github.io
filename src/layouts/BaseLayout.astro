@@ -42,7 +42,7 @@ const {
 const domain = Astro.site ? Astro.site.href : "https://raystudio.net";
 
 // Combine domain with slug and image path
-const canonicalURL = new URL(slug, domain).href;
+const canonicalURL = new URL(slug, "https://www.raystudio.net").href;
 const image = new URL(imagePath, domain).href;
 
 // Standard variables
