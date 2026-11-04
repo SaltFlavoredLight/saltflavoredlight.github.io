@@ -20,9 +20,9 @@
         "dev": "astro dev --port 2237",
         "build": "astro build",
         "preview": "astro preview --port 2237",
-        "build:github": "cross-env SITE_DOMAIN=saltflavoredlight.github.io astro build",
-        "build:raystudio": "cross-env SITE_DOMAIN=raystudio.net astro build",
-        "build:custom": "cross-env SITE_DOMAIN=\"$SITE_DOMAIN\" astro build"
+        "build:github": "SITE_DOMAIN=saltflavoredlight.github.io astro build",
+        "build:raystudio": "SITE_DOMAIN=raystudio.net astro build",
+        "build:domain3": "SITE_DOMAIN=your-third-domain.com astro build"
     },
     "dependencies": {
         "@astrojs/markdown-satteri": "^0.4.6",
