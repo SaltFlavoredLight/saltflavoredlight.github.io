@@ -19,17 +19,17 @@ type SiteLayout =
     | 'landingFooterOnly';
 
 interface Props {
-    pageTitle: string;
+    title: string;
     themeColor?: string;
     darkMode?: boolean;
     description?: string;
-    slug?: string;
+    slug: string;
     imagePath?: string;
     pageLayout?: SiteLayout;
 }
 
 const {
-    pageTitle,
+    title,
     themeColor = "rose",
     darkMode = false,
     description = "A Website About Ray. Hi! This is Ray and I love to share something!",
@@ -109,13 +109,13 @@ switch (pageLayout) {
         <link rel="icon" href={iconURL} />
 
         <!-- SEO Meta Tags -->
-        <title>{pageTitle} | Rayzhi</title>
+        <title>{title} | Rayzhi</title>
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <link rel="canonical" href={canonicalURL} />
         
         <!-- Open Graph / Social Sharing SEO -->
-        <meta property="og:title" content={pageTitle} />
+        <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={image} />
         <meta property="og:url" content={canonicalURL} />
