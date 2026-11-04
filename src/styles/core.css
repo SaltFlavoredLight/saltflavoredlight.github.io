@@ -36,7 +36,8 @@ h4 {
 /* Colorplete library shine feature applied ONLY to h1 underline */
 h1 {
     font-size: 2.75rem;
-    padding-bottom: var(--spacing-xs);
+    padding-top: var(--spacing-xs);
+    padding-bottom: var(--spacing-sm);
 }
 
 h2 {
