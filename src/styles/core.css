@@ -1,7 +1,4 @@
 
-/* ==========================================
-   3. BASE ELEMENT STYLING
-   ================================---------- */
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
@@ -33,7 +30,6 @@ h4 {
     transition: color var(--transition-speed);
 }
 
-/* Colorplete library shine feature applied ONLY to h1 underline */
 h1 {
     font-size: 2.75rem;
     padding-top: var(--spacing-xs);
@@ -143,19 +139,15 @@ tr:nth-child(even) {
 }
 
 hr {
-  width: 100%;          /* Forces the hr to span the full width of its container */
-  border: none;         /* Removes the browser's default shaded border */
-  height: 1.5px;          /* Sets the thickness of the line */
-  background-color: var(--border-color); /* Sets your custom color (supports HEX, RGB, or text) */
-  margin: 16px 0;       /* Optional: Controls spacing above and below, resets side margins */
+  width: 100%;          
+  border: none;  
+  height: 1.5px;    
+  background-color: var(--border-color); 
+  margin: 16px 0;   
 }
 
-/* ==========================================
-   8. COLORCRETE LIBRARY SHINE CLASS (Gold)
-   ================================---------- */
 .colorplete-gold-shine {
     border-color: var(--colorplete-gold) !important;
     box-shadow: 0 0 10px var(--colorplete-gold-glow);
 }
 
-/* Header and Main position! */
