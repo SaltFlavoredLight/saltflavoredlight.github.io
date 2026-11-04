@@ -56,10 +56,10 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
       - name: Build with Astro for GitHub Pages
-        run: npm run build:github
+        run: npm run build
         working-directory: ${{ env.BUILD_PATH }}
         env:
-            SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'saltflavoredlight.github.io' }}
+            SITE_DOMAIN: 'saltflavoredlight.github.io'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
