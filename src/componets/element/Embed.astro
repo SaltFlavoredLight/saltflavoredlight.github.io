@@ -1,29 +1,27 @@
 ---
-import "../styles/main.css";
-import "../styles/themes.css";
-import "../styles/core.css";
+import "../../styles/main.css";
+import "../../styles/themes.css";
+import "../../styles/core.css";
 
 export interface Props {
-    id: string;
-    privacy?: boolean | "false" | "true";
+    src: string;
+    height?: number;
     title?: string;
     noBottomMargin?: boolean | "false" | "true";
+    allow?: string;
+    sandbox?: string;
 }
 
 const {
-    id,
-    title = "YouTube video player",
+    src,
+    title = "Embed from 3rd party website",
     noBottomMargin = false,
-    privacy = false,
+    allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+    sandbox = "allow-scripts allow-same-origin allow-presentation",
 } = Astro.props;
 
-// Convert potential string booleans (from Astro attributes) into actual booleans
-const isPrivacy = privacy === true || privacy === "true";
+// Convert potential string booleans into actual booleans
 const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
-
-const embedUrl = isPrivacy
-    ? `https://www.youtube-nocookie.com/embed/${id}`
-    : `https://www.youtube.com/embed/${id}`;
 
 const className = ["video-container", !isNoBottomMargin ? "has-margin" : ""]
     .filter(Boolean)
@@ -33,10 +31,11 @@ const className = ["video-container", !isNoBottomMargin ? "has-margin" : ""]
 <div class={className}>
     <iframe
         loading="lazy"
-        src={embedUrl}
+        src={src}
         title={title}
         frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow={allow}
+        sandbox={sandbox}
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen></iframe>
 </div>
@@ -47,7 +46,7 @@ const className = ["video-container", !isNoBottomMargin ? "has-margin" : ""]
     }
 
     .has-margin {
-        margin-bottom: var(--spacing-md);
+        padding-bottom: var(--spacing-md);
     }
 
     .video-container iframe {
