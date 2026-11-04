@@ -3,42 +3,10 @@ import "../../styles/main.css";
 import "../../styles/themes.css";
 import "../../styles/core.css";
 
-const footerMap = [
-    {
-        name: "Project",
-        lists: [
-            {
-                href: "/math/",
-                name: "Math Games",
-            },
-            {
-                href: "/info/",
-                name: "RaySite Infomation",
-            },
-            {
-                href: "/eoc/",
-                name: "EoC app",
-            },
-        ],
-    },
-    {
-        name: "About me",
-        lists: [
-            {
-                href: "/about/",
-                name: "Who Am I?",
-            },
-            {
-                href: "/faith/",
-                name: "My Faith",
-            },
-            {
-                href: "/about/facts/",
-                name: "Fact Sheet",
-            },
-        ],
-    },
-];
+import { siteConfig } from '../../config/siteConfig.js';
+
+
+const footerMap = siteConfig.footerMap;
 ---
 
 <div class="site-links">

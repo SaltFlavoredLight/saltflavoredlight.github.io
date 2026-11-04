@@ -5,11 +5,13 @@ import "../../styles/core.css";
 
 import { Image } from "astro:assets";
 import logo from "../../assets/logo.png";
+
+import { siteConfig } from '../../config/siteConfig.js';
 ---
 
 <a href="/" class="brand-container">
     <Image src={logo} alt="Ray's Internet Avatar" loading="eager" loading="lazy" class="avatar" />
-    <span class="site-title">Rayzhi</span>
+    <span class="site-title">{siteConfig.shortTitle}</span>
 </a>
 
 <style>
