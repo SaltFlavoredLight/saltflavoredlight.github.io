@@ -42,7 +42,7 @@ finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
 ---
 
 <a class={finalClass} href={href}>
-    <Card noBottomMargin morepadding='false' hover={hover} theme={theme} borderless={borderless}>
+    <Card noBottomMargin padding='bottom' hover={hover} theme={theme} borderless={borderless}>
         {content && (
             <h3>
                 {title}
@@ -62,7 +62,7 @@ finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
         width: 100%;
         text-decoration: none;
         color: unset;
-        padding: var(--spacing-md);
+        margin-top: var(--spacing-md);
     }
 
     .link-card > h3 {
@@ -75,7 +75,7 @@ finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
     }
 
     .has-margin {
-        padding-top: var(--spacing-md);
-        padding-bottom: var(--spacing-md);
+        margin-top: var(--spacing-xs);
+        margin-bottom: var(--spacing-md);
     }
 </style>

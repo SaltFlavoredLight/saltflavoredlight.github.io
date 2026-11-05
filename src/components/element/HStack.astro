@@ -8,6 +8,8 @@ interface Props {
     
     /** Force 100% width across the container */
     fullWidth?: boolean;
+
+    
 }
 
 const {
@@ -61,5 +63,15 @@ const className = [
     .layout-row.full-width {
         width: 100% !important;
         max-width: none !important;
+    }
+
+    @media (max-width: 600px) {
+        .layout-row.mode-flex,
+        .layout-row.mode-grid {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            gap: 0;
+        }
     }
 </style>

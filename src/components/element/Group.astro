@@ -16,6 +16,8 @@ interface Props {
     length?: number | string;
     /** No margin bottom toggle, defaults to true */
     noBottomMargin?: boolean;
+
+    stack?: Boolean | 'true' | 'false';
 }
 
 const {
@@ -25,6 +27,7 @@ const {
     align = "left",
     length,
     noBottomMargin = false,
+    stack = true
 } = Astro.props;
 
 // Format length to a valid CSS string (e.g. 100 -> "100px")
@@ -35,6 +38,9 @@ const lengthValue =
             : length
         : "";
 
+const isStacking = stack === 'true' || stack === true;
+
+
 // Process all classes cleanly in JS first
 const className = [
     "groups",
@@ -43,9 +49,12 @@ const className = [
     vertical ? "vertical" : "horizontal",
     `align-${align.replace(" ", "-")}`,
     !noBottomMargin ? "has-margin" : "",
+    isStacking ? "stack" : "",
 ]
     .filter(Boolean)
     .join(" ");
+
+
 ---
 
 <div class={className}>
@@ -105,5 +114,13 @@ const className = [
     }
     .groups.align-space-evenly {
         justify-content: space-evenly;
+    }
+
+    @media (max-width: 600px) {
+        .groups.stack {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+        }
     }
 </style>

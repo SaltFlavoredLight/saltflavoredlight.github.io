@@ -11,7 +11,7 @@ interface Props {
 
     noBottomMargin?: boolean | "false" | "true";
 
-    morepadding?: boolean | "false" | "true";
+    padding?: '' | 'more' | "default" | "none" | 'bottom';
 }
 
 import "../../styles/main.css";
@@ -23,11 +23,10 @@ const {
     theme = "",
     borderless = "false",
     noBottomMargin = false,
-    morepadding = false // dev, will be replaced later.
+    padding = ''
 } = Astro.props;
 
 const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
-const isMorePadding = morepadding === true || morepadding === "true";
 
 let finalClass = "";
 
@@ -37,7 +36,7 @@ finalClass += hover ? `hover-${hover} ` : ` `;
 finalClass += theme ? `theme-${theme} ` : ` `;
 finalClass += borderless === "true" ? `borderless ` : ` `;
 finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
-finalClass += isMorePadding ? `morepadding ` : ` `;
+finalClass += padding ? `padding-${padding} ` : ` `;
 ---
 
 <div class={finalClass}>
@@ -69,10 +68,20 @@ finalClass += isMorePadding ? `morepadding ` : ` `;
         margin-bottom: var(--spacing-md);
     }
 
-    div.morepadding {
-        padding: var(--spacing-lg);
+    div.padding-more {
+        padding-top: var(--spacing-lg);
+        padding-bottom: var(--spacing-lg);
     }
 
+    div.padding-none {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+
+    div.padding-bottom {
+        padding-top: 0;
+    }
 
     .inner :global(p, li, code, small) {
         color: inherit;
