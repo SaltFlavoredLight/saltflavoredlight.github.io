@@ -28,8 +28,8 @@ h4 {
     font-weight: 700;
     color: var(--theme-primary);
     letter-spacing: 0.04em;
-    margin-top: 0;
-    margin-bottom: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
     transition: color var(--transition-speed);
 }
 
