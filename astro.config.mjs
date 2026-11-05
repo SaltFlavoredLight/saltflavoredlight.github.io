@@ -16,6 +16,7 @@ export default defineConfig({
         port: 2237,
     },
     site: getSiteUrl(),
+    scopedStyleStrategy: 'class', 
     integrations: [
         mdx(),
         sitemap()
