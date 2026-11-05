@@ -2,21 +2,20 @@
 import "../styles/main.css";
 import "../styles/themes.css";
 
-
 import SiteHeader from "../components/header/SiteHeader.astro";
 import SiteFooter from "../components/footer/SiteFooter.astro";
 
 // All 9 mathematical combinations of Header & Footer states
-type SiteLayout = 
-    | 'full' 
-    | 'landing' 
-    | 'headerOnly' 
-    | 'footerOnly' 
-    | 'mix' 
-    | 'fullLanding' 
-    | 'none'
-    | 'landingHeaderOnly'
-    | 'landingFooterOnly';
+type SiteLayout =
+    | "full"
+    | "landing"
+    | "headerOnly"
+    | "footerOnly"
+    | "mix"
+    | "fullLanding"
+    | "none"
+    | "landingHeaderOnly"
+    | "landingFooterOnly";
 
 interface Props {
     title: string;
@@ -33,9 +32,9 @@ const {
     themeColor = "rose",
     darkMode = false,
     description = "A Website About Ray. Hi! This is Ray and I love to share something!",
-    slug = "/",              // Slug input (e.g. "/about" or "")
+    slug = "/", // Slug input (e.g. "/about" or "")
     imagePath = "/cover.png", // Image path relative to your domain
-    pageLayout = 'full'
+    pageLayout = "full",
 } = Astro.props;
 
 // Get domain from Astro config (with fallback placeholder)
@@ -57,45 +56,45 @@ if (darkMode) {
 }
 
 // State mapping for Header and Footer: 'full', 'landing', or 'none'
-let headerState: 'full' | 'landing' | 'none' = 'full';
-let footerState: 'full' | 'landing' | 'none' = 'full';
+let headerState: "full" | "landing" | "none" = "full";
+let footerState: "full" | "landing" | "none" = "full";
 
 switch (pageLayout) {
-    case 'full':
-        headerState = 'full';
-        footerState = 'full';
+    case "full":
+        headerState = "full";
+        footerState = "full";
         break;
-    case 'landing':
-        headerState = 'landing';
-        footerState = 'landing';
+    case "landing":
+        headerState = "landing";
+        footerState = "landing";
         break;
-    case 'headerOnly':
-        headerState = 'full';
-        footerState = 'none';
+    case "headerOnly":
+        headerState = "full";
+        footerState = "none";
         break;
-    case 'footerOnly':
-        headerState = 'none';
-        footerState = 'full';
+    case "footerOnly":
+        headerState = "none";
+        footerState = "full";
         break;
-    case 'mix':
-        headerState = 'full';
-        footerState = 'landing';
+    case "mix":
+        headerState = "full";
+        footerState = "landing";
         break;
-    case 'fullLanding':
-        headerState = 'landing';
-        footerState = 'full';
+    case "fullLanding":
+        headerState = "landing";
+        footerState = "full";
         break;
-    case 'none':
-        headerState = 'none';
-        footerState = 'none';
+    case "none":
+        headerState = "none";
+        footerState = "none";
         break;
-    case 'landingHeaderOnly':
-        headerState = 'landing';
-        footerState = 'none';
+    case "landingHeaderOnly":
+        headerState = "landing";
+        footerState = "none";
         break;
-    case 'landingFooterOnly':
-        headerState = 'none';
-        footerState = 'landing';
+    case "landingFooterOnly":
+        headerState = "none";
+        footerState = "landing";
         break;
 }
 ---
@@ -104,7 +103,7 @@ switch (pageLayout) {
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
+
         <!-- Favicon / Site Icon -->
         <link rel="icon" href={iconURL} />
 
@@ -113,7 +112,7 @@ switch (pageLayout) {
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <link rel="canonical" href={canonicalURL} />
-        
+
         <!-- Open Graph / Social Sharing SEO -->
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
@@ -122,23 +121,45 @@ switch (pageLayout) {
     </head>
     <body class={bodyClass}>
         <!-- Header Rendering Logic -->
-        {headerState === 'full' && <SiteHeader landing={false} singlePage={pageLayout} />}
-        {headerState === 'landing' && <SiteHeader landing={true} singlePage={pageLayout} />}
+        {
+            headerState === "full" && (
+                <SiteHeader landing={false} singlePage={pageLayout} />
+            )
+        }
+        {
+            headerState === "landing" && (
+                <SiteHeader landing={true} singlePage={pageLayout} />
+            )
+        }
 
         <main>
             <slot />
         </main>
 
         <!-- Footer Rendering Logic -->
-        {footerState === 'full' && <SiteFooter landing={false} singlePage={pageLayout} />}
-        {footerState === 'landing' && <SiteFooter landing={true} singlePage={pageLayout} />}
+        {
+            footerState === "full" && (
+                <SiteFooter landing={false} singlePage={pageLayout} />
+            )
+        }
+        {
+            footerState === "landing" && (
+                <SiteFooter landing={true} singlePage={pageLayout} />
+            )
+        }
     </body>
 </html>
 
 <style>
-main {
-    padding: var(--spacing-md) var(--spacing-lg);
-    margin: 0 auto;
-    max-width: var(--page-max-width);
-}
+    main {
+        padding: var(--spacing-md) var(--spacing-lg);
+        margin: 0 auto;
+        max-width: var(--page-max-width);
+    }
+
+    @media (max-width: 600px) {
+        main {
+            padding: var(--spacing-md) var(--spacing-md);
+        }
+    }
 </style>
