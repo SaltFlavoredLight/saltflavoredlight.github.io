@@ -1,4 +1,4 @@
-/* Reset CSS */
+/* Main CSS */
 *, *::before, *::after {
     box-sizing: border-box;
     transition: all var(--transition-speed) ease-in-out;
