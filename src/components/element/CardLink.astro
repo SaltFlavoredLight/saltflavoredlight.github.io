@@ -6,7 +6,7 @@ import "../../styles/themes.css";
 import Card from "./Card.astro";
 
 interface Props {
-    title: string;
+    title?: string;
     href?: string;
     noBottomMargin?: boolean | "true" | "false";
 
@@ -43,11 +43,15 @@ finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
 
 <a class={finalClass} href={href}>
     <Card noBottomMargin morepadding='false' hover={hover} theme={theme} borderless={borderless}>
-        <h3>
-            {title}
-            <span> &rarr;</span>
-        </h3>
-        {content}
+        {content && (
+            <h3>
+                {title}
+                <span> &rarr;</span>
+            </h3>   
+        )}
+        {content && (
+            content
+        )}
         <slot />
     </Card>
 </a>
