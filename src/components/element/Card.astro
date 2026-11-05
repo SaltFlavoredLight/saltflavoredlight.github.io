@@ -16,7 +16,7 @@ interface Props {
 
 import "../../styles/main.css";
 import "../../styles/themes.css";
-import "../../styles/core.css";
+
 
 const {
     hover = "",
@@ -65,6 +65,7 @@ finalClass += isMorePadding ? `morepadding ` : ` `;
     }
 
     div.has-margin {
+        margin-top: var(--spacing-lg);
         margin-bottom: var(--spacing-md);
     }
 
