@@ -42,11 +42,13 @@ finalClass += !isNoBottomMargin ? "has-margin " : "";
 ---
 
 <a class={finalClass} href={href}>
-    <Card noBottomMargin padding='none' hover={hover} theme={theme} borderless={borderless}>
-        <h3>
-            {title}
-            <span> &rarr;</span>
-        </h3>
+    <Card noBottomMargin padding='' hover={hover} theme={theme} borderless={borderless}>
+        {title && title.trim() !== "" && (
+            <h3>
+                {title}
+                <span> &rarr;</span>
+            </h3>
+        )}
         {content}
         <slot />
     </Card>
