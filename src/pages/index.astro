@@ -16,6 +16,7 @@ const description =
 ---
 
 <BaseLayout title="Welcome!" description={description} slug="/">
+    <!-- Title -->
     <h1 class="text-center">
         <span class="hide-on-mobile" role="img" aria-label="Waving hand">👋</span>
         Hi there, <br class="show-on-mobile"> My name is Ray.
@@ -24,22 +25,35 @@ const description =
     <p class="text-center">
         <strong>A website that talks all About Me</strong>
     </p>
-    <hr />
-    <HStack>
-        <Card noBottomMargin="true">
-            <strong>Check out my YouTube Video!</strong>
-        </Card>
-        <Card noBottomMargin="true">
-            <strong>Check out my YouTube Video!</strong>
-        </Card>
-    </HStack>
-    <HStack>
-        <Card noBottomMargin="true">
-            <strong>Check out my YouTube Video!</strong>
-        </Card>
 
+    <br>
+
+    <!-- Features -->
+    <HStack> 
+        <CardLink noBottomMargin="true" title="Math Quiz" theme="">
+            <p><strong>Test your Math?</strong> start with speedy quiz!</p>
+            <p>Test how much your brain can do when dealing with lots of numbers.</p>
+        </CardLink>
+        <CardLink noBottomMargin="true" title="Math Quiz" theme="">
+            <strong>See what project I am doing</strong>
+        </CardLink>
     </HStack>
-    <p>More Infomation......</p>
+    <HStack> 
+        <CardLink noBottomMargin="true" title="YouTUbe" theme="/youtube">
+            <strong>About My Youtube</strong>
+        </CardLink>
+    </HStack>
+    <hr />
+
+    <!-- About Me -->
+    <Section>
+        <p>Hi! this is Ray.</p>
+
+    </Section>
+    <hr />
+
+    <!-- Contact -->
+    <p>Want to Reach out to Me? <a href="/contact">Visit Here.</a></p>
 </BaseLayout>
 
 <style>
