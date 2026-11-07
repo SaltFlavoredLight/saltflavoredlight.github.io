@@ -10,6 +10,9 @@ interface Props {
     fullWidth?: boolean;
 
     noBottomMargin?: boolean | "false" | "true";
+
+    /** Force items to stretch to match height (default: true) */
+    forceStretch?: boolean;
 }
 
 const {
@@ -17,6 +20,7 @@ const {
     mode = "grid",
     noBottomMargin = false,
     fullWidth = false,
+    forceStretch = true,
 } = Astro.props;
 
 const isNoBottomMargin = (noBottomMargin === true || noBottomMargin === "true");
@@ -27,7 +31,8 @@ const className = [
     gap ? `gap-${gap}` : "",
     `mode-${mode}`,
     fullWidth ? "full-width" : "",
-    !isNoBottomMargin ? `has-margin` : ` `
+    !isNoBottomMargin ? `has-margin` : ` `,
+    forceStretch ? "force-stretch" : ""
 ]
     .filter(Boolean)
     .join(" ");
@@ -71,10 +76,24 @@ const className = [
         align-items: center;
     }
 
+    /* Flex Mode with Force Stretch */
+    .layout-row.mode-flex.force-stretch {
+        align-items: stretch;
+    }
+
+    /* Ensure children inside flex stretch handle content properly */
+    .layout-row.mode-flex.force-stretch > * {
+        height: auto;
+    }
+
     /* 2. Grid Mode */
     .layout-row.mode-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .layout-row.mode-grid.force-stretch {
+        align-items: stretch;
     }
 
     /* Force Full Width Modifier */
