@@ -14,7 +14,7 @@ interface Props {
 
     /** this is theme for the card, default is light, where also have Dark, Border and Middle option */
     theme?: "" | "dark" | "border" | "middle" | "bold";
-    
+
     /** true if you hate border */
     borderless?: Boolean | "true" | "false";
 
@@ -38,16 +38,19 @@ let finalClass = "";
 
 finalClass += "link-card ";
 finalClass += !isNoBottomMargin ? "has-margin " : "";
+finalClass += theme ? `theme-${theme}` : "";
 ---
 
 <a class={finalClass} href={href}>
     <Card noBottomMargin hover={hover} theme={theme} borderless={borderless}>
-        {title && title.trim() !== "" && (
-            <h3>
-                {title}
-                <span> &rarr;</span>
-            </h3>
-        )}
+        {
+            title && title.trim() !== "" && (
+                <h3>
+                    {title}
+                    <span> &rarr;</span>
+                </h3>
+            )
+        }
         {content}
         <slot />
     </Card>
@@ -64,13 +67,20 @@ finalClass += !isNoBottomMargin ? "has-margin " : "";
         margin-bottom: none;
     }
 
-    .link-card > h3 {
+    .link-card h3,
+    .link-card.theme-bold:hover h3 {
         margin: 0;
-        font: inherit;
+        color: var(--theme-primary);
     }
 
-    .link-card:hover h3 {
-        color: inherit;
+    .link-card.theme-middle:hover h3,
+    .link-card.theme-bold h3 {
+        color: var(--bg-light);
+    }
+
+    .link-card.theme-middle:hover p,
+    .link-card.theme-bold p {
+        color: var(--bg-surface);
     }
 
     .link-card.has-margin {
