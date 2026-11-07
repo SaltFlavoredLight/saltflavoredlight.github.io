@@ -61,17 +61,9 @@ const description =
         text-align: center;
     }
 
-    .show-on-mobile {
-        display: none;
-    }
-
-    @media (max-width: 600px) {
-        .hide-on-mobile {
-            display: none;
-        }
-
-        .show-on-mobile {
-            display: block;
+    @media (min-width: 800px) {
+        h1 {
+            font-size: calc(var(--spacing-lg) * 1.2);
         }
     }
 </style>
