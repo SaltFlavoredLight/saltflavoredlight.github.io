@@ -34,46 +34,18 @@ export const siteConfig = {
     // 7. Footer Sitemap
     footerMap: [
         {
-            name: "Project",
-            lists: [
-                {
-                    href: "/math/",
-                    name: "Math Test",
-                },
-                {
-                    href: "/info/",
-                    name: "RaySite Infomation",
-                },
-                {
-                    href: "/eoc/",
-                    name: "EoC app",
-                },
-            ],
-        },
-        {
             name: "About me",
             lists: [
                 {
                     href: "/about/",
                     name: "Who Am I?",
-                },
-                {
-                    href: "/faith/",
-                    name: "My Faith",
-                },
-                {
-                    href: "/about/facts/",
-                    name: "Fact Sheet",
-                },
-            ],
+                }
+            ]
         },
     ],
 
     // 8. Header Tree
     pageTree: [
-        { title: "Works", href: "/works/" },
-        { title: "Information", href: "/info/" },
-        { title: "Projects", href: "/projects/" },
         { title: "About Me", href: "/about/" },
     ]
 
