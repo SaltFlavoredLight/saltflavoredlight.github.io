@@ -1,45 +1,140 @@
 ---
-// Astro frontmatter
-const title = "Under Maintenance";
+import "../styles/main.css";
+import "../styles/themes.css";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/element/Card.astro";
+import Group from "../components/element/Group.astro";
+import Button from "../components/element/Button.astro";
+import YouTube from "../components/element/YouTube.astro";
+import CardLink from "../components/element/CardLink.astro";
+import HStack from "../components/element/HStack.astro";
+import C169 from "../components/C169.astro";
+import Figure from "../components/element/Figure.astro";
+
+import codeImage from "../assets/code.png";
+
+const description =
+    "A Website About Ray. Hi! This is Ray and I love to share something! you are welcome to my website!";
 ---
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title}</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
-            color: #333333;
-        }
-        .box {
-            background-color: #ffffff;
-            border: 2px solid #cccccc;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 4px 4px 0px #cccccc;
-        }
+
+<BaseLayout title="Welcome!" description={description} slug="/">
+    <!-- Title -->
+    <h1 class="text-center">
+        <span class="hide-on-mobile" role="img" aria-label="Waving hand"
+            >👋</span
+        >
+        Hi there, <br class="show-on-mobile" /> My name is Ray.
+        <span class="hide-on-mobile" role="img" aria-label="Speech bubble"
+            >💬</span
+        >
+    </h1>
+    <p class="text-center">
+        <strong>A website that talks all About Me</strong>
+        <br>
+        Please Notices that I am currently devaloping a new website, please wait till website is released.
+    </p>
+    
+    <hr />
+
+    <!-- Features -->
+    <HStack>
+        <CardLink
+            noBottomMargin="true"
+            title="Math Quiz"
+            href="#"
+            theme="middle"
+        >
+            <p><strong>Test your Math?</strong> start with speedy quiz!</p>
+            <p>
+                Test how much your brain can do when dealing with lots of
+                numbers.
+            </p>
+        </CardLink>
+        <CardLink
+            noBottomMargin="true"
+            title="Projects"
+            href="#"
+            theme="middle"
+        >
+            <p><strong>See All My Projects here</strong>.</p>
+            <p>Built fun, or big stuff, that benefit everyone</p>
+        </CardLink>
+    </HStack>
+    <HStack>
+        <CardLink
+            noBottomMargin="true"
+            title="YouTube"
+            href="#"
+            theme="middle"
+        >
+            <p>
+                <strong>Composing Musics, and share Tech thing</strong>.
+                Original Scores let you walk though arts of sound.
+            </p>
+        </CardLink>
+    </HStack>
+    <p>Or, <a href="#">click here</a> to visit This Sitemap</p>
+
+    <br />
+
+    <Section theme="middle" margin="bottom">
+        <h2>Working on Software......</h2>
+        <p>I make tools, system, and also large web project!</p>
+        <p>
+            I using Astro as my static framework, and also my custom tools for
+            Apps
+        </p>
+        <p>Stay Tuned becuase I am gonna release many thing!</p>
+
+        <Figure
+            src={codeImage}
+            alt="A code snippet showing the Astro component markup."
+            enableFootNote="left"
+            radius="lg"
+        />
+
+        <Button href="#"> Learn More on this Project Planning </Button>
+    </Section>
+
+    <!-- About Me -->
+    <h2>About Me</h2>
+    <p>
+        <strong>Hi! this is Ray.</strong> I love Math, Computer Science and Arts.
+        And devaloper of web projects.
+    </p>
+    <p>
+        I am dedicated to developing technology that allows everyone to benefit
+        from the power of the Web and the Internet.
+    </p>
+    <p>
+        About my Personal Life, I am deeply being converted to a Christian (by
+        some reason that I even don't know).
+    </p>
+
+    <Group>
+        <Button href="/about">Learn more about Me</Button>
+        <Button href="#" format="border">Learn about my Faith</Button
+        >
+    </Group>
+
+    <!-- Contact -->
+    <hr />
+    <p>Want to Reach out to Me? <a href="#">Visit Here.</a></p>
+    <small>
+        This Website is Built by Ray with Astro, Copyrigh (C) 2026 Ray.
+    </small>
+</BaseLayout>
+
+<style>
+    .text-center {
+        text-align: center;
+    }
+
+    @media (min-width: 800px) {
         h1 {
-            font-size: 1.5rem;
-            margin: 0;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-size: calc(var(--spacing-lg) * 1.2);
         }
-    </style>
-</head>
-<body>
-
-    <div class="box">
-        <h1>Under Maintenance</h1>
-        <p>Please Come Back Later!</p>
-    </div>
-
-</body>
-</html>
+    }
+</style>
