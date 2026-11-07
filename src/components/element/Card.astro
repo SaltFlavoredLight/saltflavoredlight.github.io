@@ -1,46 +1,52 @@
 ---
 interface Props {
-    /** when blank, disaled, otherwise, the name appeared here will be applied to style, Option: color, move, both */
+    /** when blank, disabled, otherwise, the name appeared here will be applied to style, Option: color, move, both */
     hover?: "" | "color" | "move" | "both";
 
     /** this is theme for the card, default is light, where also have Dark, Border and Middle option */
-    theme?: "" | "dark" | "border" | "middle";
+    theme?: "" | "dark" | "border" | "middle" | "bold";
 
     /** true if you hate border */
     borderless?: "true" | "false" | Boolean;
 
     noBottomMargin?: boolean | "false" | "true";
 
-    padding?: '' | 'more' | "default" | "none" | 'bottom';
+    padding?: "" | "more" | "default" | "none" | "bottom";
+
+    full?: Boolean | 'true' | 'false'
 }
 
 import "../../styles/main.css";
 import "../../styles/themes.css";
-
 
 const {
     hover = "",
     theme = "",
     borderless = "false",
     noBottomMargin = false,
-    padding = ''
+    padding = "",
+    full = 'true'
 } = Astro.props;
 
 const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
+const isFull = full === true || full === "true";
 
 let finalClass = "";
 
 finalClass += "card ";
-
-finalClass += hover ? `hover-${hover} ` : ` `;
-finalClass += theme ? `theme-${theme} ` : ` `;
-finalClass += borderless === "true" ? `borderless ` : ` `;
-finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
-finalClass += padding ? `padding-${padding} ` : ` `;
+finalClass += hover ? `hover-${hover} ` : ``;
+finalClass += theme ? `theme-${theme} ` : ``;
+finalClass +=
+    borderless === "true" || borderless === true ? `borderless ` : ``;
+finalClass += !isNoBottomMargin ? `has-margin ` : ``;
+finalClass += padding ? `padding-${padding} ` : ``;
+finalClass += isFull ? `full ` : ` `;
 ---
 
 <div class={finalClass}>
-    <slot />
+    <div class="card-content">
+        <slot />
+    </div>
 </div>
 
 <style>
@@ -49,6 +55,7 @@ finalClass += padding ? `padding-${padding} ` : ` `;
         --bg-color-border: var(--border-color);
         --text-color-default: var(--text-primary);
         --bg-color-hover: var(--bg-alt);
+        --text-color-hover: inherit;
 
         color: var(--text-color-default);
         background-color: var(--bg-color-default);
@@ -60,11 +67,17 @@ finalClass += padding ? `padding-${padding} ` : ` `;
         height: fit-content;
 
         transform: translateY(0px);
-        transition: all 0.2 ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* Ensure slotted elements inherit changing colors properly */
+    .card-content,
+    .card-content :global(*) {
+        color: inherit;
     }
 
     div.has-margin {
-        margin-top: var(--spacing-lg);
+        margin-top: var(--spacing-md);
         margin-bottom: var(--spacing-md);
     }
 
@@ -78,21 +91,16 @@ finalClass += padding ? `padding-${padding} ` : ` `;
         padding-bottom: 0;
     }
 
-
     div.padding-bottom {
         padding-top: 0;
     }
-
-    .inner :global(p, li, code, small) {
-        color: inherit;
-    }
-
 
     div.theme-dark {
         --bg-color-default: var(--text-primary);
         --bg-color-border: var(--border-color);
         --text-color-default: var(--bg-primary);
         --bg-color-hover: var(--text-muted);
+        --text-color-hover: var(--bg-primary);
     }
 
     div.theme-border {
@@ -100,6 +108,7 @@ finalClass += padding ? `padding-${padding} ` : ` `;
         --bg-color-border: var(--border-color);
         --text-color-default: inherit;
         --bg-color-hover: var(--bg-surface);
+        --text-color-hover: inherit;
     }
 
     div.theme-middle {
@@ -108,6 +117,13 @@ finalClass += padding ? `padding-${padding} ` : ` `;
         --text-color-default: inherit;
         --bg-color-hover: var(--theme-primary);
         --text-color-hover: var(--bg-primary);
+    }
+    div.theme-bold {
+        --bg-color-default: var(--theme-primary);
+        --bg-color-border: var(--border-color);
+        --text-color-default: var(--bg-primary);
+        --bg-color-hover: var(--bg-alt);
+        --text-color-hover: inherit;
     }
 
     div.borderless {
@@ -120,14 +136,17 @@ finalClass += padding ? `padding-${padding} ` : ` `;
 
     div.hover-color:hover {
         background-color: var(--bg-color-hover);
-        color: var(--text-color-hover, --text-color-default);
+        color: var(--text-color-hover);
     }
 
     div.hover-both:hover {
         transform: translateY(-4px);
         box-shadow: 4px 10px 24px rgba(0, 0, 0, 0.35);
-
         background-color: var(--bg-color-hover);
-        color: var(--text-color-hover, --text-color-default);
+        color: var(--text-color-hover);
+    }
+
+    div.full {
+        height: 100%;
     }
 </style>

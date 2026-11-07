@@ -2,7 +2,6 @@
 import "../../styles/main.css";
 import "../../styles/themes.css";
 
-
 import Card from "./Card.astro";
 
 interface Props {
@@ -10,16 +9,16 @@ interface Props {
     href?: string;
     noBottomMargin?: boolean | "true" | "false";
 
-    /** when blank, disaled, otherwise, the name appeared here will be applied to style, Option: color, move, both */
+    /** when blank, disabled, otherwise, the name appeared here will be applied to style, Option: color, move, both */
     hover?: "" | "color" | "move" | "both";
 
     /** this is theme for the card, default is light, where also have Dark, Border and Middle option */
-    theme?: "" | "dark" | "border" | "middle";
-
+    theme?: "" | "dark" | "border" | "middle" | "bold";
+    
     /** true if you hate border */
     borderless?: Boolean | "true" | "false";
 
-    /** oher way to enter is just use Slots */
+    /** other way to enter is just use Slots */
     content?: string;
 }
 
@@ -30,7 +29,7 @@ const {
     hover = "both",
     theme = "border",
     borderless = false,
-    content = ""
+    content = "",
 } = Astro.props;
 
 const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
@@ -38,15 +37,17 @@ const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
 let finalClass = "";
 
 finalClass += "link-card ";
-finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
+finalClass += !isNoBottomMargin ? "has-margin " : "";
 ---
 
 <a class={finalClass} href={href}>
-    <Card noBottomMargin padding='bottom' hover={hover} theme={theme} borderless={borderless}>
-        <h3>
-            {title}
-            <span> &rarr;</span>
-        </h3>
+    <Card noBottomMargin hover={hover} theme={theme} borderless={borderless}>
+        {title && title.trim() !== "" && (
+            <h3>
+                {title}
+                <span> &rarr;</span>
+            </h3>
+        )}
         {content}
         <slot />
     </Card>
@@ -58,7 +59,9 @@ finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
         width: 100%;
         text-decoration: none;
         color: unset;
-        margin-top: var(--spacing-md);
+
+        margin-top: var(--spacing-xs);
+        margin-bottom: none;
     }
 
     .link-card > h3 {
@@ -66,11 +69,11 @@ finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
         font: inherit;
     }
 
-    .link-card:hover > h3 {
-        color: var(--text-primary);
+    .link-card:hover h3 {
+        color: inherit;
     }
 
-    .has-margin {
+    .link-card.has-margin {
         margin-top: var(--spacing-xs);
         margin-bottom: var(--spacing-md);
     }
