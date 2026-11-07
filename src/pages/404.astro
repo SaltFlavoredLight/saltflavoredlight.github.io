@@ -1,0 +1,46 @@
+---
+import "../styles/main.css";
+import "../styles/themes.css";
+
+import PageLayout from "../layouts/PageLayout.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/element/Card.astro";
+import Group from "../components/element/Group.astro";
+import Button from "../components/element/Button.astro";
+import YouTube from "../components/element/YouTube.astro";
+import CardLink from "../components/element/CardLink.astro";
+import HStack from "../components/element/HStack.astro";
+import C169 from "../components/C169.astro";
+import Figure from "../components/element/Figure.astro";
+
+import codeImage from "../assets/code.png";
+
+const description =
+    "A Website About Ray. Hi! This is Ray and I love to share something! you are welcome to my website!";
+---
+
+<PageLayout title="Oops!!" description={description}>
+    <p><strong>There is Noting Here......</strong></p>
+
+    <Card>
+        <p><strong>The Common Reason can be:</strong></p>
+        <ul>
+            <li>A Typo in URL.</li>
+            <li>Page have been removed.</li>
+            <li>I got an error when updating.</li>
+        </ul>
+    </Card>
+
+    <p>But it's OK, I can let you go back to Home Page</p>
+
+    <Group>
+        <Button href="/"> Home Page </Button>
+        <Button href="/sitemap" format="border"> Go To Sitemap </Button>
+    </Group>
+
+    <hr />
+
+    <p>Error Code: 404 - Not Found</p>
+
+    <small>Easter Egg on this website: Dear St. Anthony, please come around; This webpage is lost and cannot be found</small>
+</PageLayout>
