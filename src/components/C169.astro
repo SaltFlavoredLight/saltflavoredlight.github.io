@@ -1,0 +1,57 @@
+---
+import "../styles/main.css";
+import "../styles/themes.css";
+
+interface Props {
+  noBottomMargin?: boolean | "false" | "true";
+  radius?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+}
+
+const { 
+  noBottomMargin = false,
+  radius = 'md'
+} = Astro.props;
+
+const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
+
+let containerClass = "aspect-container";
+if (!isNoBottomMargin) {
+  containerClass += " has-margin";
+}
+---
+
+<div class={`${containerClass} radius-${radius}`}>
+  <slot />
+</div>
+
+<style>
+  .aspect-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .aspect-container.has-margin {
+    margin-bottom: var(--spacing-md, 1.5rem);
+  }
+
+  /* Radius mappings matching your design system */
+  .radius-none { border-radius: 0px; }
+  .radius-xs   { border-radius: 0.125rem; }
+  .radius-sm   { border-radius: 0.25rem; }
+  .radius-md   { border-radius: var(--border-radius, 0.375rem); }
+  .radius-lg   { border-radius: 0.5rem; }
+  .radius-xl   { border-radius: 0.75rem; }
+
+  /* Ensure any children (like images or videos inside the slot) fill the 16:9 box correctly */
+  .aspect-container :global(img),
+  .aspect-container :global(video),
+  .aspect-container :global(iframe) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
