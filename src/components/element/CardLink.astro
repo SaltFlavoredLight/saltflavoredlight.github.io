@@ -41,21 +41,13 @@ finalClass += !isNoBottomMargin ? "has-margin " : "";
 ---
 
 <a class={finalClass} href={href}>
-    <Card
-        noBottomMargin
-        padding=""
-        hover={hover}
-        theme={theme}
-        borderless={borderless}
-    >
-        {
-            title && title.trim() !== "" && (
-                <h3>
-                    {title}
-                    <span> &rarr;</span>
-                </h3>
-            )
-        }
+    <Card noBottomMargin hover={hover} theme={theme} borderless={borderless}>
+        {title && title.trim() !== "" && (
+            <h3>
+                {title}
+                <span> &rarr;</span>
+            </h3>
+        )}
         {content}
         <slot />
     </Card>
@@ -66,10 +58,10 @@ finalClass += !isNoBottomMargin ? "has-margin " : "";
         display: block;
         width: 100%;
         text-decoration: none;
-        color: inherit;
+        color: unset;
 
         margin-top: var(--spacing-xs);
-        margin-bottom: 0;
+        margin-bottom: none;
     }
 
     .link-card > h3 {
