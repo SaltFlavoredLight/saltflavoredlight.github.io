@@ -21,6 +21,7 @@ const description =
 ---
 
 <BaseLayout title="Welcome!" description={description} slug="/">
+    <!-- Title -->
     <h1 class="text-center">
         <span class="hide-on-mobile" role="img" aria-label="Waving hand">👋</span>
         Hi there, <br class="show-on-mobile"> My name is Ray.
@@ -29,20 +30,18 @@ const description =
     <p class="text-center">
         <strong>A website that talks all About Me</strong>
     </p>
-    <hr />
-    <HStack>
-        <CardLink title="" noBottomMargin="true">
-            <p>Check out my YouTube Video!</p>
-        </CardLink>
-        <CardLink title="" noBottomMargin="true">
-            <p>Check out my YouTube Video!</p>
-        </CardLink>
-    </HStack>
-    <HStack>
-        <CardLink title="" noBottomMargin="true">
-            <p>Check out my YouTube Video!</p>
-        </CardLink>
 
+    <br>
+
+    <!-- Features -->
+    <HStack> 
+        <CardLink noBottomMargin="true" title="Math Quiz" theme="">
+            <p><strong>Test your Math?</strong> start with speedy quiz!</p>
+            <p>Test how much your brain can do when dealing with lots of numbers.</p>
+        </CardLink>
+        <CardLink noBottomMargin="true" title="Math Quiz" theme="">
+            <strong>See what project I am doing</strong>
+        </CardLink>
     </HStack>
     <p>More Infomation......</p>
 
@@ -57,21 +56,4 @@ const description =
 </BaseLayout>
 
 <style>
-    .text-center {
-        text-align: center;
-    }
-
-    .show-on-mobile {
-        display: none;
-    }
-
-    @media (max-width: 600px) {
-        .hide-on-mobile {
-            display: none;
-        }
-
-        .show-on-mobile {
-            display: block;
-        }
-    }
 </style>
