@@ -11,6 +11,10 @@ import YouTube from "../components/element/YouTube.astro";
 import CardLink from "../components/element/CardLink.astro";
 import HStack from "../components/element/HStack.astro";
 import C169 from "../components/C169.astro";
+import Figure from "../components/element/Figure.astro";
+
+
+import codeImage from "../assets/logo.png"
 
 const description =
     "A Website About Ray. Hi! This is Ray and I love to share something! you are welcome to my website!";
@@ -41,6 +45,15 @@ const description =
 
     </HStack>
     <p>More Infomation......</p>
+
+
+<Figure
+    src={codeImage} 
+    alt="A code snippet showing the Astro component markup." 
+    enableFootNote="center" 
+    radius="lg" 
+  />
+
 </BaseLayout>
 
 <style>
