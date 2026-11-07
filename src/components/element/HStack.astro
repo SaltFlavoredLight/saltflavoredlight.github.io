@@ -2,19 +2,24 @@
 interface Props {
     /** Gap spacing option between items */
     gap?: "" | "none" | "xs" | "sm" | "md" | "lg" | "xg";
-    
+
     /** Layout mode: Flex row (space-between) or Grid */
     mode?: "flex" | "grid";
-    
+
     /** Force 100% width across the container */
     fullWidth?: boolean;
+
+    noBottomMargin?: boolean | "false" | "true";
 }
 
 const {
     gap = "md",
     mode = "grid",
+    noBottomMargin = false,
     fullWidth = false,
 } = Astro.props;
+
+const isNoBottomMargin = (noBottomMargin === true || noBottomMargin === "true");
 
 // Clean class builder
 const className = [
@@ -22,7 +27,10 @@ const className = [
     gap ? `gap-${gap}` : "",
     `mode-${mode}`,
     fullWidth ? "full-width" : "",
-].filter(Boolean).join(" ");
+    !isNoBottomMargin ? `has-margin` : ` `
+]
+    .filter(Boolean)
+    .join(" ");
 ---
 
 <div class={className}>
@@ -36,12 +44,24 @@ const className = [
     }
 
     /* Gap options mapped to theme variables */
-    .layout-row.gap-none { gap: 0; }
-    .layout-row.gap-xs { gap: var(--spacing-xs, 0.25rem); }
-    .layout-row.gap-sm { gap: var(--spacing-sm, 0.5rem); }
-    .layout-row.gap-md { gap: var(--spacing-md, 1rem); }
-    .layout-row.gap-lg { gap: var(--spacing-lg, 1.5rem); }
-    .layout-row.gap-xg { gap: var(--spacing-xg, 2rem); }
+    .layout-row.gap-none {
+        gap: 0;
+    }
+    .layout-row.gap-xs {
+        gap: var(--spacing-xs, 0.25rem);
+    }
+    .layout-row.gap-sm {
+        gap: var(--spacing-sm, 0.5rem);
+    }
+    .layout-row.gap-md {
+        gap: var(--spacing-md, 1rem);
+    }
+    .layout-row.gap-lg {
+        gap: var(--spacing-lg, 1.5rem);
+    }
+    .layout-row.gap-xg {
+        gap: var(--spacing-xg, 2rem);
+    }
 
     /* 1. Flex Mode (Row with space-between) */
     .layout-row.mode-flex {
@@ -61,5 +81,20 @@ const className = [
     .layout-row.full-width {
         width: 100% !important;
         max-width: none !important;
+    }
+
+    @media (max-width: 600px) {
+        .layout-row.mode-flex,
+        .layout-row.mode-grid {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            gap: 0;
+        }
+    }
+
+    .layout-row.has-margin {
+        margin-top: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
     }
 </style>

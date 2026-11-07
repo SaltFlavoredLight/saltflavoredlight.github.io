@@ -10,8 +10,10 @@ import Button from "../components/element/Button.astro";
 import YouTube from "../components/element/YouTube.astro";
 import CardLink from "../components/element/CardLink.astro";
 import HStack from "../components/element/HStack.astro";
-import { Image } from "astro:assets";
-import CodingImage from "../assets/code.png"
+import Figure from "../components/element/Figure.astro";
+
+
+import codeImage from "../assets/logo.png"
 
 const description =
     "A Website About Ray. Hi! This is Ray and I love to share something! you are welcome to my website!";
@@ -31,6 +33,19 @@ const description =
     <p class="text-center">
         <strong>A website that talks all About Me</strong>
     </p>
+    <hr />
+    <HStack>
+        <CardLink title="" noBottomMargin="true">
+            <p>Check out my YouTube Video!</p>
+        </CardLink>
+        <CardLink title="" noBottomMargin="true">
+            <p>Check out my YouTube Video!</p>
+        </CardLink>
+    </HStack>
+    <HStack>
+        <CardLink title="" noBottomMargin="true">
+            <p>Check out my YouTube Video!</p>
+        </CardLink>
 
     <hr />
 
@@ -100,6 +115,16 @@ const description =
     <hr />
     <p>Want to Reach out to Me? <a href="/contact">Visit Here.</a></p>
     <small> This Website is Built by Ray with Astro </small>
+    <p>More Infomation......</p>
+
+
+<Figure
+    src={codeImage} 
+    alt="A code snippet showing the Astro component markup." 
+    enableFootNote="center" 
+    radius="lg" 
+  />
+
 </BaseLayout>
 
 <style>
