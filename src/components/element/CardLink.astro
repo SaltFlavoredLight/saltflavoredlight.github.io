@@ -2,7 +2,6 @@
 import "../../styles/main.css";
 import "../../styles/themes.css";
 
-
 import Card from "./Card.astro";
 
 interface Props {
@@ -10,7 +9,7 @@ interface Props {
     href?: string;
     noBottomMargin?: boolean | "true" | "false";
 
-    /** when blank, disaled, otherwise, the name appeared here will be applied to style, Option: color, move, both */
+    /** when blank, disabled, otherwise, the name appeared here will be applied to style, Option: color, move, both */
     hover?: "" | "color" | "move" | "both";
 
     /** this is theme for the card, default is light, where also have Dark, Border and Middle option */
@@ -19,7 +18,7 @@ interface Props {
     /** true if you hate border */
     borderless?: Boolean | "true" | "false";
 
-    /** oher way to enter is just use Slots */
+    /** other way to enter is just use Slots */
     content?: string;
 }
 
@@ -59,10 +58,10 @@ finalClass += !isNoBottomMargin ? "has-margin " : "";
         display: block;
         width: 100%;
         text-decoration: none;
-        color: unset;
+        color: inherit;
 
         margin-top: var(--spacing-xs);
-        margin-bottom: none;
+        margin-bottom: 0;
     }
 
     .link-card > h3 {
@@ -70,8 +69,8 @@ finalClass += !isNoBottomMargin ? "has-margin " : "";
         font: inherit;
     }
 
-    .link-card:hover > h3 {
-        color: var(--text-primary);
+    .link-card:hover h3 {
+        color: inherit;
     }
 
     .link-card.has-margin {
