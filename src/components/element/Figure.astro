@@ -1,0 +1,104 @@
+---
+import { Image } from "astro:assets";
+import "../../styles/main.css";
+import "../../styles/themes.css";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  enableFootNote?: "none" | "left" | "center" | "right";
+  noBottomMargin?: boolean | "false" | "true";
+  radius?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
+}
+
+const {
+  src,
+  alt,
+  enableFootNote = "none",
+  noBottomMargin = false,
+  radius = "md",
+} = Astro.props;
+
+const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
+
+let containerClass = "figure-image-container";
+if (!isNoBottomMargin) {
+  containerClass += " has-margin";
+}
+
+const alignmentClasses = {
+  left: "text-left",
+  center: "text-center",
+  right: "text-right",
+  none: "",
+};
+
+const footnoteAlignment = alignmentClasses[enableFootNote] || "";
+---
+
+<div class={containerClass}>
+  <Image src={src} alt={alt} class={`figure-img radius-${radius}`} />
+
+  {
+    enableFootNote !== "none" && (
+      <small class={`figure-caption ${footnoteAlignment}`}>{alt}</small>
+    )
+  }
+</div>
+
+<style>
+  .figure-image-container {
+    width: 100%;
+  }
+
+  .figure-image-container.has-margin {
+    margin-bottom: var(--spacing-md, 1.5rem);
+  }
+
+  .figure-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* Radius mappings */
+  .radius-none {
+    border-radius: 0px;
+  }
+  .radius-xs {
+    border-radius: 0.125rem;
+  }
+  .radius-sm {
+    border-radius: 0.25rem;
+  }
+  .radius-md {
+    border-radius: var(--border-radius, 0.375rem);
+  }
+  .radius-lg {
+    border-radius: 0.5rem;
+  }
+  .radius-xl {
+    border-radius: 0.75rem;
+  }
+
+  .figure-caption {
+    display: block;
+    width: 100%;
+    margin-top: var(--spacing-sm, 0.5rem);
+    opacity: 0.85;
+    font-size: 0.875em;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+</style>
