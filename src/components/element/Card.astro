@@ -12,6 +12,8 @@ interface Props {
     noBottomMargin?: boolean | "false" | "true";
 
     padding?: "" | "more" | "default" | "none" | "bottom";
+
+    full?: Boolean | 'true' | 'false'
 }
 
 import "../../styles/main.css";
@@ -23,19 +25,22 @@ const {
     borderless = "false",
     noBottomMargin = false,
     padding = "",
+    full = 'true'
 } = Astro.props;
 
 const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
+const isFull = full === true || full === "true";
 
 let finalClass = "";
 
 finalClass += "card ";
-finalClass += hover ? `hover-${hover} ` : ` `;
-finalClass += theme ? `theme-${theme} ` : ` `;
+finalClass += hover ? `hover-${hover} ` : ``;
+finalClass += theme ? `theme-${theme} ` : ``;
 finalClass +=
-    borderless === "true" || borderless === true ? `borderless ` : ` `;
-finalClass += !isNoBottomMargin ? `has-margin ` : ` `;
-finalClass += padding ? `padding-${padding} ` : ` `;
+    borderless === "true" || borderless === true ? `borderless ` : ``;
+finalClass += !isNoBottomMargin ? `has-margin ` : ``;
+finalClass += padding ? `padding-${padding} ` : ``;
+finalClass += isFull ? `full ` : ` `;
 ---
 
 <div class={finalClass}>
@@ -139,5 +144,9 @@ finalClass += padding ? `padding-${padding} ` : ` `;
         box-shadow: 4px 10px 24px rgba(0, 0, 0, 0.35);
         background-color: var(--bg-color-hover);
         color: var(--text-color-hover);
+    }
+
+    div.full {
+        height: 100%;
     }
 </style>
