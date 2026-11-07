@@ -10,6 +10,8 @@ import Button from "../components/element/Button.astro";
 import YouTube from "../components/element/YouTube.astro";
 import CardLink from "../components/element/CardLink.astro";
 import HStack from "../components/element/HStack.astro";
+import { Image } from "astro:assets";
+import CodingImage from "../assets/code.png"
 
 const description =
     "A Website About Ray. Hi! This is Ray and I love to share something! you are welcome to my website!";
@@ -59,10 +61,20 @@ const description =
             </p>
         </CardLink>
     </HStack>
+    <p>Or, <a href="/sitemap">click here</a> to visit This Sitemap</p>
 
     <br />
 
-    <Section />
+    <Section theme="middle" margin="bottom">
+        <h2>Working on Software......</h2>
+        <p>I make tools, system, and also large web project!</p>
+        <p>I using Astro as my static framework, and also my custom tools for Apps</p>
+        <p>Stay Tuned becuase I am gonna release many thing!</p>
+        <Image alt="Screenshot of my working HTML Demo" src={CodingImage} />
+        <Button href="/projects">
+            Learn More on this Project Planning
+        </Button>
+    </Section>
 
     <!-- About Me -->
     <h2>About Me</h2>
@@ -87,6 +99,7 @@ const description =
     <!-- Contact -->
     <hr />
     <p>Want to Reach out to Me? <a href="/contact">Visit Here.</a></p>
+    <small> This Website is Built by Ray with Astro </small>
 </BaseLayout>
 
 <style>
