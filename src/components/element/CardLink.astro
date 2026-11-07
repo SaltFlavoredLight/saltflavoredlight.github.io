@@ -13,8 +13,8 @@ interface Props {
     hover?: "" | "color" | "move" | "both";
 
     /** this is theme for the card, default is light, where also have Dark, Border and Middle option */
-    theme?: "" | "dark" | "border" | "middle";
-
+    theme?: "" | "dark" | "border" | "middle" | "bold";
+    
     /** true if you hate border */
     borderless?: Boolean | "true" | "false";
 
@@ -29,7 +29,7 @@ const {
     hover = "both",
     theme = "border",
     borderless = false,
-    content = ""
+    content = "",
 } = Astro.props;
 
 const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
@@ -41,13 +41,21 @@ finalClass += !isNoBottomMargin ? "has-margin " : "";
 ---
 
 <a class={finalClass} href={href}>
-    <Card noBottomMargin padding='' hover={hover} theme={theme} borderless={borderless}>
-        {title && title.trim() !== "" && (
-            <h3>
-                {title}
-                <span> &rarr;</span>
-            </h3>
-        )}
+    <Card
+        noBottomMargin
+        padding=""
+        hover={hover}
+        theme={theme}
+        borderless={borderless}
+    >
+        {
+            title && title.trim() !== "" && (
+                <h3>
+                    {title}
+                    <span> &rarr;</span>
+                </h3>
+            )
+        }
         {content}
         <slot />
     </Card>
