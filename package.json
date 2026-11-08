@@ -22,7 +22,8 @@
         "preview": "astro preview --port 2237",
         "build:github": "SITE_DOMAIN=saltflavoredlight.github.io astro build",
         "build:raystudio": "SITE_DOMAIN=raystudio.net astro build",
-        "build:domain3": "SITE_DOMAIN=your-third-domain.com astro build"
+        "build:domain3": "SITE_DOMAIN=your-third-domain.com astro build",
+        "sbom": "cyclonedx-npm --output-format JSON --output-file sbom.json"
     },
     "dependencies": {
         "@astrojs/markdown-satteri": "^0.4.6",
@@ -40,5 +41,10 @@
     },
     "engines": {
         "node": ">=22.23.4"
+    },
+    "devDependencies": {
+        "@types/node": "^26.6.6",
+        "@cyclonedx/cyclonedx-npm": "^6.0.1",
+        "typescript": "^7.0.2"
     }
 }

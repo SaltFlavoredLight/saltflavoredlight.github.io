@@ -17,7 +17,7 @@ export default defineConfig({
         port: 2237,
     },
     site: getSiteUrl(),
-    scopedStyleStrategy: 'class',
+    scopedStyleStrategy: 'class', 
     integrations: [
         mdx(),
         sitemap()
@@ -29,7 +29,8 @@ export default defineConfig({
                 '#components': path.resolve('./src/components'),
                 '#assets': path.resolve('./src/assets'),
                 '#layouts': path.resolve('./src/layouts'),
-                '#public': path.resolve('./public')
+                '#public': path.resolve('./public'),
+                "#config": path.resolve('./src/config/')
             }
         }
     }
