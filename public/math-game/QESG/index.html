@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Equation Solving Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" href="/styles/theme-colors.css">
+    <link rel="stylesheet" href="/styles/game_style.css">
+</head>
+<body>
+
+    <!-- Mode Selection -->
+    <div id="settings">
+        <h1 id="title"> Quadratic Equation Solving Game </h1> 
+        <h2>Select Game Mode:</h2>
+        <button id="classicMode">Classic Mode</button>
+        <button id="quickMode">Quick Mode (a=1)</button>
+        <button id="advanceMode">Advance Mode</button>
+        <br>
+        <button id="time30">30s</button>
+        <button id="time60">60s</button>
+        <button id="time90">90s</button>
+        <button id="time120">120s</button>
+        <button id="time180">180s</button>
+        <button id="time300">300s</button>
+        <button id="continues">coutinues</button>
+	    <br>
+        <p>continues means you will continues games until you wrong.</p>
+        <p><strong>Hit "Start Game" to go into the game.</strong></p>
+        <button id="startGame">Start Game</button>
+        <button id="howToPlayButton">How To Play?</button>
+        <p id="modeConfirmation"> You are choosing: <span id="chosenMode">{choose a mode}</span>, <span id="chosenTime">{choose a sec.}</span></p>
+    </div>
+
+    <div id="howToPlayScreen" class="hidden">
+        <h1>How To Play?</h1>
+        <h2>the main rule</h2>
+        <p> the dis play will give a Quadratic Equation<br>
+            like 3x^2+5x+3=0(ax^2 +bx+c = 0)<br>
+            solve it, and type the answer (I promise you will always find two answers) <br>
+            your score is how many problam you solve correctly in few seconds!<br>
+            you need try to reach more score!
+        </p>
+        <h2>the three mode</h2>
+        <p>
+            in every mode the equation like <strong>ax^2+bx+c</strong>. only differnce is a, b, c.<br>
+            <strong>1, classic:</strong> that is -4 &lt a &lt 4, two answer is -10 &lt x &lt 10<br> 
+            <strong>2, quick:</strong> that is a only is 1, two answer is -13 &lt x &lt 13<br> 
+            <strong>3, adcance:</strong> that is -10 &lt a &lt 10, two answer is -13 &lt x &lt 13<br> 
+            notice that a is not 0.<br>
+        </p>
+        <h2>keyboard shortcuts</h2>
+        <p>
+            while you are on the game, you can enter only use keybaord! how to do:<br>
+            1, type your 1st roots. <br>
+            2,hit enter(you will move to next space). <br> 
+            3, enter the 2nd roots. <br>
+            4,hit enter to submuit. <br>
+        </p>
+        <button id="backToSetting">I Got It!</button>'
+        <button id="backToSetting2">back to sitting</button>
+
+    </div>
+    
+    <!-- Game Area (Hidden Initially) -->
+    <div id="gameArea" class="hidden">
+        <h1>Solve More Problems <span id="isShow"> in <span id="timeChoose">90</span> Seconds! </span></h1>
+        <p><span id="timeMeaning">Time Left/Pass:</span><span id="timer">90</span>     Score:<span id="score">0</span></p>
+        <p id="problem">ax² + bx + c = 0</p>
+        <input type="number" id="answer1" placeholder="1st root">
+        <input type="number" id="answer2" placeholder="2nd roots">
+        <br>
+        <button id="submit">Submit Answer</button>
+        <p id="resultMessage">keyboard shotrcuts: 1, type your 1st roots. 2,hit enter(you will move to next space). <br> 3, enter the 2nd roots. 4,hit enter to submuit.</p>
+    </div>
+
+    <!-- finalScoreScreen -->
+    <div id="finalScoreScreen" class="hidden">
+        <h1 id="endTitle">⏳ Time's Up! ⏳</h1>
+        <p>Your score is:</p>
+        <h1 id="finalScore"></h1> <!-- Large font for score -->
+        <p>Play time: <span id="playTime"></span></p>
+        <p>Play mode: <span id="playMode"></span></p>
+        <button id="restartGame">Play Again</button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <a href="/index.html">Copyright © 2025 RayStudio.</a>
+        <div class="nav-links">
+            <!--
+            <a href="/index.html">  <img src="/images/logo.png" alt="Hime"></a>
+            <a href="https://www.youtube.com/@RayStudio1130" style="color: gold; font-weight: bold;">  <img src="/images/icon/youtube-color.png" alt="youtube"></a> -->
+            <a href="/index.html"> Home Page </a>
+            <a href="https://www.youtube.com/@RayStudio1130" style="color: gold; font-weight: bold;"> My Youtube</a>
+        </div>
+    </div>
+            
+    <script>
+        //No.1: code for settings
+        //this is first page
+        var mode = "not choose"; 
+        
+        //if you hit classicMode botton...
+        document.getElementById("classicMode").addEventListener("click", () => {
+            document.getElementById("quickMode").style.backgroundColor = ""; 
+            document.getElementById("advanceMode").style.backgroundColor = ""; 
+            document.getElementById("classicMode").style.backgroundColor = "#FFD700"; 
+            document.getElementById("chosenMode").textContent = "classic mode";
+            mode = "classic";
+        });
+        
+        //if you hit quickMode botton...
+        document.getElementById("quickMode").addEventListener("click", () => {
+            document.getElementById("classicMode").style.backgroundColor = ""; 
+            document.getElementById("quickMode").style.backgroundColor = "#FFD700"; 
+            document.getElementById("advanceMode").style.backgroundColor = ""; 
+            document.getElementById("chosenMode").textContent = "quick mode (a=1)";
+            mode = "quick";
+        });             
+        
+        //if you hit advance botton...
+        document.getElementById("advanceMode").addEventListener("click", () => {
+            document.getElementById("classicMode").style.backgroundColor = ""; 
+            document.getElementById("quickMode").style.backgroundColor = ""; 
+            document.getElementById("advanceMode").style.backgroundColor = "#FFD700"; 
+            document.getElementById("chosenMode").textContent = "Advance Mode";
+            
+            mode = "advance";
+        });        
+        
+        //if you hit time30s botton...
+        document.getElementById("time30").addEventListener("click", () => {
+            document.getElementById("time30").style.backgroundColor = ""; 
+            document.getElementById("time60").style.backgroundColor = ""; 
+            document.getElementById("time90").style.backgroundColor = ""; 
+            document.getElementById("time120").style.backgroundColor = ""; 
+            document.getElementById("time180").style.backgroundColor = ""; 
+            document.getElementById("time300").style.backgroundColor = ""; 
+            document.getElementById("continues").style.backgroundColor = ""; 
+            document.getElementById("time30").style.backgroundColor = "#FFD700"; 
+            document.getElementById("chosenTime").textContent = "30 seconds.";
+            document.getElementById("endTitle").textContent = "⏳ Time's Up! ⏳";
+            document.getElementById("timeMeaning").textContent = "Time left :";
+            selectedTime = 30;
+        });        
+        
+        //if you hit time60s botton...
+        document.getElementById("time60").addEventListener("click", () => {
+            document.getElementById("time30").style.backgroundColor = ""; 
+            document.getElementById("time60").style.backgroundColor = ""; 
+            document.getElementById("time90").style.backgroundColor = ""; 
+            document.getElementById("time120").style.backgroundColor = ""; 
+            document.getElementById("time180").style.backgroundColor = ""; 
+            document.getElementById("time300").style.backgroundColor = ""; 
+            document.getElementById("continues").style.backgroundColor = ""; 
+            document.getElementById("time60").style.backgroundColor = "#FFD700"; 
+            document.getElementById("chosenTime").textContent = "60 seconds.";
+            document.getElementById("endTitle").textContent = "⏳ Time's Up! ⏳";
+            document.getElementById("timeMeaning").textContent = "Time left :";
+            selectedTime = 60;
+        });        
+        
+        //if you hit time90s botton...
+        document.getElementById("time90").addEventListener("click", () => {
+            document.getElementById("time30").style.backgroundColor = ""; 
+            document.getElementById("time60").style.backgroundColor = ""; 
+            document.getElementById("time90").style.backgroundColor = ""; 
+            document.getElementById("time120").style.backgroundColor = ""; 
+            document.getElementById("time180").style.backgroundColor = ""; 
+            document.getElementById("time300").style.backgroundColor = ""; 
+            document.getElementById("continues").style.backgroundColor = ""; 
+            document.getElementById("time90").style.backgroundColor = "#FFD700"; 
+            document.getElementById("chosenTime").textContent = "90 seconds.";
+            document.getElementById("endTitle").textContent = "⏳ Time's Up! ⏳";
+            document.getElementById("timeMeaning").textContent = "Time left :";
+            selectedTime = 90;
+        });        
+        
+        //if you hit time120s botton...
+        document.getElementById("time120").addEventListener("click", () => {
+            document.getElementById("time30").style.backgroundColor = ""; 
+            document.getElementById("time60").style.backgroundColor = ""; 
+            document.getElementById("time90").style.backgroundColor = ""; 
+            document.getElementById("time120").style.backgroundColor = ""; 
+            document.getElementById("time180").style.backgroundColor = ""; 
+            document.getElementById("time300").style.backgroundColor = ""; 
+            document.getElementById("time300").style.backgroundColor = ""; 
+            document.getElementById("continues").style.backgroundColor = ""; 
+            document.getElementById("time120").style.backgroundColor = "#FFD700"; 
+            document.getElementById("chosenTime").textContent = "120 seconds.";
+            document.getElementById("endTitle").textContent = "⏳ Time's Up! ⏳";
+            document.getElementById("timeMeaning").textContent = "Time left :";
+            selectedTime = 120;
+        });        
+        
+        //if you hit time180s botton...
+        document.getElementById("time180").addEventListener("click", () => {
+            document.getElementById("time30").style.backgroundColor = ""; 
+            document.getElementById("time60").style.backgroundColor = ""; 
+            document.getElementById("time90").style.backgroundColor = ""; 
+            document.getElementById("time120").style.backgroundColor = ""; 
+            document.getElementById("time180").style.backgroundColor = ""; 
+            document.getElementById("time300").style.backgroundColor = ""; 
+            document.getElementById("continues").style.backgroundColor = ""; 
+            document.getElementById("time180").style.backgroundColor = "#FFD700"; 
+            document.getElementById("chosenTime").textContent = "180 seconds.";
+            document.getElementById("endTitle").textContent = "⏳ Time's Up! ⏳";
+            document.getElementById("timeMeaning").textContent = "Time left :";
+            selectedTime = 180;
+        });        
+        
+        //if you hit time300s botton...
+        document.getElementById("time300").addEventListener("click", () => {
+            document.getElementById("time30").style.backgroundColor = ""; 
+            document.getElementById("time60").style.backgroundColor = ""; 
+            document.getElementById("time90").style.backgroundColor = ""; 
+            document.getElementById("time120").style.backgroundColor = ""; 
+            document.getElementById("time180").style.backgroundColor = ""; 
+            document.getElementById("continues").style.backgroundColor = ""; 
+            document.getElementById("time300").style.backgroundColor = "#FFD700"; 
+            document.getElementById("chosenTime").textContent = "300 seconds.";
+            document.getElementById("endTitle").textContent = "⏳ Time's Up! ⏳";
+            document.getElementById("timeMeaning").textContent = "Time left :";
+            selectedTime = 300;
+        }); 
+
+        //if you hit continues botton...
+        document.getElementById("continues").addEventListener("click", () => {
+            document.getElementById("time30").style.backgroundColor = ""; 
+            document.getElementById("time60").style.backgroundColor = ""; 
+            document.getElementById("time90").style.backgroundColor = ""; 
+            document.getElementById("time120").style.backgroundColor = ""; 
+            document.getElementById("time180").style.backgroundColor = ""; 
+            document.getElementById("time300").style.backgroundColor = ""; 
+            document.getElementById("continues").style.backgroundColor = "#FFD700"; 
+            document.getElementById("time60").style.backgroundColor = ""; 
+            document.getElementById("chosenTime").textContent = "continues until you wrong.";
+            document.getElementById("endTitle").textContent = "❌ Oh no you are wrong! ❌";
+            document.getElementById("timeMeaning").textContent = "Time passed :";
+            selectedTime = 0;
+        });
+        
+        //if you want to know how to play
+        document.getElementById("backToSetting").addEventListener("click", () => {
+            document.getElementById("howToPlayScreen").classList.add("hidden");
+            document.getElementById("settings").classList.remove("hidden");
+        });        
+        
+        document.getElementById("backToSetting2").addEventListener("click", () => {
+            document.getElementById("howToPlayScreen").classList.add("hidden");
+            document.getElementById("settings").classList.remove("hidden");
+        });
+            
+        //if you ready ti start...
+        document.getElementById("startGame").addEventListener("click", () => {
+            if (mode === "not choose"){
+                alert("please choose a mode");
+            } else {
+                if (selectedTime===-1) {
+                    alert("please choose a time");
+                } else { 
+                    startGame();
+                }
+            }
+        });   
+        
+        document.getElementById("howToPlayButton").addEventListener("click", () => {
+            document.getElementById("settings").classList.add("hidden");
+            document.getElementById("howToPlayScreen").classList.remove("hidden");
+        });        
+        
+        //now need to set a, b, c
+        var a = 0;
+        var b = 0;
+        var c = 0;
+
+
+        
+        //No.2: code for main game
+        //that is gameArea.
+        function startGame() {
+            localStorage.setItem("gameTime", selectedTime);
+            document.getElementById("timeChoose").textContent = selectedTime;
+            document.getElementById("settings").classList.add("hidden");
+            document.getElementById("gameArea").classList.remove("hidden");
+            document.getElementById("answer1").focus();
+
+            if (selectedTime===0) {
+                document.getElementById("isShow").textContent = "correctly!";
+            }
+            
+            let timeLeft = parseInt(localStorage.getItem("gameTime"));
+            score = 0;
+            document.getElementById("score").textContent = `${score}`;
+            document.getElementById("timer").textContent = `${timeLeft}s`;
+
+            const startTime = new Date(); // Store the start time
+
+            const timerInterval = setInterval(() => {
+                if (selectedTime===0) {
+                    timeLeft++;
+                } else {
+                    timeLeft--;
+                }
+                document.getElementById("timer").textContent = `${timeLeft}s`;
+
+                if (timeLeft === 0) {
+                    clearInterval(timerInterval);
+
+                    // Get formatted time
+                    let endTime = new Date();
+                    let formattedTime = endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                    // Show "Time's Up!" message and score
+                    document.getElementById("finalScore").textContent = score;
+                    document.getElementById("playTime").textContent = formattedTime + " " + endTime.toLocaleDateString();
+                    document.getElementById("playMode").textContent = mode + ", " + localStorage.getItem("gameTime") + "s";
+
+                    document.getElementById("finalScoreScreen").classList.remove("hidden");
+                    document.getElementById("gameArea").classList.add("hidden"); // Hide game area
+                }
+            }, 1000);
+
+            generateProblem();
+        }       
+
+	    // A helper function to get a positive integer between a and b, exclusive.
+        function getRandomBetween(a, b) {
+            return Math.floor(Math.random() * (b - a - 1)) + (a + 1);
+        }
+
+        //A helper function
+        function formatNumber(num) {
+            if (num === 0) return "";   // ???????
+            if (num === 1) return "+";   // Remove 1
+            if (num > 0) return `+${num}`;  // Add + for positive numbers
+            return `${num}`;  // Keep negative numbers unchanged
+        }
+
+        //to give a problam
+        function generateProblem() {
+            let x1, x2;  // Declare x1 and x2 so they are available for b and c calculations
+      
+            if (mode === "quick") {
+                a = 1;
+                x1 = getRandomBetween(-13, 13);
+                x2 = getRandomBetween(-13, 13);
+            } else {
+                if (mode === "classic") {
+                    a = getRandomBetween(-4, 4);
+                    while (a === 0) {
+                        a = getRandomBetween(-4, 4);
+                    }
+                x1 = getRandomBetween(-10, 10);
+                x2 = getRandomBetween(-10, 10);
+                } else {
+                    a = getRandomBetween(-10, 10);
+                    while (a === 0) {
+                        a = getRandomBetween(-10, -10);
+                    }
+                x1 = getRandomBetween(-13, 13);
+                x2 = getRandomBetween(-13, 13); 
+                }
+            }
+
+            b = -a * (x1 + x2);
+            c = a * x1 * x2;
+
+            let farmotb;
+            if (b === 0) {
+                farmotb = "";
+            } else {
+                farmotb = formatNumber(b) + "x";
+            }
+            let farmotc;
+            if (c === 0) {
+                farmotc = "";
+            } else {
+                farmotc = formatNumber(c);
+            }
+
+            //document.getElementById("problem").textContent = `${formatNumber(a)}x² ${b !== 0 ?  : ""} ${c !== 0 ? formatNumber(c) : ""} = 0`;
+            document.getElementById("problem").textContent = `${formatNumber(a)}x²  ${farmotb}  ${farmotc} = 0`;
+        }
+
+        // For answer1: pressing Enter or Space moves focus to answer2.
+        document.getElementById("answer1").addEventListener("keydown", function(event) {
+            if (event.key === "Enter" || event.key === " " || event.keyCode === 32) {
+                event.preventDefault();
+                document.getElementById("answer2").focus();
+            }
+        });
+    
+        // For answer2: pressing Enter or Space simulates clicking the Submit Answer button.
+        document.getElementById("answer2").addEventListener("keydown", function(event) {
+            if (event.key === "Enter" || event.key === " " || event.keyCode === 32) {
+                event.preventDefault();
+                document.getElementById("submit").click();
+            }
+        });
+
+        // Submit answer event.
+        document.getElementById("submit").addEventListener("click", () => {
+            let answer1 = parseInt(document.getElementById("answer1").value.trim());
+            let answer2 = parseInt(document.getElementById("answer2").value.trim());
+
+            // Calculate correct roots
+            let discriminant = b * b - 4 * a * c;
+            let root1 = Math.round((-b + Math.sqrt(discriminant)) / (2 * a));
+            let root2 = Math.round((-b - Math.sqrt(discriminant)) / (2 * a));
+
+            let resultMessage = document.getElementById("resultMessage");
+
+            if ((answer1 === root1 && answer2 === root2) || (answer1 === root2 && answer2 === root1)) {
+                score = score + 1;
+                document.getElementById("score").textContent = `${score}`; // Updates the score display
+                resultMessage.textContent = "✔ You answered correctly!";
+                resultMessage.style.color = "green";
+            } else {
+                if (selectedTime === 0) {
+                    // Get formatted time
+                    let endTime = new Date();
+                    let formattedTime = endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                    // Show "Time's Up!" message and score
+                    document.getElementById("finalScore").textContent = score;
+                    document.getElementById("playTime").textContent = formattedTime + " " + endTime.toLocaleDateString();
+                    document.getElementById("playMode").textContent = mode + ", countinues.";
+
+                    document.getElementById("finalScoreScreen").classList.remove("hidden");
+                    document.getElementById("gameArea").classList.add("hidden"); // Hide game area
+                }
+                resultMessage.textContent = `❌ Your answer is wrong! right answer: ${root1} ${root2}`;
+                resultMessage.style.color = "red";
+
+            }
+
+            // Clear input fields
+            document.getElementById("answer1").value = "";
+            document.getElementById("answer2").value = "";
+            document.getElementById("answer1").focus();
+            generateProblem();
+
+            // Show result for 1 second, then continue to next problem
+            setTimeout(() => {
+                resultMessage.style.color = "black";
+                resultMessage.textContent = ""; // Clear result message        
+            }, 2000);
+    });
+
+
+        //last one! for score page
+    document.getElementById("restartGame").addEventListener("click", () => {
+        if (selectedTime === 0) {      
+            location.reload();
+        }
+        document.getElementById("finalScoreScreen").classList.add("hidden"); // Hide the score screen
+        document.getElementById("settings").classList.remove("hidden"); // Show settings again
+    });
+    </script>
+</body>
+</html>

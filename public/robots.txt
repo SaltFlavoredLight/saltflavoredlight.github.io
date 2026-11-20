@@ -1,0 +1,9 @@
+# Hello Everyone!
+User-agent: *
+Disallow: /cdn-cgi # Unless you want Information from Cloudflare.
+Disallow: /jesus # Easter Egg number 1: screct project information on the way.
+
+# This is normal Sitemap.
+Sitemap: https://rayzhi.me/sitemap-0.xml
+
+# As I growing in Jesus, I know I must update my-self, in everything (Nov. 2026)
