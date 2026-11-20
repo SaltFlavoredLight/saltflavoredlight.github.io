@@ -12,7 +12,7 @@ export const siteConfig = {
     shortTitle: "Ray",
 
     // 3. About Me Message
-
+    aboutMessage: "I love Math, Computer Science and Arts. Devaloper of web projects. I am a devaloper who have mutiple goal. chasing the dream of being a devaloper who can benefit the world with Open Source Projects.",
     // 4. About Me Message Short
     aboutMessageShort: "I love Math, Computer Science and Arts. Devaloper of web projects.",
 
