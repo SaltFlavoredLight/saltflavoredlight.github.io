@@ -24,6 +24,8 @@ const description =
     description={description}
     slug="/"
 >
+
+    <p><strong>Enter your Postfix form or prefix form here.</strong> <br> Make sure you enter space between each token! like "3 3 +" not "33+"</p>
     <input type="text" id="tokenInput" />
     <br />
 
@@ -38,10 +40,8 @@ const description =
         </label>
     </Group>
 
-    <Button id="startButton" noBottomMargin="false">Start</Button>
+    <Button jsid="startButton" noBottomMargin="false">Start</Button>
     
-    <p>Make sure you enter space between each token! like "3 3 +" not "33+"</p>
-
     <hr />
 
     <div class="stackThinking" id="stack">
@@ -89,10 +89,12 @@ const description =
         font-size: 25px;
     }
 
+    /*
     :global(#table th), 
     :global(#table td) {
         padding: 0 var(--spacing-md);
     }
+    */
 </style>
 
 <script>

@@ -330,7 +330,7 @@ table {
 
 th,
 td {
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
     border: 1px solid var(--border-color);
     text-align: left;
 }
@@ -378,6 +378,9 @@ hr {
     }
 }
 
+.text-left {
+    text-align: left;
+}
 
 .text-right {
     text-align: right;
@@ -388,8 +391,6 @@ hr {
 }
 
 /* #endregion */
-
-
 
 /* #region Form Elements */
 

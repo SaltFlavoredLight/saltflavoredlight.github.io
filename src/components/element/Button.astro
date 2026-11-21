@@ -6,7 +6,7 @@ interface Props {
     /** (optional) what's the button's style? Support general, fill, border, text and bg */
     format?: string;
 
-    id?: string;
+    jsid?: string;
 
     noBottomMargin?: boolean | "true" | "false";
 }
@@ -14,7 +14,7 @@ interface Props {
 import "#src/styles/main.css";
 import "#src/styles/themes.css";
 
-const { href, format = "fill", id, noBottomMargin = true } = Astro.props;
+const { href, format = "fill", jsid, noBottomMargin = true } = Astro.props;
 
 const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
 
@@ -23,11 +23,11 @@ const finalStyle =
 ---
 
 {href ? (
-    <a href={href} class={finalStyle} id={id}>
+    <a href={href} class={finalStyle} id={jsid}>
         <slot />
     </a>
 ) : (
-    <button class={finalStyle} id={id}>
+    <button class={finalStyle} id={jsid}>
         <slot />
     </button>
 )}
