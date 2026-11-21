@@ -30,7 +30,8 @@ export default defineConfig({
                 '#assets': path.resolve('./src/assets'),
                 '#layouts': path.resolve('./src/layouts'),
                 '#public': path.resolve('./public'),
-                "#config": path.resolve('./src/config/')
+                "#config": path.resolve('./src/config/'),
+                "#lib": path.resolve('./src/lib/')
             }
         }
     }
