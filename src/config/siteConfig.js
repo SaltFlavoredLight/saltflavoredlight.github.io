@@ -12,7 +12,7 @@ export const siteConfig = {
     shortTitle: "Ray",
 
     // 3. About Me Message
-    aboutMessage: "I love Math, Computer Science and Arts. Devaloper of web projects. I am a devaloper who have mutiple goal. chasing the dream of being a devaloper who can benefit the world with Open Source Projects.",
+    aboutMessage: "I love Math, Computer Science and Arts. Devaloper of web projects. I am a devaloper who have mutiple goal. chasing the dream of being a devaloper who can benefit the world with Open Source Projects. Recent Message: I am turning 15 years old, and I am a Christian. I love to share my thoughts and ideas with the world. I am a software developer, and I love to create things that can help people. I am also a student, and I love to learn new things. I am a Christian, and I love to share my faith with others. I am a student, and I love to learn new things. I am a software developer, and I love to create things that can help people. I am also a student, and I love to learn new things. I am a Christian, and I love to share my faith with others.",
     // 4. About Me Message Short
     aboutMessageShort: "I love Math, Computer Science and Arts. Devaloper of web projects.",
 
@@ -49,5 +49,5 @@ export const siteConfig = {
         { title: "About Me", href: "/about/" },
     ]
 
-    
+
 };
