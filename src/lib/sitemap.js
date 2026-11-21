@@ -41,10 +41,19 @@ function extractTitle(source, path) {
     /^---\s*\n([\s\S]*?)\n---/
   )?.[1] || "";
 
+  const frontmatterTitle = frontmatter.match(
+    /^title\s*:\s*(["'])(.*?)\1\s*$|^title\s*:\s*(.+?)\s*$/m
+  );
+
   const title =
-    frontmatter.match(
-      /^title\s*:\s*["']?(.+?)["']?\s*$/m
-    )?.[1] ||
+    frontmatterTitle?.[2]?.trim() ||
+    frontmatterTitle?.[3]?.trim() ||
+    source.match(
+      /<(?:PageLayout|BaseLayout)\b[\s\S]*?\btitle\s*=\s*(["'])(.*?)\1/
+    )?.[2]?.trim() ||
+    source.match(
+      /export\s+const\s+metadata\s*=\s*\{[\s\S]*?\btitle\s*:\s*(["'])(.*?)\1/
+    )?.[2]?.trim() ||
     source.match(/<title[^>]*>(.*?)<\/title>/is)?.[1] ||
     source.match(/^#\s+(.+)$/m)?.[1];
 

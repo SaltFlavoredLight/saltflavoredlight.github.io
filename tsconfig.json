@@ -24,6 +24,9 @@
             "#public/*": [
                 "./public/*"
             ],
+            "#lib/*": [ 
+                "./src/lib/*"
+            ],
             "#config/*": [
                 "./src/config/*"
             ]
