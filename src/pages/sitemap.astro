@@ -1,0 +1,86 @@
+---
+import '#src/styles/main.css';
+import '#src/styles/themes.css';
+import PageLayout from "#layouts/PageLayout.astro";
+import { generateSitemap } from "#lib/sitemap.js";
+
+interface SitemapNode {
+  title: string;
+  path: string;
+  type: "page" | string;
+  children?: Record<string, SitemapNode>;
+}
+
+interface FlattenedEntry {
+  node: SitemapNode;
+  depth: number;
+}
+
+const sitemap: SitemapNode = await generateSitemap();
+
+function getChildren(node: SitemapNode): SitemapNode[] {
+  return Object.values(node.children ?? {}).sort((a, b) =>
+    a.path.localeCompare(b.path)
+  );
+}
+
+function flattenTree(node: SitemapNode, depth: number = 0): FlattenedEntry[] {
+  const entries: FlattenedEntry[] = [];
+
+  for (const child of getChildren(node)) {
+    entries.push({ node: child, depth });
+    entries.push(...flattenTree(child, depth + 1));
+  }
+
+  return entries;
+}
+
+const entries: FlattenedEntry[] = flattenTree(sitemap);
+---
+
+<PageLayout
+  title="Sitemap"
+  description="Browse every public page on this website."
+  slug="/sitemap/"
+  addDes={true}
+>
+  <nav aria-label="Website sitemap">
+    <ul class="sitemap-tree">
+      <li>
+        <a href="/">{sitemap.title}</a>
+      </li>
+      {entries.map(({ node, depth }) => (
+        <li style={`--tree-depth: ${depth}`}>
+          {node.type === "page" ? (
+            <a href={node.path}>{node.title}</a>
+          ) : (
+            <p>{node.title}</p>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+</PageLayout>
+
+<style>
+  .sitemap-tree {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sitemap-tree li {
+    margin: var(--spacing-xs, 0.5rem) 0;
+    padding-left: calc(var(--tree-depth, 0) * var(--spacing-md, 1.25rem));
+    border-left: calc(var(--tree-depth, 0) * 1px) solid var(--border-color, currentColor);
+  }
+
+  .sitemap-tree a,
+  .sitemap-tree p {
+    display: inline-block;
+  }
+
+  .sitemap-tree p {
+    font-weight: 600;
+  }
+</style>
