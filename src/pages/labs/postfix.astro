@@ -26,10 +26,12 @@ export const metadata = {
 ---
 
 <PageLayout
-    title="Lab: Postfix and Prefix Calculator"
+    title="Postfix and Prefix Calculator"
     description={description}
     slug="/"
 >
+
+    <p><strong>Enter your Postfix form or prefix form here.</strong> <br> Make sure you enter space between each token! like "3 3 +" not "33+"</p>
     <input type="text" id="tokenInput" />
     <br />
 
@@ -44,9 +46,8 @@ export const metadata = {
         </label>
     </Group>
 
-    <button id="startButton">Start</button>
-    <p>Make sure you enter space between each token! like "3 3 +" not "33+"</p>
-
+    <Button jsid="startButton" noBottomMargin="false">Start</Button>
+    
     <hr />
 
     <div class="stackThinking" id="stack">
@@ -94,10 +95,12 @@ export const metadata = {
         font-size: 25px;
     }
 
-    :global(#table th),
+    /*
+    :global(#table th), 
     :global(#table td) {
         padding: 0 var(--spacing-md);
     }
+    */
 </style>
 
 <script>

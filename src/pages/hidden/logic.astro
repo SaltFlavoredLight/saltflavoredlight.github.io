@@ -1,0 +1,219 @@
+---
+import "#src/styles/main.css";
+import "#src/styles/themes.css";
+
+import PageLayout from "#src/layouts/PageLayout.astro";
+
+---
+
+<PageLayout title="Input Testing Center" description="Test all HTML input types and common form elements below." slug="/hidden/logic">
+    <p>Test all HTML input types and common form elements below.</p>
+
+    <h2>Text Inputs</h2>
+
+    <label for="text">Text</label>
+    <input type="text" id="text" placeholder="Enter text">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter password">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="example@email.com">
+
+    <label for="tel">Telephone</label>
+    <input type="tel" id="tel" placeholder="Enter phone number">
+
+    <label for="url">URL</label>
+    <input type="url" id="url" placeholder="https://example.com">
+
+    <label for="search">Search</label>
+    <input type="search" id="search" placeholder="Search...">
+
+    <h2>Numeric Inputs</h2>
+
+    <label for="number">Number</label>
+    <input type="number" id="number" placeholder="Enter a number">
+
+    <label for="range">Range</label>
+    <input type="range" id="range" min="0" max="100" value="50">
+
+    <h2>Date and Time Inputs</h2>
+
+    <label for="date">Date</label>
+    <input type="date" id="date">
+
+    <label for="time">Time</label>
+    <input type="time" id="time">
+
+    <label for="datetime-local">Datetime Local</label>
+    <input type="datetime-local" id="datetime-local">
+
+    <label for="month">Month</label>
+    <input type="month" id="month">
+
+    <label for="week">Week</label>
+    <input type="week" id="week">
+
+    <h2>Selection Inputs</h2>
+
+    <label for="checkbox">
+        <input type="checkbox" id="checkbox">
+        Checkbox
+    </label>
+
+    <label for="radio-one">
+        <input type="radio" id="radio-one" name="radio-demo" value="one">
+        Radio One
+    </label>
+
+    <label for="radio-two">
+        <input type="radio" id="radio-two" name="radio-demo" value="two">
+        Radio Two
+    </label>
+
+    <label for="select">Select</label>
+    <select id="select">
+        <option value="">Choose an option</option>
+        <option value="one">Option One</option>
+        <option value="two">Option Two</option>
+        <option value="three">Option Three</option>
+    </select>
+
+    <label for="multiple-select">Multiple Select</label>
+    <select id="multiple-select" multiple>
+        <option value="one">Option One</option>
+        <option value="two">Option Two</option>
+        <option value="three">Option Three</option>
+    </select>
+
+    <h2>File and Color Inputs</h2>
+
+    <label for="file">File</label>
+    <input type="file" id="file">
+
+    <label for="multiple-file">Multiple Files</label>
+    <input type="file" id="multiple-file" multiple>
+
+    <label for="image-file">Image File</label>
+    <input type="file" id="image-file" accept="image/*">
+
+    <label for="color">Color</label>
+    <input type="color" id="color" value="#3366ff">
+
+    <h2>Button Inputs</h2>
+
+    <form>
+        <label for="button">Button</label>
+        <input type="button" id="button" value="Click Me">
+
+        <label for="submit">Submit</label>
+        <input type="submit" id="submit" value="Submit Form">
+
+        <label for="reset">Reset</label>
+        <input type="reset" id="reset" value="Reset Form">
+
+        <label for="image-button">Image Button</label>
+        <input
+            type="image"
+            id="image-button"
+            alt="Submit using image"
+            src="https://placehold.co/120x40?text=Submit"
+        >
+    </form>
+
+    <h2>Textarea</h2>
+
+    <label for="textarea">Standard Textarea</label>
+    <textarea id="textarea" rows="4" placeholder="Enter your message"></textarea>
+
+    <label for="readonly-textarea">Readonly Textarea</label>
+    <textarea id="readonly-textarea" rows="4" readonly>Readonly content</textarea>
+
+    <label for="disabled-textarea">Disabled Textarea</label>
+    <textarea id="disabled-textarea" rows="4" disabled>Disabled content</textarea>
+
+    <h2>Validation</h2>
+
+    <form id="validationDemo">
+        <label for="required">Required</label>
+        <input type="text" id="required" required placeholder="This field is required">
+
+        <label for="minlength">Minimum Length</label>
+        <input type="text" id="minlength" minlength="3" placeholder="At least 3 characters">
+
+        <label for="maxlength">Maximum Length</label>
+        <input type="text" id="maxlength" maxlength="10" placeholder="Maximum 10 characters">
+
+        <label for="pattern">Pattern</label>
+        <input
+            type="text"
+            id="pattern"
+            pattern="[A-Za-z]+"
+            placeholder="Letters only"
+        >
+
+        <label for="validation-email">Email Validation</label>
+        <input
+            type="email"
+            id="validation-email"
+            required
+            placeholder="Enter a valid email"
+        >
+
+        <button type="submit">Test Validation</button>
+    </form>
+
+    <h2>Disabled and Readonly</h2>
+
+    <label for="disabled">Disabled Input</label>
+    <input type="text" id="disabled" value="Disabled" disabled>
+
+    <label for="readonly">Readonly Input</label>
+    <input type="text" id="readonly" value="Readonly" readonly>
+
+    <label for="normal">Normal Input</label>
+    <input type="text" id="normal" value="Editable">
+
+    <h2>Input Sizes</h2>
+
+    <label for="small">Small</label>
+    <input type="text" id="small" class="input-sm" placeholder="Small input">
+
+    <label for="medium">Medium</label>
+    <input type="text" id="medium" class="input-md" placeholder="Medium input">
+
+    <label for="large">Large</label>
+    <input type="text" id="large" class="input-lg" placeholder="Large input">
+
+    <h2>Custom States</h2>
+
+    <label for="error">Error State</label>
+    <input type="text" id="error" class="input-error" value="Invalid value">
+
+    <label for="success">Success State</label>
+    <input type="text" id="success" class="input-success" value="Valid value">
+
+    <h2>Input Widths</h2>
+
+    <label for="auto">Automatic Width</label>
+    <input type="text" id="auto" class="input-auto" placeholder="Automatic width">
+
+    <label for="full">Full Width</label>
+    <input type="text" id="full" class="input-full" placeholder="Full width">
+
+    <h2>Fieldset and Legend</h2>
+
+    <fieldset>
+        <legend>Personal Information</legend>
+
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" placeholder="First name">
+
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" placeholder="Last name">
+    </fieldset>
+
+    <h2>Hidden Input</h2>
+    <input type="hidden" name="hidden-value" value="hidden-data">
+    <p>Hidden inputs have no visible label or control.</p>
+</PageLayout>
