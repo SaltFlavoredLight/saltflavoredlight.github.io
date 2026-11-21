@@ -11,14 +11,29 @@ import HomeButton from "#components/site/HomeButtons.astro";
 ---
 
 <div class="site-info">
-    <Image alt="Ray's Avatar" src={logo} class="avatar" />
-    <h2>{siteConfig.footerTitle}</h2>
-    <p>{siteConfig.aboutMessageShort}</p>
+    <a class="profile-link" href="/">
+        <Image alt="Ray's Avatar" src={logo} class="avatar" />
+        <h2>{siteConfig.footerTitle}</h2>
+        <p>{siteConfig.aboutMessageShort}</p>
+    </a>
+    <hr>
     <HomeButton />
 </div>
 
 <style>
-    a {
+    .site-info {
+        width: 100%;
+        max-width: 550px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background: var(--theme-primary);
+    }
+
+    .profile-link {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
         background: var(--theme-primary);
         color: var(--bg-primary);
         margin: 0;
@@ -26,7 +41,9 @@ import HomeButton from "#components/site/HomeButtons.astro";
         text-decoration: none;
     }
 
-    a:hover {
+    .profile-link:hover,
+    .profile-link:hover h2,
+    .profile-link:hover p {
         color: var(--text-primary);
     }
 
@@ -38,12 +55,11 @@ import HomeButton from "#components/site/HomeButtons.astro";
         padding: 0;
     }
 
-
-    div {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
+    hr {
+        width: 100%;
+        background-color: var(--bg-primary);
+        opacity: 0.35;
+        margin: var(--spacing-sm) 0;
     }
 
     .avatar {
@@ -57,8 +73,10 @@ import HomeButton from "#components/site/HomeButtons.astro";
 
     
     @media (max-width: 800px) {
-        div {
+        .site-info,
+        .profile-link {
             align-items: center;
+            text-align: center;
         }
     }
 </style>
