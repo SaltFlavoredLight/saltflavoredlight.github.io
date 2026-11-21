@@ -1,0 +1,36 @@
+---
+import PageLayout from "#layouts/PageLayout.astro";
+
+import CardLink from "#components/element/CardLink.astro";
+
+const allPosts = (
+    Object.entries(
+    import.meta.glob("./labs/*.astro", {
+        eager: true,
+    }),
+    ) as [string, { metadata: { title: string; description: string } }][]
+).map(([path, module]) => ({
+    ...module.metadata,
+    href: path.replace("./labs", "/labs").replace(".astro", ""),
+}));
+---
+
+<PageLayout title="All Projects" description="List of my woks." slug="/">
+
+    <p>Welcome! this is library of the works!</p>
+    <p>Here you can find my digital works, and I will keep updating this page with new works.</p>
+    
+    <hr>
+
+    {allPosts.map((post) => (
+        <CardLink
+            noBottomMargin={true}
+            title={post.title}
+            href={post.href}
+        >
+            {post.description}
+        </CardLink>
+    ))}
+
+    
+</PageLayout>

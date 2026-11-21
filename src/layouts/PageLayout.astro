@@ -21,9 +21,10 @@ interface Props {
     imagePath?: string;
     pageLayout?: SiteLayout;
     frontmatter?: Props;
+    addDes?: boolean | "true" | "false";
 }
 
-// Extract props from frontmatter (when loaded via MDX layout:) 
+// Extract props from frontmatter (when loaded via MDX layout:)
 // or directly from Astro.props (when loaded via Astro component)
 const content = Astro.props.frontmatter || Astro.props;
 
@@ -35,6 +36,7 @@ const {
     slug = "/",
     imagePath = "/cover.png",
     pageLayout = "full",
+    addDes = false,
 } = content;
 ---
 
@@ -48,5 +50,12 @@ const {
     pageLayout={pageLayout}
 >
     <h1>{title}</h1>
+
+    {(addDes === true || addDes === "true") && (
+        <>
+            <p>{description}</p> <hr />
+        </>
+    )}
+
     <slot />
 </BaseLayout>
