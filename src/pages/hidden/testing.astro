@@ -2,7 +2,6 @@
 import "#src/styles/main.css";
 import "#src/styles/themes.css";
 
-
 import PageLayout from "#layouts/PageLayout.astro";
 import Section from "#components/Section.astro";
 import Card from "#components/element/Card.astro";
@@ -32,13 +31,15 @@ import HStack from "#components/element/HStack.astro";
         or an image.
     </p>
     <Group>
-        <Button href="https://en.wikipedia.org/wiki/Catholic_Church"
-            >See Also: Catholic Church</Button
-        >
+        <Button href="https://en.wikipedia.org/wiki/Catholic_Church">
+            See Also: Catholic Church
+        </Button>
         <Button
             href="https://en.wikipedia.org/wiki/Catholic_devotions_to_Jesus"
-            format="border">Learn more on this article</Button
+            format="border"
         >
+            Learn more on this article
+        </Button>
     </Group>
     <h2 id="devotion-to-the-holy-name-of-jesus">
         Devotion to the Holy Name of Jesus
@@ -277,17 +278,22 @@ import HStack from "#components/element/HStack.astro";
     <YouTube id="qAsGWVk51Jk" privacy />
     <h2 id="references">References</h2>
     <HStack>
-        <CardLink
-            title="Wikipedia"
-            href="https://en.wikipedia.org/"
-        >
+        <CardLink title="Wikipedia" href="https://en.wikipedia.org/">
             Go to wikipedia
         </CardLink>
-        <CardLink
-            title="Catholic Answers"
-            href="https://www.catholic.com"
-        >
+        <CardLink title="Catholic Answers" href="https://www.catholic.com">
             Best Guide for find something faithful
         </CardLink>
     </HStack>
+    <blockquote>
+        <strong>Disclaimer:</strong> The information provided on this page is
+        for educational and informational purposes only. It is not intended as a
+        substitute for professional advice or guidance. The content reflects the
+        author's personal research and understanding of the subject matter, and
+        may not represent the views of any official religious institution or
+        authority. Readers are encouraged to seek additional sources and consult
+        with qualified experts for a comprehensive understanding of the topics
+        discussed. <br> (Github copliot atuocomplete this disclamer, and I just want
+        to put prayer here)
+    </blockquote>
 </PageLayout>

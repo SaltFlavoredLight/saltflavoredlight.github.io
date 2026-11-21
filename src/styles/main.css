@@ -390,6 +390,14 @@ hr {
     text-align: center;
 }
 
+blockquote {
+    border-left: 4px solid var(--theme-primary);
+    padding-left: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
 /* #endregion */
 
 /* #region Form Elements */
