@@ -54,8 +54,8 @@ export const siteConfig = {
 
     // 8. Header Tree
     pageTree: [
-        { title: "Projects", href: "/projects/" },
         { title: "About Me", href: "/about/" },
+        { title: "Projects", href: "/projects/" },
         { title: "Youtube", href: "/youtube/" },
     ]
 };
