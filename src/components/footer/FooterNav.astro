@@ -71,12 +71,14 @@ const footerMap = siteConfig.footerMap;
 
     @media (max-width: 800px) {
         .site-links {
+            justify-content: center;
             text-align: center;
             gap: var(--spacing-xs);
         }
 
         .site-links ul {
-            width: 50%;
+            min-width: 0;
+            width: auto;
         }
     }
 </style>
