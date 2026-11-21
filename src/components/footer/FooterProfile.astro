@@ -7,12 +7,14 @@ import { siteConfig } from '#config/siteConfig.js';
 
 import logo from "#assets/logo.png";
 import { Image } from "astro:assets";
+import HomeButton from "#components/site/HomeButtons.astro";
 ---
 
 <div class="site-info">
     <Image alt="Ray's Avatar" src={logo} class="avatar" />
     <h2>{siteConfig.footerTitle}</h2>
     <p>{siteConfig.aboutMessageShort}</p>
+    <HomeButton />
 </div>
 
 <style>
@@ -21,6 +23,7 @@ import { Image } from "astro:assets";
         color: var(--bg-primary);
         margin: 0;
         font: inherit;
+        text-decoration: none;
     }
 
     a:hover {
