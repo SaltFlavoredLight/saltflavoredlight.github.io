@@ -1,24 +1,32 @@
 ---
-interface Props {
-    /** The main title displayed at the top of the card */
-    href: string;
+import type { HTMLAttributes } from 'astro/types';
 
-    /** (optional) what's the button's style? Support general, fill, border, text and bg */
+// Extend HTMLAttributes for both anchor and button elements
+interface Props extends HTMLAttributes<'button'>, HTMLAttributes<'a'> {
+    /** (optional) The destination URL. If provided, renders as an <a> tag. */
+    href?: string;
+
+    /** (optional) The button's style format: general, fill, border, text, or bg */
     format?: string;
 }
 
 import "#src/styles/main.css";
 import "#src/styles/themes.css";
 
+const { href, format = "fill", class: className, ...attrs } = Astro.props;
 
-const { href = "/", format = "fill" } = Astro.props;
-
-const finalStyle = `btn-${format}`;
+const finalStyle = `btn-${format} ${className || ''}`.trim();
 ---
 
-<a href={href} class={finalStyle}>
-    <slot />
-</a>
+{href ? (
+    <a href={href} class={finalStyle} {...attrs}>
+        <slot />
+    </a>
+) : (
+    <button class={finalStyle} {...attrs}>
+        <slot />
+    </button>
+)}
 
 <style>
     .btn-general {
