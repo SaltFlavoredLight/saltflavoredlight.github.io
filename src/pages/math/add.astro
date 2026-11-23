@@ -10,152 +10,146 @@ import PageLayout from "#src/layouts/PageLayout.astro";
     description="A timed addition challenge."
     slug="/math-game/ASR/"
 >
-    <div class="game-shell">
-        <section id="settings" class="game-panel">
-            <h2>Select a mode</h2>
-            <div class="game-options">
-                <button
-                    class="game-button mode-button"
-                    data-mode="simple"
-                    type="button"
-                >
-                    Child (1 digit)
-                </button>
-                <button
-                    class="game-button mode-button"
-                    data-mode="normal"
-                    type="button"
-                >
-                    Easy (2 digits)
-                </button>
-                <button
-                    class="game-button mode-button"
-                    data-mode="classic"
-                    type="button"
-                >
-                    Classic (3 digits)
-                </button>
-                <button
-                    class="game-button mode-button"
-                    data-mode="hard"
-                    type="button"
-                >
-                    Hard (4 digits)
-                </button>
-            </div>
+    <section id="settings" class="game-panel">
+        <h2>Select a mode</h2>
+        <div class="game-options">
+            <button
+                class="game-button mode-button"
+                data-mode="simple"
+                type="button"
+            >
+                Child (1 digit)
+            </button>
+            <button
+                class="game-button mode-button"
+                data-mode="normal"
+                type="button"
+            >
+                Easy (2 digits)
+            </button>
+            <button
+                class="game-button mode-button"
+                data-mode="classic"
+                type="button"
+            >
+                Classic (3 digits)
+            </button>
+            <button
+                class="game-button mode-button"
+                data-mode="hard"
+                type="button"
+            >
+                Hard (4 digits)
+            </button>
+        </div>
 
-            <h3>Select a duration</h3>
-            <div class="game-options">
-                {[30, 60, 90, 120, 180, 300].map((seconds) => (
-                    <button
-                        class="game-button time-button"
-                        data-time={seconds}
-                        type="button"
-                    >
-                        {seconds}s
-                    </button>
-                ))}
+        <h3>Select a duration</h3>
+        <div class="game-options">
+            {[30, 60, 90, 120, 180, 300].map((seconds) => (
                 <button
                     class="game-button time-button"
-                    data-time="0"
+                    data-time={seconds}
                     type="button"
                 >
-                    Until wrong
+                    {seconds}s
                 </button>
-            </div>
-            <p id="modeConfirmation">Choose a mode and duration to begin.</p>
-            <div class="game-actions">
-                <button id="startGame" class="game-button" type="button">
-                    Start game
-                </button>
-                <button
-                    id="howToPlayButton"
-                    class="game-button secondary"
-                    type="button"
-                >
-                    How to play
-                </button>
-            </div>
-        </section>
-
-        <section id="howToPlayScreen" class="game-panel hidden">
-            <h2>How to play</h2>
-            <p>
-                Add the two numbers displayed and enter the answer. A correct
-                answer adds one point.
-            </p>
-            <p>Press Enter or the submit button to check each answer.</p>
-            <button id="backToSetting" class="game-button" type="button">
-                Back to game setup
+            ))}
+            <button class="game-button time-button" data-time="0" type="button">
+                Until wrong
             </button>
-        </section>
-
-        <section id="gameArea" class="game-panel hidden">
-            <h2 id="gameHeading">Solve as many problems as possible</h2>
-            <div class="game-scoreboard">
-                <span>
-                    <span id="timeMeaning">Time left:</span>{" "}
-                    <strong id="timer">90</strong>
-                </span>
-                <span>
-                    Score: <strong id="score">0</strong>
-                </span>
-            </div>
-            <p id="problem" class="game-problem">
-                2 + 3 = ?
-            </p>
-            <div class="game-answer">
-                <input id="answer1" type="number" placeholder="Your answer" />
-                <button id="submit" class="game-button" type="button">
-                    Submit
-                </button>
-            </div>
-            <p id="resultMessage" class="game-result" aria-live="polite"></p>
-        </section>
-
-        <section id="finalScoreScreen" class="game-panel hidden">
-            <h2 id="endTitle">Time's up</h2>
-            <p>Your score</p>
-            <p id="finalScore" class="game-final-score">
-                0
-            </p>
-            <p>
-                Play time: <span id="playTime"></span>
-            </p>
-            <p>
-                Play mode: <span id="playMode"></span>
-            </p>
-            <button id="restartGame" class="game-button" type="button">
-                Play again
+        </div>
+        <p id="modeConfirmation">Choose a mode and duration to begin.</p>
+        <div class="game-actions">
+            <button id="startGame" class="game-button" type="button">
+                Start game
             </button>
-        </section>
+            <button
+                id="howToPlayButton"
+                class="game-button secondary"
+                type="button"
+            >
+                How to play
+            </button>
+        </div>
+    </section>
 
-        <section class="game-info">
-            <h2>About Addition Speed Run</h2>
-            <p>
-                Challenge your mental addition across four number ranges. Choose
-                a timed round or continue until your first wrong answer.
-            </p>
-            <div class="game-mode-grid">
-                <div class="game-mode-card">
-                    <h3>Child</h3>
-                    <p>Two 1-digit numbers.</p>
-                </div>
-                <div class="game-mode-card">
-                    <h3>Easy</h3>
-                    <p>Two 2-digit numbers.</p>
-                </div>
-                <div class="game-mode-card">
-                    <h3>Classic</h3>
-                    <p>Two 3-digit numbers.</p>
-                </div>
-                <div class="game-mode-card">
-                    <h3>Hard</h3>
-                    <p>Two 4-digit numbers.</p>
-                </div>
+    <section id="howToPlayScreen" class="game-panel hidden">
+        <h2>How to play</h2>
+        <p>
+            Add the two numbers displayed and enter the answer. A correct answer
+            adds one point.
+        </p>
+        <p>Press Enter or the submit button to check each answer.</p>
+        <button id="backToSetting" class="game-button" type="button">
+            Back to game setup
+        </button>
+    </section>
+
+    <section id="gameArea" class="game-panel hidden">
+        <h2 id="gameHeading">Solve as many problems as possible</h2>
+        <div class="game-scoreboard">
+            <span>
+                <span id="timeMeaning">Time left:</span>{" "}
+                <strong id="timer">90</strong>
+            </span>
+            <span>
+                Score: <strong id="score">0</strong>
+            </span>
+        </div>
+        <p id="problem" class="game-problem">
+            2 + 3 = ?
+        </p>
+        <div class="game-answer">
+            <input id="answer1" type="number" placeholder="Your answer" />
+            <button id="submit" class="game-button" type="button">
+                Submit
+            </button>
+        </div>
+        <p id="resultMessage" class="game-result" aria-live="polite"></p>
+    </section>
+
+    <section id="finalScoreScreen" class="game-panel hidden">
+        <h2 id="endTitle">Time's up</h2>
+        <p>Your score</p>
+        <p id="finalScore" class="game-final-score">
+            0
+        </p>
+        <p>
+            Play time: <span id="playTime"></span>
+        </p>
+        <p>
+            Play mode: <span id="playMode"></span>
+        </p>
+        <button id="restartGame" class="game-button" type="button">
+            Play again
+        </button>
+    </section>
+
+    <section class="game-info">
+        <h2>About Addition Speed Run</h2>
+        <p>
+            Challenge your mental addition across four number ranges. Choose a
+            timed round or continue until your first wrong answer.
+        </p>
+        <div class="game-mode-grid">
+            <div class="game-mode-card">
+                <h3>Child</h3>
+                <p>Two 1-digit numbers.</p>
             </div>
-        </section>
-    </div>
+            <div class="game-mode-card">
+                <h3>Easy</h3>
+                <p>Two 2-digit numbers.</p>
+            </div>
+            <div class="game-mode-card">
+                <h3>Classic</h3>
+                <p>Two 3-digit numbers.</p>
+            </div>
+            <div class="game-mode-card">
+                <h3>Hard</h3>
+                <p>Two 4-digit numbers.</p>
+            </div>
+        </div>
+    </section>
 </PageLayout>
 
 <script>
