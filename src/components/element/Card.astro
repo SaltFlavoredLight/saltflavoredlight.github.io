@@ -13,7 +13,7 @@ interface Props {
 
     padding?: "" | "more" | "default" | "none" | "bottom";
 
-    full?: Boolean | 'true' | 'false'
+    full?: Boolean | "true" | "false";
 }
 
 import "#src/styles/main.css";
@@ -25,7 +25,7 @@ const {
     borderless = "false",
     noBottomMargin = false,
     padding = "",
-    full = 'true'
+    full = "true",
 } = Astro.props;
 
 const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
@@ -36,8 +36,7 @@ let finalClass = "";
 finalClass += "card ";
 finalClass += hover ? `hover-${hover} ` : ``;
 finalClass += theme ? `theme-${theme} ` : ``;
-finalClass +=
-    borderless === "true" || borderless === true ? `borderless ` : ``;
+finalClass += borderless === "true" || borderless === true ? `borderless ` : ``;
 finalClass += !isNoBottomMargin ? `has-margin ` : ``;
 finalClass += padding ? `padding-${padding} ` : ``;
 finalClass += isFull ? `full ` : ` `;
@@ -71,8 +70,7 @@ finalClass += isFull ? `full ` : ` `;
     }
 
     /* Ensure slotted elements inherit changing colors properly */
-    .card-content,
-    .card-content :global(*) {
+    .card-content :global(*):not(h1, h2, h3, h4, h5, h6, a) {
         color: inherit;
     }
 

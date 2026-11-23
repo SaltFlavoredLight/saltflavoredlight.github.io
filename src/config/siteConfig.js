@@ -1,6 +1,6 @@
 // src/config/siteConfig.js
 // to use it:
-// import { siteConfig } from '#src/config/siteConfig.js';
+// import { siteConfig } from '#config/siteConfig.js';
 
 export const siteConfig = {
     // 1. Complete Title

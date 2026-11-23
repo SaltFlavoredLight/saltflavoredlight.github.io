@@ -6,7 +6,7 @@ import "#src/styles/themes.css";
 import BrandLogo from "./BrandLogo.astro";
 import Nav from "./Nav.astro";
 import Hamburger from "./Hamburger.astro";
-import CTAButton from "./CTAButton.astro";
+import Button from "#components/element/Button.astro";
 
 interface Props {
     landing?: boolean;
@@ -23,7 +23,7 @@ const { landing = false } = Astro.props;
         {!landing && <Nav />}
 
         <div class="header-right">
-            <CTAButton />
+            <Button href="/works" format="bg">My Works</Button>
             {!landing && <Hamburger />}
         </div>
     </div>
