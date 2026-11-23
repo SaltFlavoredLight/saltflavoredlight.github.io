@@ -3,6 +3,7 @@ import "#src/styles/main.css";
 import "#src/styles/themes.css";
 import "#src/styles/game.css";
 import PageLayout from "#src/layouts/PageLayout.astro";
+import Button from "#src/components/element/Button.astro";
 ---
 
 <PageLayout
@@ -13,63 +14,63 @@ import PageLayout from "#src/layouts/PageLayout.astro";
     <section id="settings" class="game-panel">
         <h2>Select a mode</h2>
         <div class="game-options">
-            <button
+            <Button
                 class="game-button mode-button"
                 data-mode="simple"
                 type="button"
             >
                 Child (1 digit)
-            </button>
-            <button
+            </Button>
+            <Button
                 class="game-button mode-button"
                 data-mode="normal"
                 type="button"
             >
                 Easy (2 digits)
-            </button>
-            <button
+            </Button>
+            <Button
                 class="game-button mode-button"
                 data-mode="classic"
                 type="button"
             >
                 Classic (3 digits)
-            </button>
-            <button
+            </Button>
+            <Button
                 class="game-button mode-button"
                 data-mode="hard"
                 type="button"
             >
                 Hard (4 digits)
-            </button>
+            </Button>
         </div>
 
         <h3>Select a duration</h3>
         <div class="game-options">
             {[30, 60, 90, 120, 180, 300].map((seconds) => (
-                <button
+                <Button
                     class="game-button time-button"
                     data-time={seconds}
                     type="button"
                 >
                     {seconds}s
-                </button>
+                </Button>
             ))}
-            <button class="game-button time-button" data-time="0" type="button">
+            <Button class="game-button time-button" data-time="0" type="button">
                 Until wrong
-            </button>
+            </Button>
         </div>
         <p id="modeConfirmation">Choose a mode and duration to begin.</p>
         <div class="game-actions">
-            <button id="startGame" class="game-button" type="button">
+            <Button id="startGame" class="game-button" type="button">
                 Start game
-            </button>
-            <button
+            </Button>
+            <Button
                 id="howToPlayButton"
                 class="game-button secondary"
                 type="button"
             >
                 How to play
-            </button>
+            </Button>
         </div>
     </section>
 
@@ -80,9 +81,9 @@ import PageLayout from "#src/layouts/PageLayout.astro";
             adds one point.
         </p>
         <p>Press Enter or the submit button to check each answer.</p>
-        <button id="backToSetting" class="game-button" type="button">
+        <Button id="backToSetting" class="game-button" type="button">
             Back to game setup
-        </button>
+        </Button>
     </section>
 
     <section id="gameArea" class="game-panel hidden">
@@ -101,9 +102,9 @@ import PageLayout from "#src/layouts/PageLayout.astro";
         </p>
         <div class="game-answer">
             <input id="answer1" type="number" placeholder="Your answer" />
-            <button id="submit" class="game-button" type="button">
+            <Button id="submit" class="game-button" type="button">
                 Submit
-            </button>
+            </Button>
         </div>
         <p id="resultMessage" class="game-result" aria-live="polite"></p>
     </section>
@@ -120,9 +121,9 @@ import PageLayout from "#src/layouts/PageLayout.astro";
         <p>
             Play mode: <span id="playMode"></span>
         </p>
-        <button id="restartGame" class="game-button" type="button">
+        <Button id="restartGame" class="game-button" type="button">
             Play again
-        </button>
+        </Button>
     </section>
 
     <section class="game-info">
