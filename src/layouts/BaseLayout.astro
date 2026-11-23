@@ -105,7 +105,7 @@ switch (pageLayout) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <!-- Favicon / Site Icon -->
-        <link rel="icon" href={iconURL} />
+        <link rel="icon" href={iconURL} type="image/x-icon">
 
         <!-- SEO Meta Tags -->
         <title>{title} | Rayzhi</title>
@@ -120,7 +120,7 @@ switch (pageLayout) {
         <meta property="og:url" content={canonicalURL} />
     </head>
     <body class={bodyClass}>
-        <!-- Header Rendering Logic -->
+        <!-- Header Logic -->
         {
             headerState === "full" && (
                 <SiteHeader landing={false} singlePage={pageLayout} />
@@ -136,7 +136,7 @@ switch (pageLayout) {
             <slot />
         </main>
 
-        <!-- Footer Rendering Logic -->
+        <!-- Footer Logic -->
         {
             footerState === "full" && (
                 <SiteFooter landing={false} singlePage={pageLayout} />
