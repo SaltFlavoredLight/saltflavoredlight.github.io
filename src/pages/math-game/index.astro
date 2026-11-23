@@ -1,0 +1,23 @@
+---
+import "#src/styles/main.css";
+import "#src/styles/themes.css";
+import "#src/styles/game.css";
+import PageLayout from "#src/layouts/PageLayout.astro";
+import CardLink from "#src/components/element/CardLink.astro";
+import HStack from "#src/components/element/HStack.astro";
+---
+
+<PageLayout title="Math Games" description="Practice addition, multiplication, and quadratic equations." slug="/math-game">
+    <p class="text-center">Choose a speed challenge and train one math skill at a time.</p>
+    <HStack>
+        <CardLink noBottomMargin="true" title="Addition Speed Run" href="/math-game/ASR/" theme="middle">
+            <p>Add pairs of numbers before time runs out.</p>
+        </CardLink>
+        <CardLink noBottomMargin="true" title="Multiple Solver Testing" href="/math-game/MSTG/" theme="middle">
+            <p>Practice multiplication across four difficulty levels.</p>
+        </CardLink>
+        <CardLink noBottomMargin="true" title="Quadratic Equation Solver" href="/math-game/QESG/" theme="middle">
+            <p>Find both roots of a quadratic equation.</p>
+        </CardLink>
+    </HStack>
+</PageLayout>
