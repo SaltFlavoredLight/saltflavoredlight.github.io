@@ -1,0 +1,62 @@
+---
+layout: "#layouts/PageLayout.astro"
+
+title: "YouTube"
+
+description: "Welcome to my YouTUbe page! Here you can find my YouTube channel and videos. I post content related to music, technology, and more. Subscribe to stay updated with my latest uploads!"
+slug: '/youtube'
+---
+
+import Section from "#components/Section.astro";
+import Card from "#components/element/Card.astro";
+import Group from "#components/element/Group.astro";
+import Button from "#components/element/Button.astro";
+import YouTube from "#components/element/YouTube.astro";
+import CardLink from "#components/element/CardLink.astro";
+import HStack from "#components/element/HStack.astro";
+
+**Welcome to my YouTube page!**
+
+Here you can find my YouTube channel and videos. I post content related to music, technology, and more. Subscribe to stay updated with my latest uploads!
+
+<Section>
+  <CardLink href="https://www.youtube.com/@saltflavoredlight" target="_blank" theme="bg" noBottomMargin title="Visit My New YouTube Channel" hover="move">
+
+    I just moved my YouTube channel to a new name! Check out my channel for the latest videos and updates. Don't forget to subscribe and hit the notification bell to stay informed about my new content!
+
+    Channel Name: **@saltflavoredlight**
+
+    <Button>Go to Youtube!</Button>
+  </CardLink>
+</Section>
+
+## About what I am doing on YouTube
+
+> Share Anything I want
+
+I start my youtube as a hobby to share musics, preserntation, and a [prank video (of course I hide it)](https://www.youtube.com/watch?v=RrESvSRNpeo). my First Brand, Ray Studio.
+
+Now I am posting Music! from Musescore to anything, I start a little, but now I am being a professional music creator, I am looking forward to make video about Technology.
+
+
+<HStack>
+    <div>
+        ### Check it out:
+
+        This is my current flagship music video, **Spirit of Spring.**
+
+        I built it with Musescore, the music is designed as orchestral music, you can see I group every instrument to a section and play my melody and base.
+
+        <Group>
+            <Button href="https://www.youtube.com/watch?v=T_bqoXk49tw" target="_blank">Watch on YouTube</Button>
+            <Button href="https://musescore.com/user/101427901/scores/29667839" target="_blank" format="border">See the Score</Button>
+        </Group>
+    </div>    
+    <YouTube videoId="T_bqoXk49tw" title="Spirit of Spring" /> 
+</HStack>
+
+### New YouTube Channel
+
+because I really think about re-branding, now you can see My New YouTube Channel, [Salt Flavored Light](https://www.youtube.com/@saltflavoredlight) , I will post more content about music and technology, and I will also share my thoughts and experiences on these topics. I hope you will enjoy my content and subscribe to my channel!
+
+Original YouTube Channel is currently inactive, but you can still check out my old videos on [Ray Studio](https://www.youtube.com/@raystudio1130) channel. I will be uploading new content to my new channel, so stay tuned for more updates!

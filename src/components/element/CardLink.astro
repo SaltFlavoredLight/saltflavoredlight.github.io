@@ -7,6 +7,7 @@ import Card from "./Card.astro";
 interface Props {
     title: string;
     href?: string;
+    target?: string;
     noBottomMargin?: boolean | "true" | "false";
 
     /** when blank, disabled, otherwise, the name appeared here will be applied to style, Option: color, move, both */
@@ -30,6 +31,7 @@ const {
     theme = "border",
     borderless = false,
     content = "",
+    target = "",
 } = Astro.props;
 
 const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
@@ -42,15 +44,13 @@ finalClass += theme ? `theme-${theme}` : "";
 ---
 
 <a class={finalClass} href={href}>
-    <Card noBottomMargin hover={hover} theme={theme} borderless={borderless}>
-        {
-            title && title.trim() !== "" && (
-                <h3>
-                    {title}
-                    <span> &rarr;</span>
-                </h3>
-            )
-        }
+    <Card noBottomMargin hover={hover} theme={theme} borderless={borderless} target={target}>
+        {title && title.trim() !== "" && (
+            <h3>
+                {title}
+                <span> &rarr;</span>
+            </h3>
+        )}
         {content}
         <slot />
     </Card>
@@ -62,6 +62,7 @@ finalClass += theme ? `theme-${theme}` : "";
         width: 100%;
         text-decoration: none;
         color: unset;
+        font-weight: unset;
 
         margin-top: var(--spacing-xs);
         margin-bottom: none;
@@ -70,6 +71,7 @@ finalClass += theme ? `theme-${theme}` : "";
     .link-card h3,
     .link-card.theme-bold:hover h3 {
         margin: 0;
+        font-weight: 550;
         color: var(--theme-primary);
     }
 
