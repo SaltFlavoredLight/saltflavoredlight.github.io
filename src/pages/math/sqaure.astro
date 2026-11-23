@@ -5,47 +5,106 @@ import "#src/styles/game.css";
 import PageLayout from "#src/layouts/PageLayout.astro";
 ---
 
-<PageLayout title="Quadratic Equation Solving" description="A timed quadratic equation challenge." slug="/math-game/QESG/">
+<PageLayout
+    title="Quadratic Equation Solving"
+    description="A timed quadratic equation challenge."
+    slug="/math-game/QESG/"
+>
     <div class="game-shell">
         <section id="settings" class="game-panel">
             <h2>Select a mode</h2>
             <div class="game-options">
-                <button class="game-button mode-button" data-mode="classic" type="button">Classic</button>
-                <button class="game-button mode-button" data-mode="quick" type="button">Quick (a = 1)</button>
-                <button class="game-button mode-button" data-mode="advance" type="button">Advanced</button>
+                <button
+                    class="game-button mode-button"
+                    data-mode="classic"
+                    type="button"
+                >
+                    Classic
+                </button>
+                <button
+                    class="game-button mode-button"
+                    data-mode="quick"
+                    type="button"
+                >
+                    Quick (a = 1)
+                </button>
+                <button
+                    class="game-button mode-button"
+                    data-mode="advance"
+                    type="button"
+                >
+                    Advanced
+                </button>
             </div>
             <h3>Select a duration</h3>
             <div class="game-options">
                 {[30, 60, 90, 120, 180, 300].map((seconds) => (
-                    <button class="game-button time-button" data-time={seconds} type="button">{seconds}s</button>
+                    <button
+                        class="game-button time-button"
+                        data-time={seconds}
+                        type="button"
+                    >
+                        {seconds}s
+                    </button>
                 ))}
-                <button class="game-button time-button" data-time="0" type="button">Until wrong</button>
+                <button
+                    class="game-button time-button"
+                    data-time="0"
+                    type="button"
+                >
+                    Until wrong
+                </button>
             </div>
             <p id="modeConfirmation">Choose a mode and duration to begin.</p>
             <div class="game-actions">
-                <button id="startGame" class="game-button" type="button">Start game</button>
-                <button id="howToPlayButton" class="game-button secondary" type="button">How to play</button>
+                <button id="startGame" class="game-button" type="button">
+                    Start game
+                </button>
+                <button
+                    id="howToPlayButton"
+                    class="game-button secondary"
+                    type="button"
+                >
+                    How to play
+                </button>
             </div>
         </section>
 
         <section id="howToPlayScreen" class="game-panel hidden">
             <h2>How to play</h2>
-            <p>Read the quadratic equation, find both integer roots, and enter them in either order.</p>
-            <p>Enter moves from the first root to the second. Enter again submits.</p>
-            <button id="backToSetting" class="game-button" type="button">Back to game setup</button>
+            <p>
+                Read the quadratic equation, find both integer roots, and enter
+                them in either order.
+            </p>
+            <p>
+                Enter moves from the first root to the second. Enter again
+                submits.
+            </p>
+            <button id="backToSetting" class="game-button" type="button">
+                Back to game setup
+            </button>
         </section>
 
         <section id="gameArea" class="game-panel hidden">
             <h2 id="gameHeading">Solve as many equations as possible</h2>
             <div class="game-scoreboard">
-                <span><span id="timeMeaning">Time left:</span> <strong id="timer">90</strong></span>
-                <span>Score: <strong id="score">0</strong></span>
+                <span>
+                    <span id="timeMeaning">Time left:</span>{" "}
+                    <strong id="timer">90</strong>
+                </span>
+                <span>
+                    Score: <strong id="score">0</strong>
+                </span>
             </div>
-            <p id="problem" class="game-problem">x² + 5x + 6 = 0</p>
+            <p id="problem" class="game-problem">
+                x² + 5x + 6 = 0
+            </p>
             <div class="game-answer">
                 <input id="answer1" type="number" placeholder="First root" />
                 <input id="answer2" type="number" placeholder="Second root" />
-                <button id="submit" class="game-button" type="button">Submit</button>
+                <button id="submit" class="game-button" type="button">
+                    Submit
+                </button>
             </div>
             <p id="resultMessage" class="game-result" aria-live="polite"></p>
         </section>
@@ -53,173 +112,220 @@ import PageLayout from "#src/layouts/PageLayout.astro";
         <section id="finalScoreScreen" class="game-panel hidden">
             <h2 id="endTitle">Time's up</h2>
             <p>Your score</p>
-            <p id="finalScore" class="game-final-score">0</p>
-            <p>Play time: <span id="playTime"></span></p>
-            <p>Play mode: <span id="playMode"></span></p>
-            <button id="restartGame" class="game-button" type="button">Play again</button>
+            <p id="finalScore" class="game-final-score">
+                0
+            </p>
+            <p>
+                Play time: <span id="playTime"></span>
+            </p>
+            <p>
+                Play mode: <span id="playMode"></span>
+            </p>
+            <button id="restartGame" class="game-button" type="button">
+                Play again
+            </button>
         </section>
 
         <section class="game-info">
             <h2>About Quadratic Equation Solving</h2>
-            <p>Solve equations with integer roots across classic, quick, and advanced ranges.</p>
+            <p>
+                Solve equations with integer roots across classic, quick, and
+                advanced ranges.
+            </p>
             <div class="game-mode-grid">
-                <div class="game-mode-card"><h3>Classic</h3><p>Coefficients vary from -4 to 4; roots range from -10 to 10.</p></div>
-                <div class="game-mode-card"><h3>Quick</h3><p>The leading coefficient is 1.</p></div>
-                <div class="game-mode-card"><h3>Advanced</h3><p>Coefficients vary from -10 to 10.</p></div>
+                <div class="game-mode-card">
+                    <h3>Classic</h3>
+                    <p>
+                        Coefficients vary from -4 to 4; roots range from -10 to
+                        10.
+                    </p>
+                </div>
+                <div class="game-mode-card">
+                    <h3>Quick</h3>
+                    <p>The leading coefficient is 1.</p>
+                </div>
+                <div class="game-mode-card">
+                    <h3>Advanced</h3>
+                    <p>Coefficients vary from -10 to 10.</p>
+                </div>
             </div>
         </section>
     </div>
+</PageLayout>
 
-    <script>
-        let mode = "";
-        let selectedTime = -1;
-        let score = 0;
-        let a = 0;
-        let b = 0;
-        let c = 0;
-        let root1 = 0;
-        let root2 = 0;
-        let timerInterval;
+<script>
+    let mode = "";
+    let selectedTime = -1;
+    let score = 0;
+    let a = 0;
+    let b = 0;
+    let c = 0;
+    let root1 = 0;
+    let root2 = 0;
+    let timerInterval;
 
-        const settings = document.getElementById("settings");
-        const instructions = document.getElementById("howToPlayScreen");
-        const gameArea = document.getElementById("gameArea");
-        const finalScreen = document.getElementById("finalScoreScreen");
-        const answer1 = document.getElementById("answer1");
-        const answer2 = document.getElementById("answer2");
-        const resultMessage = document.getElementById("resultMessage");
+    const settings = document.getElementById("settings");
+    const instructions = document.getElementById("howToPlayScreen");
+    const gameArea = document.getElementById("gameArea");
+    const finalScreen = document.getElementById("finalScoreScreen");
+    const answer1 = document.getElementById("answer1");
+    const answer2 = document.getElementById("answer2");
+    const resultMessage = document.getElementById("resultMessage");
 
-        document.querySelectorAll(".mode-button").forEach((button) => button.addEventListener("click", () => {
-            document.querySelectorAll(".mode-button").forEach((item) => item.classList.remove("selected"));
+    document.querySelectorAll(".mode-button").forEach((button) =>
+        button.addEventListener("click", () => {
+            document
+                .querySelectorAll(".mode-button")
+                .forEach((item) => item.classList.remove("selected"));
             button.classList.add("selected");
             mode = button.dataset.mode;
-            document.getElementById("modeConfirmation").textContent = `Selected mode: ${mode}`;
-        }));
+            document.getElementById("modeConfirmation").textContent =
+                `Selected mode: ${mode}`;
+        }),
+    );
 
-        document.querySelectorAll(".time-button").forEach((button) => button.addEventListener("click", () => {
-            document.querySelectorAll(".time-button").forEach((item) => item.classList.remove("selected"));
+    document.querySelectorAll(".time-button").forEach((button) =>
+        button.addEventListener("click", () => {
+            document
+                .querySelectorAll(".time-button")
+                .forEach((item) => item.classList.remove("selected"));
             button.classList.add("selected");
             selectedTime = Number(button.dataset.time);
-            document.getElementById("modeConfirmation").textContent = `Selected mode: ${mode || "not chosen"} | Duration: ${selectedTime === 0 ? "until wrong" : `${selectedTime} seconds`}`;
-        }));
+            document.getElementById("modeConfirmation").textContent =
+                `Selected mode: ${mode || "not chosen"} | Duration: ${selectedTime === 0 ? "until wrong" : `${selectedTime} seconds`}`;
+        }),
+    );
 
-        function randomBetween(min, max) {
-            return Math.floor(Math.random() * (max - min)) + min;
+    function randomBetween(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function formatCoefficient(number) {
+        if (number === 0) return "";
+        if (number === 1) return "+";
+        if (number > 0) return `+${number}`;
+        return String(number);
+    }
+
+    function generateProblem() {
+        let x1;
+        let x2;
+        if (mode === "quick") {
+            a = 1;
+            x1 = randomBetween(-13, 14);
+            x2 = randomBetween(-13, 14);
+        } else if (mode === "classic") {
+            a = randomBetween(-4, 5);
+            while (a === 0) a = randomBetween(-4, 5);
+            x1 = randomBetween(-10, 11);
+            x2 = randomBetween(-10, 11);
+        } else {
+            a = randomBetween(-10, 11);
+            while (a === 0) a = randomBetween(-10, 11);
+            x1 = randomBetween(-13, 14);
+            x2 = randomBetween(-13, 14);
         }
+        b = -a * (x1 + x2);
+        c = a * x1 * x2;
+        root1 = x1;
+        root2 = x2;
 
-        function formatCoefficient(number) {
-            if (number === 0) return "";
-            if (number === 1) return "+";
-            if (number > 0) return `+${number}`;
-            return String(number);
-        }
+        const bText = b === 0 ? "" : `${formatCoefficient(b)}x`;
+        const cText = c === 0 ? "" : formatCoefficient(c);
+        document.getElementById("problem").textContent =
+            `${formatCoefficient(a)}x² ${bText} ${cText} = 0`
+                .replace(/\s+/g, " ")
+                .replace("+ -", "- ");
+    }
 
-        function generateProblem() {
-            let x1;
-            let x2;
-            if (mode === "quick") {
-                a = 1;
-                x1 = randomBetween(-13, 14);
-                x2 = randomBetween(-13, 14);
-            } else if (mode === "classic") {
-                a = randomBetween(-4, 5);
-                while (a === 0) a = randomBetween(-4, 5);
-                x1 = randomBetween(-10, 11);
-                x2 = randomBetween(-10, 11);
-            } else {
-                a = randomBetween(-10, 11);
-                while (a === 0) a = randomBetween(-10, 11);
-                x1 = randomBetween(-13, 14);
-                x2 = randomBetween(-13, 14);
-            }
-            b = -a * (x1 + x2);
-            c = a * x1 * x2;
-            root1 = x1;
-            root2 = x2;
+    function showFinal(reason) {
+        clearInterval(timerInterval);
+        document.getElementById("finalScore").textContent = String(score);
+        document.getElementById("playTime").textContent =
+            `${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} ${new Date().toLocaleDateString()}`;
+        document.getElementById("playMode").textContent =
+            selectedTime === 0
+                ? `${mode}, until wrong`
+                : `${mode}, ${selectedTime}s`;
+        document.getElementById("endTitle").textContent = reason;
+        gameArea.classList.add("hidden");
+        finalScreen.classList.remove("hidden");
+    }
 
-            const bText = b === 0 ? "" : `${formatCoefficient(b)}x`;
-            const cText = c === 0 ? "" : formatCoefficient(c);
-            document.getElementById("problem").textContent = `${formatCoefficient(a)}x² ${bText} ${cText} = 0`.replace(/\s+/g, " ").replace("+ -", "- ");
-        }
-
-        function showFinal(reason) {
-            clearInterval(timerInterval);
-            document.getElementById("finalScore").textContent = String(score);
-            document.getElementById("playTime").textContent = `${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} ${new Date().toLocaleDateString()}`;
-            document.getElementById("playMode").textContent = selectedTime === 0 ? `${mode}, until wrong` : `${mode}, ${selectedTime}s`;
-            document.getElementById("endTitle").textContent = reason;
-            gameArea.classList.add("hidden");
-            finalScreen.classList.remove("hidden");
-        }
-
-        function startGame() {
-            if (!mode) return alert("Please choose a mode.");
-            if (selectedTime === -1) return alert("Please choose a duration.");
-            clearInterval(timerInterval);
-            score = 0;
-            document.getElementById("score").textContent = "0";
-            settings.classList.add("hidden");
-            finalScreen.classList.add("hidden");
-            gameArea.classList.remove("hidden");
-            document.getElementById("timeMeaning").textContent = selectedTime === 0 ? "Time passed:" : "Time left:";
-            document.getElementById("gameHeading").textContent = selectedTime === 0 ? "Solve correctly until your first mistake" : `Solve as many equations as possible in ${selectedTime} seconds`;
-            let timeValue = selectedTime === 0 ? 0 : selectedTime;
+    function startGame() {
+        if (!mode) return alert("Please choose a mode.");
+        if (selectedTime === -1) return alert("Please choose a duration.");
+        clearInterval(timerInterval);
+        score = 0;
+        document.getElementById("score").textContent = "0";
+        settings.classList.add("hidden");
+        finalScreen.classList.add("hidden");
+        gameArea.classList.remove("hidden");
+        document.getElementById("timeMeaning").textContent =
+            selectedTime === 0 ? "Time passed:" : "Time left:";
+        document.getElementById("gameHeading").textContent =
+            selectedTime === 0
+                ? "Solve correctly until your first mistake"
+                : `Solve as many equations as possible in ${selectedTime} seconds`;
+        let timeValue = selectedTime === 0 ? 0 : selectedTime;
+        document.getElementById("timer").textContent = `${timeValue}s`;
+        timerInterval = setInterval(() => {
+            timeValue += selectedTime === 0 ? 1 : -1;
             document.getElementById("timer").textContent = `${timeValue}s`;
-            timerInterval = setInterval(() => {
-                timeValue += selectedTime === 0 ? 1 : -1;
-                document.getElementById("timer").textContent = `${timeValue}s`;
-                if (selectedTime !== 0 && timeValue === 0) showFinal("Time's up");
-            }, 1000);
-            generateProblem();
-            answer1.focus();
+            if (selectedTime !== 0 && timeValue === 0) showFinal("Time's up");
+        }, 1000);
+        generateProblem();
+        answer1.focus();
+    }
+
+    document.getElementById("startGame").addEventListener("click", startGame);
+    document.getElementById("howToPlayButton").addEventListener("click", () => {
+        settings.classList.add("hidden");
+        instructions.classList.remove("hidden");
+    });
+    document.getElementById("backToSetting").addEventListener("click", () => {
+        instructions.classList.add("hidden");
+        settings.classList.remove("hidden");
+    });
+
+    function submitAnswer() {
+        const first = Number(answer1.value);
+        const second = Number(answer2.value);
+        if (
+            (first === root1 && second === root2) ||
+            (first === root2 && second === root1)
+        ) {
+            score++;
+            document.getElementById("score").textContent = String(score);
+            resultMessage.textContent = "Correct";
+            resultMessage.className = "game-result success";
+        } else {
+            resultMessage.textContent = `Wrong. The roots were ${root1} and ${root2}`;
+            resultMessage.className = "game-result error";
+            if (selectedTime === 0) showFinal("Your first answer was wrong");
         }
+        answer1.value = "";
+        answer2.value = "";
+        answer1.focus();
+        generateProblem();
+        setTimeout(() => {
+            resultMessage.textContent = "";
+            resultMessage.className = "game-result";
+        }, 1800);
+    }
 
-        document.getElementById("startGame").addEventListener("click", startGame);
-        document.getElementById("howToPlayButton").addEventListener("click", () => {
-            settings.classList.add("hidden");
-            instructions.classList.remove("hidden");
-        });
-        document.getElementById("backToSetting").addEventListener("click", () => {
-            instructions.classList.add("hidden");
-            settings.classList.remove("hidden");
-        });
-
-        function submitAnswer() {
-            const first = Number(answer1.value);
-            const second = Number(answer2.value);
-            if ((first === root1 && second === root2) || (first === root2 && second === root1)) {
-                score++;
-                document.getElementById("score").textContent = String(score);
-                resultMessage.textContent = "Correct";
-                resultMessage.className = "game-result success";
-            } else {
-                resultMessage.textContent = `Wrong. The roots were ${root1} and ${root2}`;
-                resultMessage.className = "game-result error";
-                if (selectedTime === 0) showFinal("Your first answer was wrong");
-            }
-            answer1.value = "";
-            answer2.value = "";
-            answer1.focus();
-            generateProblem();
-            setTimeout(() => {
-                resultMessage.textContent = "";
-                resultMessage.className = "game-result";
-            }, 1800);
+    document.getElementById("submit").addEventListener("click", submitAnswer);
+    answer1.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            answer2.focus();
         }
-
-        document.getElementById("submit").addEventListener("click", submitAnswer);
-        answer1.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                answer2.focus();
-            }
-        });
-        answer2.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") submitAnswer();
-        });
-        document.getElementById("restartGame").addEventListener("click", () => {
-            finalScreen.classList.add("hidden");
-            settings.classList.remove("hidden");
-        });
-    </script>
-</PageLayout>
+    });
+    answer2.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") submitAnswer();
+    });
+    document.getElementById("restartGame").addEventListener("click", () => {
+        finalScreen.classList.add("hidden");
+        settings.classList.remove("hidden");
+    });
+</script>
