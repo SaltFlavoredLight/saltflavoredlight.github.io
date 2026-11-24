@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types';
 
 // Extend HTMLAttributes for both anchor and button elements
-interface Props extends HTMLAttributes<'button'>, HTMLAttributes<'a'> {
+interface Props extends HTMLAttributes<'button'>, Omit<HTMLAttributes<'a'>, 'type'> {
     /** (optional) The destination URL. If provided, renders as an <a> tag. */
     href?: string;
 

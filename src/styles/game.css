@@ -6,12 +6,6 @@
     text-align: center;
 }
 
-.game-panel h1,
-.game-panel h2,
-.game-panel h3 {
-    margin-top: 0;
-}
-
 .hidden {
     display: none !important;
 }

@@ -64,26 +64,7 @@ import Button from "#src/components/element/Button.astro";
             <Button id="startGame" class="game-button" type="button">
                 Start game
             </Button>
-            <Button
-                id="howToPlayButton"
-                class="game-button secondary"
-                type="button"
-            >
-                How to play
-            </Button>
         </div>
-    </section>
-
-    <section id="howToPlayScreen" class="game-panel hidden">
-        <h2>How to play</h2>
-        <p>
-            Add the two numbers displayed and enter the answer. A correct answer
-            adds one point.
-        </p>
-        <p>Press Enter or the submit button to check each answer.</p>
-        <Button id="backToSetting" class="game-button" type="button">
-            Back to game setup
-        </Button>
     </section>
 
     <section id="gameArea" class="game-panel hidden">
@@ -127,6 +108,12 @@ import Button from "#src/components/element/Button.astro";
     </section>
 
     <hr>
+                <h2>How to play</h2>
+        <p>
+            Add the two numbers displayed and enter the answer. A correct answer
+            adds one point.
+        </p>
+        <p>Press Enter or the submit button to check each answer.</p>
         <h2>About Addition Speed Run</h2>
         <p>
             Challenge your mental addition across four number ranges. Choose a
@@ -254,14 +241,6 @@ import Button from "#src/components/element/Button.astro";
     }
 
     document.getElementById("startGame").addEventListener("click", startGame);
-    document.getElementById("howToPlayButton").addEventListener("click", () => {
-        settings.classList.add("hidden");
-        instructions.classList.remove("hidden");
-    });
-    document.getElementById("backToSetting").addEventListener("click", () => {
-        instructions.classList.add("hidden");
-        settings.classList.remove("hidden");
-    });
 
     function submitAnswer() {
         const answer = Number(answerInput.value);
