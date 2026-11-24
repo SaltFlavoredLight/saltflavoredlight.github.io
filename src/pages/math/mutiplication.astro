@@ -253,14 +253,6 @@ import Button from "#src/components/element/Button.astro";
     }
 
     document.getElementById("startGame").addEventListener("click", startGame);
-    document.getElementById("howToPlayButton").addEventListener("click", () => {
-        settings.classList.add("hidden");
-        instructions.classList.remove("hidden");
-    });
-    document.getElementById("backToSetting").addEventListener("click", () => {
-        instructions.classList.add("hidden");
-        settings.classList.remove("hidden");
-    });
 
     function submitAnswer() {
         const answer = Number(answerInput.value);
