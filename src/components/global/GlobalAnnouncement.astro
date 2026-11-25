@@ -1,0 +1,23 @@
+---
+// just setup the script
+---
+<div>
+</div>
+
+<script>
+  // Wait until the DOM is loaded
+  document.addEventListener("DOMContentLoaded", function() {
+  	// 1. Check if URL contains ?from=raystudio.net
+  	const urlParams = new URLSearchParams(window.location.search);
+  	if (urlParams.has("from")) {
+  		const fromValue = urlParams.get("from");
+  		if (fromValue === "raystudio.net") {
+  			// 2. Replace the .text inside #globalAnnouncement
+  			const announceText = document.getElementById("globalAnnouncement").querySelector(".text");
+  			if (announceText) {
+  				announceText.textContent = "You are redirected here because you visited my older domain, please keep in mind that raystudio.net will be unavailable soon.";
+  			}
+  		}
+  	}
+  });
+</script>
