@@ -1,215 +1,225 @@
 ---
 interface Props {
-	title: string;
-	theme?: string;
-	onHover?: boolean | "true" | "false";
-	animation?: "none" | "expend" | "fade";
+    title: string;
+    theme?: string;
+    onHover?: boolean | "true" | "false";
+    animation?: "none" | "expend" | "fade";
 }
 
 import "#src/styles/main.css";
 import "#src/styles/themes.css";
 
-const {
-	title,
-	theme,
-	onHover = false,
-	animation = "expend",
-} = Astro.props;
+const { title, theme, onHover = false, animation = "expend" } = Astro.props;
 
 const isHoverEnabled = onHover === true || onHover === "true";
 ---
 
 <details
-	class={`faq__item faq--anim-${animation}`}
-	data-theme={theme}
-	data-on-hover={isHoverEnabled ? "true" : undefined}
+    class={`faq__item faq--anim-${animation}`}
+    data-theme={theme}
+    data-on-hover={isHoverEnabled ? "true" : undefined}
 >
-	<summary class="faq__summary">{title}</summary>
-	<div class="faq__answer-wrapper">
-		<div class="faq__answer">
-			<slot />
-		</div>
-	</div>
+    <summary class="faq__summary">{title}</summary>
+    <div class="faq__answer-wrapper">
+        <div class="faq__answer">
+            <slot />
+        </div>
+    </div>
 </details>
 
 <script>
-	document.querySelectorAll<HTMLDetailsElement>('.faq__item').forEach((item) => {
-		const summary = item.querySelector('.faq__summary');
-		const answerWrapper = item.querySelector('.faq__answer-wrapper') as HTMLElement;
-		const isHover = item.getAttribute('data-on-hover') === 'true';
+    document
+        .querySelectorAll<HTMLDetailsElement>(".faq__item")
+        .forEach((item) => {
+            const summary = item.querySelector(".faq__summary");
+            const answerWrapper = item.querySelector(
+                ".faq__answer-wrapper",
+            ) as HTMLElement;
+            const isHover = item.getAttribute("data-on-hover") === "true";
 
-		if (!summary || !answerWrapper) return;
+            if (!summary || !answerWrapper) return;
 
-		// Set initial max-height if already open on load
-		if (item.open) {
-			answerWrapper.style.maxHeight = 'none';
-		}
+            // Set initial max-height if already open on load
+            if (item.open) {
+                answerWrapper.style.maxHeight = "none";
+            }
 
-		const toggleFaq = (e: Event) => {
-			e.preventDefault(); // Prevent instant native toggle so we can animate
+            const toggleFaq = (e: Event) => {
+                e.preventDefault(); // Prevent instant native toggle so we can animate
 
-			const isOpen = item.open;
+                const isOpen = item.open;
 
-			if (isOpen) {
-				// Closing: set explicit height first, force reflow, then transition to 0
-				answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
-				requestAnimationFrame(() => {
-					answerWrapper.style.maxHeight = '0px';
-				});
-				item.classList.remove('is-open');
-				
-				// Remove 'open' after transition finishes
-				setTimeout(() => {
-					if (!item.classList.contains('is-open')) {
-						item.open = false;
-					}
-				}, 300); // Matches CSS transition duration
-			} else {
-				// Opening: set open attribute, measure scrollHeight, and transition to it
-				item.open = true;
-				item.classList.add('is-open');
-				answerWrapper.style.maxHeight = '0px';
-				
-				requestAnimationFrame(() => {
-					answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
-				});
+                if (isOpen) {
+                    // Closing: set explicit height first, force reflow, then transition to 0
+                    answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
+                    requestAnimationFrame(() => {
+                        answerWrapper.style.maxHeight = "0px";
+                    });
+                    item.classList.remove("is-open");
 
-				// Clear max-height after transition so content can resize naturally if window changes
-				setTimeout(() => {
-					if (item.open) {
-						answerWrapper.style.maxHeight = 'none';
-					}
-				}, 300);
-			}
-		};
+                    // Remove 'open' after transition finishes
+                    setTimeout(() => {
+                        if (!item.classList.contains("is-open")) {
+                            item.open = false;
+                        }
+                    }, 300); // Matches CSS transition duration
+                } else {
+                    // Opening: set open attribute, measure scrollHeight, and transition to it
+                    item.open = true;
+                    item.classList.add("is-open");
+                    answerWrapper.style.maxHeight = "0px";
 
-		summary.addEventListener('click', toggleFaq);
+                    requestAnimationFrame(() => {
+                        answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
+                    });
 
-		// Hover events if enabled
-		if (isHover) {
-			item.addEventListener('mouseenter', () => {
-				if (!item.open) {
-					item.open = true;
-					item.classList.add('is-open');
-					answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
-					setTimeout(() => { answerWrapper.style.maxHeight = 'none'; }, 300);
-				}
-			});
-			item.addEventListener('mouseleave', () => {
-				if (item.open) {
-					answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
-					requestAnimationFrame(() => {
-						answerWrapper.style.maxHeight = '0px';
-					});
-					item.classList.remove('is-open');
-					setTimeout(() => {
-						if (!item.classList.contains('is-open')) {
-							item.open = false;
-						}
-					}, 300);
-				}
-			});
-		}
-	});
+                    // Clear max-height after transition so content can resize naturally if window changes
+                    setTimeout(() => {
+                        if (item.open) {
+                            answerWrapper.style.maxHeight = "none";
+                        }
+                    }, 300);
+                }
+            };
+
+            summary.addEventListener("click", toggleFaq);
+
+            // Hover events if enabled
+            if (isHover) {
+                item.addEventListener("mouseenter", () => {
+                    if (!item.open) {
+                        item.open = true;
+                        item.classList.add("is-open");
+                        answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
+                        setTimeout(() => {
+                            answerWrapper.style.maxHeight = "none";
+                        }, 300);
+                    }
+                });
+                item.addEventListener("mouseleave", () => {
+                    if (item.open) {
+                        answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
+                        requestAnimationFrame(() => {
+                            answerWrapper.style.maxHeight = "0px";
+                        });
+                        item.classList.remove("is-open");
+                        setTimeout(() => {
+                            if (!item.classList.contains("is-open")) {
+                                item.open = false;
+                            }
+                        }, 300);
+                    }
+                });
+            }
+        });
 </script>
 
 <style>
-	.faq__item {
-		background-color: var(--bg-primary);
-		color: var(--text-primary);
-		font-family: var(--font-primary);
-		border-bottom: 2px solid var(--bg-alt);
-	}
+    .faq__item {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: var(--font-primary);
+        border-bottom: 2px solid var(--bg-alt);
+    }
 
-	.faq__item:first-child {
-		border-top: 2px solid var(--bg-alt);
-	}
+    .faq__item:first-child {
+        border-top: 2px solid var(--bg-alt);
+    }
 
-	.faq__summary {
-		position: relative;
-		padding: var(--spacing-sm) calc(var(--spacing-sm) + 1.5rem) var(--spacing-sm) var(--spacing-xs);
-		font-weight: 600;
-		line-height: 1.5;
-		cursor: pointer;
-		list-style: none;
-		border-radius: var(--border-radius);
-		transition: background-color var(--transition-speed), color var(--transition-speed);
-	}
+    .faq__summary {
+        position: relative;
+        padding: var(--spacing-sm) calc(var(--spacing-sm) + 1.5rem)
+            var(--spacing-sm) var(--spacing-xs);
+        font-weight: 600;
+        line-height: 1.5;
+        cursor: pointer;
+        list-style: none;
+        border-radius: var(--border-radius);
+        transition:
+            background-color var(--transition-speed),
+            color var(--transition-speed);
+    }
 
-	.faq__summary:hover {
-		background-color: var(--bg-alt);
-		color: var(--theme-primary);
-	}
+    .faq__summary:hover {
+        background-color: var(--bg-alt);
+        color: var(--theme-primary);
+    }
 
-	.faq__summary::-webkit-details-marker {
-		display: none;
-	}
+    .faq__summary::-webkit-details-marker {
+        display: none;
+    }
 
-	.faq__summary::after {
-		position: absolute;
-		top: 50%;
-		right: var(--spacing-xs);
-		content: '+';
-		color: var(--theme-primary);
-		font-size: 1.4rem;
-		line-height: 1;
-		transform: translateY(-50%);
-		transition: transform var(--transition-speed), color var(--transition-speed);
-	}
+    .faq__summary::after {
+        position: absolute;
+        top: 50%;
+        right: var(--spacing-xs);
+        content: "+";
+        color: var(--theme-primary);
+        font-size: 1.4rem;
+        line-height: 1;
+        transform: translateY(-50%);
+        transition:
+            transform var(--transition-speed),
+            color var(--transition-speed);
+    }
 
-	.faq__summary:hover::after {
-		color: var(--theme-light);
-	}
+    .faq__summary:hover::after {
+        color: var(--theme-light);
+    }
 
-	.faq__item[open] .faq__summary::after {
-		content: '−';
-	}
+    .faq__item[open] .faq__summary::after {
+        content: "−";
+    }
 
-	.faq__summary:focus-visible {
-		outline: 2px solid var(--theme-primary);
-		outline-offset: 2px;
-	}
+    .faq__summary:focus-visible {
+        outline: 2px solid var(--theme-primary);
+        outline-offset: 2px;
+    }
 
-	/* Wrapper handling smooth max-height transition */
-	.faq__answer-wrapper {
-		max-height: 0;
-		overflow: hidden;
-		transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-	}
+    /* Wrapper handling smooth max-height transition */
+    .faq__answer-wrapper {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+            max-height 0.3s ease-in-out,
+            opacity 0.3s ease-in-out;
+    }
 
-	.faq__item[open] .faq__answer-wrapper {
-		max-height: 500px; /* Fallback max-height during open transition */
-	}
+    .faq__item[open] .faq__answer-wrapper {
+        max-height: 500px; /* Fallback max-height during open transition */
+    }
 
-	.faq__answer {
-		padding: 0 var(--spacing-sm) var(--spacing-sm) var(--spacing-xs);
-		color: var(--text-primary);
-		opacity: 0.85;
-		line-height: 1.7;
-	}
+    .faq__answer {
+        padding: 0 var(--spacing-sm) var(--spacing-sm) var(--spacing-xs);
+        color: var(--text-primary);
+        opacity: 0.85;
+        line-height: 1.7;
+    }
 
-	.faq__answer :global(p:first-child) {
-		margin-top: 0;
-	}
+    .faq__answer :global(p:first-child) {
+        margin-top: 0;
+    }
 
-	.faq__answer :global(p:last-child) {
-		margin-bottom: 0;
-	}
+    .faq__answer :global(p:last-child) {
+        margin-bottom: 0;
+    }
 
-	/* Animation variations */
-	.faq--anim-expend .faq__answer-wrapper {
-		transition: max-height 0.3s ease-in-out;
-	}
+    /* Animation variations */
+    .faq--anim-expend .faq__answer-wrapper {
+        transition: max-height 0.3s ease-in-out;
+    }
 
-	.faq--anim-fade .faq__answer-wrapper {
-		transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-		opacity: 0;
-	}
-	.faq__item[open].faq--anim-fade .faq__answer-wrapper {
-		opacity: 0.85;
-	}
+    .faq--anim-fade .faq__answer-wrapper {
+        transition:
+            max-height 0.3s ease-in-out,
+            opacity 0.3s ease-in-out;
+        opacity: 0;
+    }
+    .faq__item[open].faq--anim-fade .faq__answer-wrapper {
+        opacity: 0.85;
+    }
 
-	.faq--anim-none .faq__answer-wrapper {
-		transition: none;
-	}
+    .faq--anim-none .faq__answer-wrapper {
+        transition: none;
+    }
 </style>
