@@ -41,10 +41,10 @@ const {
 } = Astro.props;
 
 // Get domain from Astro config (with fallback placeholder)
-const domain = Astro.site ? Astro.site.href : "https://raystudio.net";
+const domain = Astro.site ? Astro.site.href : "https://rayzhi.me";
 
 // Combine domain with slug and image path
-const canonicalURL = new URL(slug, "https://www.raystudio.net").href;
+const canonicalURL = new URL(slug, domain).href;
 const image = new URL(imagePath, domain).href;
 
 // Standard variables

@@ -9,7 +9,8 @@ function getSiteUrl() {
     if (!domain) {
         return 'http://localhost:2237/';
     }
-    return domain.startsWith('http') ? domain : `https://${domain}`;
+    const url = domain.startsWith('http') ? domain : `https://${domain}`;
+    return url.endsWith('/') ? url : `${url}/`;
 }
 
 export default defineConfig({
