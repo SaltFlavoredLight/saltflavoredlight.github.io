@@ -190,3 +190,30 @@ export async function generateSitemap({
 
   return buildTree(entries);
 }
+
+// Add this new function to your existing lib/sitemap.js
+export async function getFlatSiteEntries({
+  excludedRoutes = EXCLUDED_ROUTES,
+} = {}) {
+  const pageModules = import.meta.glob(
+    "/src/pages/**/*.{astro,md,mdx,html}",
+    { eager: true, query: "?raw", import: "default" }
+  );
+
+  const pages = Object.entries(pageModules)
+    .map(([file, source]) => {
+      const path = normalizePath(file);
+      const title = extractTitle(source, path);
+
+      return {
+        title,
+        path,
+        type: "page",
+        description: `Explore content for ${title}`,
+      };
+    })
+    .filter((page) => !isExcluded(page.path, excludedRoutes));
+
+  pages.sort((a, b) => a.path.localeCompare(b.path));
+  return pages;
+}
