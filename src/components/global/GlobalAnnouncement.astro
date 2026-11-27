@@ -1,23 +1,124 @@
 ---
-// just setup the script
+import "#src/styles/main.css";
+import "#src/styles/themes.css";
 ---
-<div>
-</div>
+
+<aside class="global-announcement" aria-label="Site announcement">
+    <svg
+        class="announcement-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+    >
+        <path d="M11,17h2V11H11v6Zm1.71-8.29Q13,8.42 13,8q0-0.43-0.29-0.71T12,7T11.29,7.29T11,8q0,0.42 0.29,0.71T12,9t0.71-0.29ZM12,22q-2.07,0-3.9-0.79q-1.82-0.79-3.17-2.14Q3.58,17.73 2.79,15.9T2,12Q2,9.92 2.79,8.1Q3.58,6.27 4.93,4.93Q6.28,3.57 8.1,2.79Q9.93,2 12,2t3.9,0.79t3.17,2.14q1.35,1.35 2.14,3.17Q22,9.92 22,12t-0.79,3.9t-2.14,3.17q-1.35,1.35-3.17,2.14T12,22Zm0-2q3.35,0 5.68-2.32T20,12T17.68,6.32T12,4T6.33,6.32T4,12t2.33,5.68T12,20Zm0-8Z" />
+    </svg>
+    <p class="announcement-message">Welcome!</p>
+    <a class="announcement-link" href="/moving-from-old-domain" hidden>
+        Learn more
+    </a>
+    <button
+        class="announcement-dismiss"
+        type="button"
+        aria-label="Dismiss announcement"
+    >
+        <span aria-hidden="true">&times;</span>
+    </button>
+</aside>
 
 <script>
-  // Wait until the DOM is loaded
-  document.addEventListener("DOMContentLoaded", function() {
-  	// 1. Check if URL contains ?from=raystudio.net
-  	const urlParams = new URLSearchParams(window.location.search);
-  	if (urlParams.has("from")) {
-  		const fromValue = urlParams.get("from");
-  		if (fromValue === "raystudio.net") {
-  			// 2. Replace the .text inside #globalAnnouncement
-  			const announceText = document.getElementById("globalAnnouncement").querySelector(".text");
-  			if (announceText) {
-  				announceText.textContent = "You are redirected here because you visited my older domain, please keep in mind that raystudio.net will be unavailable soon.";
-  			}
-  		}
-  	}
-  });
+    const announcement = document.querySelector<HTMLElement>(
+        ".global-announcement",
+    );
+
+    if (announcement) {
+        const message = announcement.querySelector(".announcement-message");
+        const link = announcement.querySelector<HTMLAnchorElement>(
+            ".announcement-link",
+        );
+        const dismissButton = announcement.querySelector<HTMLButtonElement>(
+            ".announcement-dismiss",
+        );
+        const source = new URLSearchParams(window.location.search).get("utm_source");
+
+        if (source === "raystudio.net" && message && link) {
+            message.textContent =
+                "You are redirected here because you visited my older domain, which will soon be unavailable.";
+            link.hidden = false;
+        }
+
+        dismissButton?.addEventListener("click", () => {
+            announcement.remove();
+        });
+    }
 </script>
+
+<style>
+    .global-announcement {
+        position: fixed;
+        z-index: 1000;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: var(--theme-primary);
+        color: var(--bg-primary);
+        box-shadow: 0 0 20px var(--text-primary);
+    }
+
+    .announcement-icon {
+        flex: 0 0 1.5rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: currentColor;
+    }
+
+    .announcement-message {
+        flex: 1;
+        margin: 0;
+    }
+
+    .announcement-link {
+        color: inherit;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+    }
+
+    .announcement-link:hover {
+        color: var(--bg-primary);
+        opacity: 0.8;
+    }
+
+    .announcement-dismiss {
+        display: grid;
+        flex: 0 0 2.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        place-items: center;
+        border: 1px solid currentColor;
+        border-radius: var(--border-radius);
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        font: inherit;
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+
+    .announcement-link:focus-visible,
+    .announcement-dismiss:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 3px;
+    }
+
+    @media (max-width: 600px) {
+        .global-announcement {
+            gap: var(--spacing-xs);
+            padding: var(--spacing-sm);
+        }
+    }
+</style>
