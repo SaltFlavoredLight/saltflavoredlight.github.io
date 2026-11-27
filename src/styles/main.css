@@ -808,3 +808,7 @@ select:focus-visible {
 }
 
 /* #endregion */
+.hidden {
+    display: none !important;
+}
+/* #endregion */
