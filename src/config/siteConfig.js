@@ -60,7 +60,7 @@ export const siteConfig = {
     ],
 
     globalAnnouncement: {
-        message: "We just Moved to New Website!",
+        message: "I just published New Website! thank you for your support!",
         link: "/moving-from-old-website",
         updatedAt: Math.round(Date.now() / 60_000) * 60_000,
     },
