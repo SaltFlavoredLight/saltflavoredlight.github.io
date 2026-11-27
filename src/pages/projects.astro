@@ -1,23 +1,29 @@
 ---
 import PageLayout from "#layouts/PageLayout.astro";
-
 import CardLink from "#components/element/CardLink.astro";
+import { getFlatSiteEntries } from "#lib/sitemap.js";
 
-const allPosts = (
-    Object.entries(
-    import.meta.glob("./labs/*.astro", {
-        eager: true,
-    }),
-    ) as [string, { metadata: { title: string; description: string } }][]
-).map(([path, module]) => ({
-    ...module.metadata,
-    href: path.replace("./labs", "/labs").replace(".astro", ""),
-}));
+// Fetch all entries from your sitemap utility
+const rawEntries = await getFlatSiteEntries({
+    includeCollections: true,
+    collections: ["labs", "math"], 
+});
+
+// Filter to ONLY include sub-pages under /labs/* and /math/* 
+// (excluding /labs/ and /math/ root pages, and all other site pages)
+const allPosts = rawEntries.filter(post => {
+    const path = post.path;
+
+    const isLabsSubpage = path.startsWith("/labs/") && path !== "/labs/";
+    const isMathSubpage = path.startsWith("/math/") && path !== "/math/";
+
+    return isLabsSubpage || isMathSubpage;
+});
 ---
 
-<PageLayout title="All Projects" description="List of my woks." slug="/">
+<PageLayout title="All Projects" description="List of my works." slug="/">
 
-    <p>Welcome! this is library of the works!</p>
+    <p>Welcome! This is the library of my works!</p>
     <p>Here you can find my digital works, and I will keep updating this page with new works.</p>
     
     <hr>
@@ -26,11 +32,10 @@ const allPosts = (
         <CardLink
             noBottomMargin={true}
             title={post.title}
-            href={post.href}
+            href={post.path}
         >
             {post.description}
         </CardLink>
     ))}
 
-    
 </PageLayout>
