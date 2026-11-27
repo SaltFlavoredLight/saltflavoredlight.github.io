@@ -47,7 +47,10 @@ export const siteConfig = {
     // 8. Header Tree
     pageTree: [
         { title: "About Me", href: "/about/" },
-    ]
+    ],
 
-    
+    globalAnnouncement: {
+        message: "We just Moved to New Website!",
+        link: "/moving-from-old-website",
+    },
 };

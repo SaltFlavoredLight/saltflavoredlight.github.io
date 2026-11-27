@@ -1,9 +1,27 @@
 ---
 import "#src/styles/main.css";
 import "#src/styles/themes.css";
+import { siteConfig } from "#src/config/siteConfig.js";
+
+const oldWebsiteAnnouncement = {
+    source: "raystudio.net",
+    message:
+        "Hello! You are redirected here because you visited my older domain. Please note RayStudio.net will be unavailable soon.",
+    link: "/moving-from-old-domain",
+};
 ---
 
-<aside class="global-announcement" aria-label="Site announcement">
+<aside
+    class="global-announcement"
+    aria-label="Site announcement"
+    aria-hidden="true"
+    data-old-source={oldWebsiteAnnouncement.source}
+    data-old-message={oldWebsiteAnnouncement.message}
+    data-old-link={oldWebsiteAnnouncement.link}
+    data-global-message={siteConfig.globalAnnouncement.message}
+    data-global-link={siteConfig.globalAnnouncement.link}
+    hidden
+>
     <svg
         class="announcement-icon"
         xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +31,7 @@ import "#src/styles/themes.css";
         <path d="M11,17h2V11H11v6Zm1.71-8.29Q13,8.42 13,8q0-0.43-0.29-0.71T12,7T11.29,7.29T11,8q0,0.42 0.29,0.71T12,9t0.71-0.29ZM12,22q-2.07,0-3.9-0.79q-1.82-0.79-3.17-2.14Q3.58,17.73 2.79,15.9T2,12Q2,9.92 2.79,8.1Q3.58,6.27 4.93,4.93Q6.28,3.57 8.1,2.79Q9.93,2 12,2t3.9,0.79t3.17,2.14q1.35,1.35 2.14,3.17Q22,9.92 22,12t-0.79,3.9t-2.14,3.17q-1.35,1.35-3.17,2.14T12,22Zm0-2q3.35,0 5.68-2.32T20,12T17.68,6.32T12,4T6.33,6.32T4,12t2.33,5.68T12,20Zm0-8Z" />
     </svg>
     <p class="announcement-message">Welcome!</p>
-    <a class="announcement-link" href="/moving-from-old-domain" hidden>
+    <a class="announcement-link" href="#" hidden>
         Learn more
     </a>
     <button
@@ -31,24 +49,70 @@ import "#src/styles/themes.css";
     );
 
     if (announcement) {
-        const message = announcement.querySelector(".announcement-message");
+        const messageElement = announcement.querySelector(
+            ".announcement-message",
+        );
         const link = announcement.querySelector<HTMLAnchorElement>(
             ".announcement-link",
         );
         const dismissButton = announcement.querySelector<HTMLButtonElement>(
             ".announcement-dismiss",
         );
-        const source = new URLSearchParams(window.location.search).get("utm_source");
+        const oldSource = announcement.dataset.oldSource?.trim() ?? "";
+        const requestedSource = new URLSearchParams(
+            window.location.search,
+        ).get("utm_source");
+        const isOldWebsiteVisitor =
+            oldSource !== "" && requestedSource === oldSource;
+        const message = (
+            isOldWebsiteVisitor
+                ? announcement.dataset.oldMessage
+                : announcement.dataset.globalMessage
+        )?.trim() ?? "";
+        const href = (
+            isOldWebsiteVisitor
+                ? announcement.dataset.oldLink
+                : announcement.dataset.globalLink
+        )?.trim() ?? "";
 
-        if (source === "raystudio.net" && message && link) {
-            message.textContent =
-                "You are redirected here because you visited my older domain, which will soon be unavailable.";
+        if (
+            message &&
+            href &&
+            messageElement &&
+            link &&
+            dismissButton
+        ) {
+            messageElement.textContent = message;
+            link.href = href;
             link.hidden = false;
-        }
+            announcement.hidden = false;
+            announcement.setAttribute("aria-hidden", "false");
 
-        dismissButton?.addEventListener("click", () => {
-            announcement.remove();
-        });
+            requestAnimationFrame(() => {
+                announcement.classList.add("is-visible");
+            });
+
+            let isClosing = false;
+            const closeAnnouncement = () => {
+                if (isClosing) return;
+                isClosing = true;
+                announcement.setAttribute("aria-hidden", "true");
+                announcement.classList.remove("is-visible");
+                window.setTimeout(() => {
+                    announcement.hidden = true;
+                }, 300);
+            };
+
+            const autoCloseTimer = window.setTimeout(
+                closeAnnouncement,
+                20000, // 20 seconds
+            );
+
+            dismissButton.addEventListener("click", () => {
+                window.clearTimeout(autoCloseTimer);
+                closeAnnouncement();
+            });
+        }
     }
 </script>
 
@@ -67,6 +131,22 @@ import "#src/styles/themes.css";
         background: var(--theme-primary);
         color: var(--bg-primary);
         box-shadow: 0 0 20px var(--text-primary);
+        opacity: 0;
+        transform: translateY(100%);
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+            transform 300ms ease,
+            opacity 300ms ease,
+            visibility 0s linear 300ms;
+    }
+
+    .global-announcement.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+        pointer-events: auto;
+        transition-delay: 0s;
     }
 
     .announcement-icon {
@@ -79,6 +159,7 @@ import "#src/styles/themes.css";
     .announcement-message {
         flex: 1;
         margin: 0;
+        color: var(--bg-primary);
     }
 
     .announcement-link {
@@ -119,6 +200,12 @@ import "#src/styles/themes.css";
         .global-announcement {
             gap: var(--spacing-xs);
             padding: var(--spacing-sm);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .global-announcement {
+            transition-duration: 0.01ms;
         }
     }
 </style>
