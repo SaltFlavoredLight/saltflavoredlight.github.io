@@ -1,0 +1,261 @@
+---
+import "#src/styles/main.css";
+import "#src/styles/themes.css";
+
+import PageLayout from "#src/layouts/PageLayout.astro";
+import Section from "#src/components/Section.astro";
+import Card from "#src/components/element/Card.astro";
+import Group from "#src/components/element/Group.astro";
+import Button from "#src/components/element/Button.astro";
+import YouTube from "#src/components/element/YouTube.astro";
+import CardLink from "#src/components/element/CardLink.astro";
+import HStack from "#src/components/element/HStack.astro";
+import C169 from "#src/components/C169.astro";
+import Figure from "#src/components/element/Figure.astro";
+
+import codeImage from "#src/assets/code.png";
+
+const description =
+    "A Website About Ray. Hi! This is Ray and I love to share something! you are welcome to my website!";
+
+    
+export const metadata = {
+    title: "Postfix and Prefix Calculator",
+    description: "An interactive postfix and prefix calculator.",
+};
+---
+
+<PageLayout
+    title="Postfix and Prefix Calculator"
+    description={description}
+    slug="/"
+>
+
+    <p><strong>Enter your Postfix form or prefix form here.</strong> <br> Make sure you enter space between each token! like "3 3 +" not "33+"</p>
+    <input type="text" id="tokenInput" />
+    <br />
+
+    <Group>
+        <label for="checkReverse">
+            <input type="radio" id="checkReverse" name="whichOne" />
+            Prefix Form
+        </label>
+        <label for="checkNotReverse">
+            <input type="radio" id="checkNotReverse" checked name="whichOne" />
+            Postfix Form
+        </label>
+    </Group>
+
+    <Button jsid="startButton" noBottomMargin="false">Start</Button>
+    
+    <hr />
+
+    <div class="stackThinking" id="stack">
+        <div>1</div>
+    </div>
+
+    <table id="table">
+        <tr>
+            <th>Token</th>
+            <th>Calculation Needed</th>
+            <th>Snapshot of the Stack</th>
+        </tr>
+    </table>
+
+    <hr />
+
+    <p>
+        This code is an interactive educational lab designed to visualize how
+        computers parse and evaluate mathematical expressions using a{" "}
+        <strong>Stack</strong> data structure and{" "}
+        <strong>Reverse Polish Notation (RPN)</strong>, also known as Postfix
+        notation.
+    </p>
+</PageLayout>
+
+<style>
+    :global(.stackThinking) {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        border: 1px solid #212121;
+        width: 100%;
+        margin-bottom: var(--spacing-md);
+    }
+
+    :global(.stackThinking div) {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        border-right: 1px solid #212121;
+        height: 50px;
+        min-width: 50px;
+        justify-content: center;
+        font-size: 25px;
+    }
+
+    /*
+    :global(#table th), 
+    :global(#table td) {
+        padding: 0 var(--spacing-md);
+    }
+    */
+</style>
+
+<script>
+    const input = document.getElementById("tokenInput") as HTMLInputElement;
+    const table = document.getElementById("table") as HTMLTableElement;
+    const stackListElement = document.getElementById("stack") as HTMLElement;
+    const checkReverse = document.getElementById(
+        "checkReverse",
+    ) as HTMLInputElement;
+
+    let tokenList: string[] = [];
+    let stackInstance: stackGroup;
+    let timeoutId: number | null = null;
+
+    class stackGroup {
+        stack: number[];
+        stackList: HTMLElement;
+
+        constructor(stackListElement: HTMLElement) {
+            if (!(stackListElement instanceof HTMLElement)) {
+                throw new Error("stackListElement must be a valid DOM element");
+            }
+            this.stack = [];
+            this.stackList = stackListElement;
+        }
+
+        pop(): number | null {
+            if (this.stack.length === 0) {
+                console.warn("Stack is empty. Nothing to pop.");
+                return null;
+            }
+            const result = this.stack.pop();
+            this.updateHTML();
+            return result !== undefined ? result : null;
+        }
+
+        push(token: number): void {
+            this.stack.push(token);
+            this.updateHTML();
+        }
+
+        updateHTML(): void {
+            this.stackList.innerHTML = "";
+            this.stack.forEach((value: number) => {
+                const newDiv = document.createElement("div");
+                newDiv.textContent = value.toString();
+                this.stackList.appendChild(newDiv);
+            });
+        }
+    }
+
+    function init(): void {
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+            timeoutId = null;
+        }
+
+        stackInstance = new stackGroup(stackListElement);
+
+        table.innerHTML = `
+            <tr>
+                <th>Token</th>
+                <th>Snapshot of the Stack</th>
+            </tr>`;
+
+        stackListElement.innerHTML = ``;
+
+        const rawValue = input.value.trim();
+        tokenList = rawValue === "" ? [] : rawValue.split(/\s+/);
+
+        if (checkReverse.checked === true) {
+            tokenList = tokenList.toReversed();
+        }
+    }
+
+    function calculateEachStep(): void {
+        if (tokenList.length === 0) {
+            return;
+        }
+
+        const token = tokenList.shift();
+        if (!token) return;
+
+        let a: number | null;
+        let b: number | null;
+
+        if (token === "+") {
+            if (checkReverse.checked) {
+                a = stackInstance.pop();
+                b = stackInstance.pop();
+            } else {
+                b = stackInstance.pop();
+                a = stackInstance.pop();
+            }
+            if (a !== null && b !== null) stackInstance.push(a + b);
+        } else if (token === "-") {
+            if (checkReverse.checked) {
+                a = stackInstance.pop();
+                b = stackInstance.pop();
+            } else {
+                b = stackInstance.pop();
+                a = stackInstance.pop();
+            }
+            if (a !== null && b !== null) stackInstance.push(a - b);
+        } else if (token === "^") {
+            if (checkReverse.checked) {
+                a = stackInstance.pop();
+                b = stackInstance.pop();
+            } else {
+                b = stackInstance.pop();
+                a = stackInstance.pop();
+            }
+            // Using ** for exponentiation
+            if (a !== null && b !== null) stackInstance.push(a ** b);
+        } else if (token === "*") {
+            if (checkReverse.checked) {
+                a = stackInstance.pop();
+                b = stackInstance.pop();
+            } else {
+                b = stackInstance.pop();
+                a = stackInstance.pop();
+            }
+            if (a !== null && b !== null) stackInstance.push(a * b);
+        } else if (token === "/") {
+            if (checkReverse.checked) {
+                a = stackInstance.pop();
+                b = stackInstance.pop();
+            } else {
+                b = stackInstance.pop();
+                a = stackInstance.pop();
+            }
+            if (a !== null && b !== null) stackInstance.push(a / b);
+        } else {
+            stackInstance.push(parseFloat(token));
+        }
+
+        const snapshot = stackInstance.stack;
+
+        const newLog = document.createElement("tr");
+        newLog.innerHTML = `
+            <td>${token}</td>
+            <td>${JSON.stringify([...snapshot].reverse())}</td>
+        `;
+        table.appendChild(newLog);
+
+        timeoutId = window.setTimeout(calculateEachStep, 1000);
+    }
+
+    function startCalculation(): void {
+        init();
+        calculateEachStep();
+    }
+
+    const startButton = document.getElementById("startButton");
+    if (startButton) {
+        startButton.addEventListener("click", startCalculation);
+    }
+</script>

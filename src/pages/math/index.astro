@@ -1,0 +1,34 @@
+---
+import "#src/styles/main.css";
+import "#src/styles/themes.css";
+import "#src/styles/game.css";
+import PageLayout from "#src/layouts/PageLayout.astro";
+import CardLink from "#src/components/element/CardLink.astro";
+---
+
+<PageLayout
+    title="Math Quizzes"
+    description="Practice addition, multiplication, and quadratic equations."
+    slug="/math-game"
+>
+    <p class="text-center">
+        Choose a interative and train one math skill at a time.
+    </p>
+    <CardLink title="Addition Speed Run" href="/math/add/" theme="middle">
+        <p>Add pairs of numbers before time runs out.</p>
+    </CardLink>
+
+    <CardLink title="Multiple Solver Testing" href="/math/multiplication/" theme="middle">
+        <p>Practice multiplication across four difficulty levels.</p>
+    </CardLink>
+
+    <CardLink
+        title="Quadratic Equation Solver"
+        href="/math/sqaure/"
+        theme="middle"
+    >
+        <p>Find both roots of a quadratic equation.</p>
+    </CardLink>
+    <hr>
+    <p>(You Mean all of my projects include labs? Please visit <a href="/labs">Here</a>) there also have <a href="/math/original">Original Version</a></p>
+</PageLayout>

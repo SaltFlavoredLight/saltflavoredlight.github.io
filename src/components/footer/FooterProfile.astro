@@ -3,28 +3,42 @@ import "#src/styles/main.css";
 import "#src/styles/themes.css";
 
 
-import { siteConfig } from '#src/config/siteConfig.js';
+import { siteConfig } from '#config/siteConfig.js';
 
-import logo from "#src/assets/logo.png";
+import logo from "#assets/logo.png";
 import { Image } from "astro:assets";
+import HomeButton from "#components/site/HomeButtons.astro";
 ---
 
 <div class="site-info">
-    <Image alt="Ray's Avatar" src={logo} class="avatar" />
-    <h2>{siteConfig.footerTitle}</h2>
-    <p>{siteConfig.aboutMessageShort}</p>
+    <div class="profile-link">
+        <Image alt="Ray's Avatar" src={logo} class="avatar" />
+        <h2>{siteConfig.footerTitle}</h2>
+        <p>{siteConfig.aboutMessageShort}</p>
+    </div>
+    <hr>
+    <HomeButton />
 </div>
 
 <style>
-    a {
+    .site-info {
+        width: 100%;
+        max-width: 550px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background: var(--theme-primary);
+    }
+
+    .profile-link {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
         background: var(--theme-primary);
         color: var(--bg-primary);
         margin: 0;
         font: inherit;
-    }
-
-    a:hover {
-        color: var(--text-primary);
+        text-decoration: none;
     }
 
     p,
@@ -35,12 +49,11 @@ import { Image } from "astro:assets";
         padding: 0;
     }
 
-
-    div {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
+    hr {
+        width: 100%;
+        background-color: var(--bg-primary);
+        opacity: 0.35;
+        margin: var(--spacing-sm) 0;
     }
 
     .avatar {
@@ -54,8 +67,10 @@ import { Image } from "astro:assets";
 
     
     @media (max-width: 800px) {
-        div {
+        .site-info,
+        .profile-link {
             align-items: center;
+            text-align: center;
         }
     }
 </style>

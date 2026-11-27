@@ -4,6 +4,7 @@ import "#src/styles/themes.css";
 
 import SiteHeader from "#src/components/header/SiteHeader.astro";
 import SiteFooter from "#src/components/footer/SiteFooter.astro";
+import GlobalAnnouncement from "#src/components/global/GlobalAnnouncement.astro";
 
 // All 9 mathematical combinations of Header & Footer states
 type SiteLayout =
@@ -105,7 +106,7 @@ switch (pageLayout) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <!-- Favicon / Site Icon -->
-        <link rel="icon" href={iconURL} />
+        <link rel="icon" href={iconURL} type="image/x-icon">
 
         <!-- SEO Meta Tags -->
         <title>{title} | Rayzhi</title>
@@ -120,7 +121,7 @@ switch (pageLayout) {
         <meta property="og:url" content={canonicalURL} />
     </head>
     <body class={bodyClass}>
-        <!-- Header Rendering Logic -->
+        <!-- Header Logic -->
         {
             headerState === "full" && (
                 <SiteHeader landing={false} singlePage={pageLayout} />
@@ -136,7 +137,7 @@ switch (pageLayout) {
             <slot />
         </main>
 
-        <!-- Footer Rendering Logic -->
+        <!-- Footer Logic -->
         {
             footerState === "full" && (
                 <SiteFooter landing={false} singlePage={pageLayout} />
@@ -147,14 +148,23 @@ switch (pageLayout) {
                 <SiteFooter landing={true} singlePage={pageLayout} />
             )
         }
+        <GlobalAnnouncement />
     </body>
 </html>
 
 <style>
+    :global(body) {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
     main {
         padding: var(--spacing-md) var(--spacing-lg);
         margin: 0 auto;
         max-width: var(--page-max-width);
+        width: 100%;
+        flex: 1;
     }
 
     @media (max-width: 600px) {

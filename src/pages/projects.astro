@@ -1,0 +1,48 @@
+---
+import PageLayout from "#layouts/PageLayout.astro";
+import CardLink from "#components/element/CardLink.astro";
+import HStack from "#components/element/HStack.astro";
+import { getFlatSiteEntries } from "#lib/sitemap.js";
+
+// Fetch all entries from your sitemap utility
+const rawEntries = await getFlatSiteEntries();
+
+// Filter to ONLY include sub-pages under /labs/* and /math/* 
+// (excluding /labs/ and /math/ root pages, and all other site pages)
+const allPosts = rawEntries.filter(post => {
+    const path = post.path;
+
+    const isLabsSubpage = path.startsWith("/labs/") && path !== "/labs/";
+    const isMathSubpage = path.startsWith("/math/") && path !== "/math/";
+
+    return isLabsSubpage || isMathSubpage;
+});
+---
+
+<PageLayout title="All Projects" description="List of my woks." slug="/">
+    <p>Welcome! this is library of the works!</p>
+    <p>
+        Here you can find my digital works, and I will keep updating this page
+        with new works.
+    </p>
+
+    <hr />
+
+    <HStack
+        gap="md"
+        mode="grid"
+        columns={[1, 1]}
+        fullWidth={true}
+        forceStretch={false}
+    >
+    {allPosts.map((post) => (
+        <CardLink
+            noBottomMargin={true}
+            title={post.title}
+            href={post.path}
+        >
+            {post.description}
+        </CardLink>
+    ))}
+    </HStack>
+</PageLayout>

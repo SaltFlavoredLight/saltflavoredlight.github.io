@@ -1,0 +1,272 @@
+---
+import "#src/styles/main.css";
+import "#src/styles/themes.css";
+import "#src/styles/game.css";
+import PageLayout from "#src/layouts/PageLayout.astro";
+import Button from "#src/components/element/Button.astro";
+---
+
+<PageLayout
+    title="Multiple Solver Testing"
+    description="A timed multiplication challenge."
+    slug="/math-game/MSTG/"
+>
+    <section id="settings" class="game-panel">
+        <h2>Select a mode</h2>
+        <div class="game-options">
+            <Button
+                class="game-button mode-button"
+                data-mode="simple"
+                type="button"
+            >
+                Simple (1 x 1)
+            </Button>
+            <Button
+                class="game-button mode-button"
+                data-mode="normal"
+                type="button"
+            >
+                Normal (1 x 2)
+            </Button>
+            <Button
+                class="game-button mode-button"
+                data-mode="classic"
+                type="button"
+            >
+                Classic (1 x 3)
+            </Button>
+            <Button
+                class="game-button mode-button"
+                data-mode="hard"
+                type="button"
+            >
+                Hard (2 x 2)
+            </Button>
+        </div>
+        <h3>Select a duration</h3>
+        <div class="game-options">
+            {[30, 60, 90, 120, 180, 300].map((seconds) => (
+                <Button
+                    class="game-button time-button"
+                    data-time={seconds}
+                    type="button"
+                >
+                    {seconds}s
+                </Button>
+            ))}
+            <Button class="game-button time-button" data-time="0" type="button">
+                Until wrong
+            </Button>
+        </div>
+        <p id="modeConfirmation">Choose a mode and duration to begin.</p>
+        <div class="game-actions">
+            <Button id="startGame" class="game-button" type="button">
+                Start game
+            </Button>
+        </div>
+    </section>
+
+    <section id="gameArea" class="game-panel hidden">
+        <h2 id="gameHeading">Solve as many problems as possible</h2>
+        <div class="game-scoreboard">
+            <span>
+                <span id="timeMeaning">Time left:</span>{" "}
+                <strong id="timer">90</strong>
+            </span>
+            <span>
+                Score: <strong id="score">0</strong>
+            </span>
+        </div>
+        <p id="problem" class="game-problem">
+            2 * 3 = ?
+        </p>
+        <div class="game-answer">
+            <input id="answer1" type="number" placeholder="Your answer" />
+            <Button id="submit" class="game-button" type="button">
+                Submit
+            </Button>
+        </div>
+        <p id="resultMessage" class="game-result" aria-live="polite"></p>
+    </section>
+
+    <section id="finalScoreScreen" class="game-panel hidden">
+        <h2 id="endTitle">Time's up</h2>
+        <p>Your score</p>
+        <p id="finalScore" class="game-final-score">
+            0
+        </p>
+        <p>
+            Play time: <span id="playTime"></span>
+        </p>
+        <p>
+            Play mode: <span id="playMode"></span>
+        </p>
+        <Button id="restartGame" class="game-button" type="button">
+            Play again
+        </Button>
+    </section>
+
+    <hr>
+        <h2>How to play</h2>
+        <p>
+            Multiply the two numbers displayed, enter the answer, and submit it
+            with Enter or the button.
+        </p>
+        <h2>About Multiple Solver Testing</h2>
+        <p>
+            Build multiplication speed with increasingly larger factors. Choose
+            a timed round or continue until the first wrong answer.
+        </p>
+        <div class="game-mode-grid">
+            <div class="game-mode-card">
+                <h3>Simple</h3>
+                <p>1-digit by 1-digit.</p>
+            </div>
+            <div class="game-mode-card">
+                <h3>Normal</h3>
+                <p>1-digit by 2-digit.</p>
+            </div>
+            <div class="game-mode-card">
+                <h3>Classic</h3>
+                <p>1-digit by 3-digit.</p>
+            </div>
+            <div class="game-mode-card">
+                <h3>Hard</h3>
+                <p>2-digit by 2-digit.</p>
+            </div>
+        </div>
+</PageLayout>
+
+<script>
+    // @ts-nocheck
+    let mode = "";
+    let selectedTime = -1;
+    let score = 0;
+    let a = 0;
+    let b = 0;
+    let timerInterval;
+
+    const settings = document.getElementById("settings");
+    const instructions = document.getElementById("howToPlayScreen");
+    const gameArea = document.getElementById("gameArea");
+    const finalScreen = document.getElementById("finalScoreScreen");
+    const answerInput = document.getElementById("answer1");
+    const resultMessage = document.getElementById("resultMessage");
+
+    document.querySelectorAll(".mode-button").forEach((button) =>
+        button.addEventListener("click", () => {
+            document
+                .querySelectorAll(".mode-button")
+                .forEach((item) => item.classList.remove("selected"));
+            button.classList.add("selected");
+            mode = button.dataset.mode;
+            document.getElementById("modeConfirmation").textContent =
+                `Selected mode: ${mode}`;
+        }),
+    );
+
+    document.querySelectorAll(".time-button").forEach((button) =>
+        button.addEventListener("click", () => {
+            document
+                .querySelectorAll(".time-button")
+                .forEach((item) => item.classList.remove("selected"));
+            button.classList.add("selected");
+            selectedTime = Number(button.dataset.time);
+            document.getElementById("modeConfirmation").textContent =
+                `Selected mode: ${mode || "not chosen"} | Duration: ${selectedTime === 0 ? "until wrong" : `${selectedTime} seconds`}`;
+        }),
+    );
+
+    function randomBetween(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function generateProblem() {
+        if (mode === "simple") {
+            a = randomBetween(1, 10);
+            b = randomBetween(1, 10);
+        } else if (mode === "normal") {
+            a = randomBetween(1, 10);
+            b = randomBetween(10, 100);
+        } else if (mode === "classic") {
+            a = randomBetween(1, 10);
+            b = randomBetween(100, 1000);
+        } else {
+            a = randomBetween(10, 100);
+            b = randomBetween(10, 100);
+        }
+        document.getElementById("problem").textContent = `${a} * ${b} = ?`;
+    }
+
+    function showFinal(reason) {
+        clearInterval(timerInterval);
+        document.getElementById("finalScore").textContent = String(score);
+        document.getElementById("playTime").textContent =
+            `${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} ${new Date().toLocaleDateString()}`;
+        document.getElementById("playMode").textContent =
+            selectedTime === 0
+                ? `${mode}, until wrong`
+                : `${mode}, ${selectedTime}s`;
+        document.getElementById("endTitle").textContent = reason;
+        gameArea.classList.add("hidden");
+        finalScreen.classList.remove("hidden");
+    }
+
+    function startGame() {
+        if (!mode) return alert("Please choose a mode.");
+        if (selectedTime === -1) return alert("Please choose a duration.");
+        clearInterval(timerInterval);
+        score = 0;
+        document.getElementById("score").textContent = "0";
+        settings.classList.add("hidden");
+        finalScreen.classList.add("hidden");
+        gameArea.classList.remove("hidden");
+        document.getElementById("timeMeaning").textContent =
+            selectedTime === 0 ? "Time passed:" : "Time left:";
+        document.getElementById("gameHeading").textContent =
+            selectedTime === 0
+                ? "Solve correctly until your first mistake"
+                : `Solve as many problems as possible in ${selectedTime} seconds`;
+        let timeValue = selectedTime === 0 ? 0 : selectedTime;
+        document.getElementById("timer").textContent = `${timeValue}s`;
+        timerInterval = setInterval(() => {
+            timeValue += selectedTime === 0 ? 1 : -1;
+            document.getElementById("timer").textContent = `${timeValue}s`;
+            if (selectedTime !== 0 && timeValue === 0) showFinal("Time's up");
+        }, 1000);
+        generateProblem();
+        answerInput.focus();
+    }
+
+    document.getElementById("startGame").addEventListener("click", startGame);
+
+    function submitAnswer() {
+        const answer = Number(answerInput.value);
+        if (answer === a * b) {
+            score++;
+            document.getElementById("score").textContent = String(score);
+            resultMessage.textContent = "Correct";
+            resultMessage.className = "game-result success";
+        } else {
+            resultMessage.textContent = `Wrong. The answer was ${a * b}`;
+            resultMessage.className = "game-result error";
+            if (selectedTime === 0) showFinal("Your first answer was wrong");
+        }
+        answerInput.value = "";
+        answerInput.focus();
+        generateProblem();
+        setTimeout(() => {
+            resultMessage.textContent = "";
+            resultMessage.className = "game-result";
+        }, 1800);
+    }
+
+    document.getElementById("submit").addEventListener("click", submitAnswer);
+    answerInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") submitAnswer();
+    });
+    document.getElementById("restartGame").addEventListener("click", () => {
+        finalScreen.classList.add("hidden");
+        settings.classList.remove("hidden");
+    });
+</script>

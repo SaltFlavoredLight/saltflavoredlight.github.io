@@ -1,27 +1,60 @@
 ---
-interface Props {
-    /** The main title displayed at the top of the card */
-    href: string;
+import type { HTMLAttributes } from 'astro/types';
 
-    /** (optional) what's the button's style? Support general, fill, border, text and bg */
+// Extend HTMLAttributes for both anchor and button elements
+interface Props extends HTMLAttributes<'button'>, Omit<HTMLAttributes<'a'>, 'type'> {
+    /** (optional) The destination URL. If provided, renders as an <a> tag. */
+    href?: string;
+
+    /** (optional) The button's style format: general, fill, border, text, or bg */
     format?: string;
+
+    jsid?: string;
+
+    noBottomMargin?: boolean | "true" | "false";
 }
 
 import "#src/styles/main.css";
 import "#src/styles/themes.css";
 
+const {
+    href,
+    format = "fill",
+    jsid,
+    id,
+    class: className,
+    noBottomMargin = true,
+    ...attributes
+} = Astro.props;
 
-const { href = "/", format = "fill" } = Astro.props;
+const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
 
-const finalStyle = `btn-${format}`;
+const finalStyle =
+    `btn-${format}` + (isNoBottomMargin ? " no-bottom-margin" : "");
 ---
 
-<a href={href} class={finalStyle}>
-    <slot />
-</a>
+{href ? (
+    <a
+        {...attributes}
+        href={href}
+        class:list={[finalStyle, className]}
+        id={id ?? jsid}
+    >
+        <slot />
+    </a>
+) : (
+    <button
+        {...attributes}
+        class:list={[finalStyle, className]}
+        id={id ?? jsid}
+    >
+        <slot />
+    </button>
+)}
 
 <style>
     .btn-general {
+        font-size: unset;
         background-color: transparent;
         color: inherit;
         font-weight: 600;
@@ -32,6 +65,7 @@ const finalStyle = `btn-${format}`;
         border-radius: var(--border-radius);
         transition: all var(--transition-speed);
         text-decoration: none;
+        margin-bottom: var(--spacing-xs);
     }
 
     .btn-general:hover {
@@ -42,6 +76,7 @@ const finalStyle = `btn-${format}`;
 
     /* Style 1: Fill Color Button */
     .btn-fill {
+        font-size: unset;
         background-color: var(--theme-primary);
         color: #ffffff;
         font-weight: 600;
@@ -52,6 +87,7 @@ const finalStyle = `btn-${format}`;
         border-radius: var(--border-radius);
         transition: all var(--transition-speed);
         text-decoration: none;
+        margin-bottom: var(--spacing-xs);
     }
 
     .btn-fill:hover {
@@ -61,6 +97,7 @@ const finalStyle = `btn-${format}`;
 
     /* Style 2: Border Button */
     .btn-border {
+        font-size: unset;
         background-color: transparent;
         color: var(--text-primary);
         font-weight: 600;
@@ -71,6 +108,7 @@ const finalStyle = `btn-${format}`;
         border-radius: var(--border-radius);
         transition: all var(--transition-speed);
         text-decoration: none;
+        margin-bottom: var(--spacing-xs);
     }
 
     .btn-border:hover {
@@ -81,6 +119,7 @@ const finalStyle = `btn-${format}`;
 
     /* Style 3: Text-Only Button */
     .btn-text {
+        font-size: unset;
         background-color: transparent;
         color: var(--theme-primary);
         font-weight: 600;
@@ -91,6 +130,7 @@ const finalStyle = `btn-${format}`;
         border-radius: var(--border-radius);
         transition: all var(--transition-speed);
         text-decoration: none;
+        margin-bottom: var(--spacing-xs);
     }
 
     .btn-text:hover {
@@ -100,6 +140,7 @@ const finalStyle = `btn-${format}`;
     }
 
     .btn-bg {
+        font-size: unset;
         background-color: transparent;
         color: inherit;
         font-weight: 600;
@@ -111,11 +152,16 @@ const finalStyle = `btn-${format}`;
         transition: all var(--transition-speed);
         text-decoration: none;
         white-space: nowrap;
+        margin-bottom: var(--spacing-xs);
     }
 
     .btn-bg:hover {
         color: var(--text-primary);
         background-color: var(--bg-primary);
         border: 2px solid var(--bg-primary);
+    }
+
+    .no-bottom-margin {
+        margin-bottom: 0px;
     }
 </style>

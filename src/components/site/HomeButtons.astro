@@ -1,0 +1,16 @@
+---
+import "#src/styles/main.css";
+import "#src/styles/themes.css";
+
+import Button from "#components/element/Button.astro";
+import HStack from "#components/element/HStack.astro";
+---
+
+<HStack mode="grid" fullWidth gap="xs" noBottomMargin>
+    <Button href="/" format="bg" noBottomMargin="false">
+        Home Page
+    </Button>
+    <Button href="/sitemap" format="bg" noBottomMargin="false">
+        View Sitemap
+    </Button>
+</HStack>

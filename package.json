@@ -37,7 +37,8 @@
         "#assets/*": "./src/assets/*",
         "#layouts/*": "./src/layouts/*",
         "#public/*": "./public/*",
-        "#config/*": "./src/config/*"
+        "#config/*": "./src/config/*",
+        "#lib/*": "./src/lib/*"
     },
     "engines": {
         "node": ">=22.23.4"

@@ -6,6 +6,9 @@ interface Props {
     /** Layout mode: Flex row (space-between) or Grid */
     mode?: "flex" | "grid";
 
+    /** Column weight proportions for grid mode, e.g., [1, 1] or [1, 2, 1] */
+    columns?: number[];
+
     /** Force 100% width across the container */
     fullWidth?: boolean;
 
@@ -18,6 +21,7 @@ interface Props {
 const {
     gap = "md",
     mode = "grid",
+    columns,
     noBottomMargin = false,
     fullWidth = false,
     forceStretch = true,
@@ -25,20 +29,29 @@ const {
 
 const isNoBottomMargin = (noBottomMargin === true || noBottomMargin === "true");
 
+// Map numeric array [1, 2, 1] to CSS fr units -> "1fr 2fr 1fr"
+const gridTemplateColumns = columns && columns.length > 0
+    ? columns.map((val) => `${val}fr`).join(" ")
+    : undefined;
+
 // Clean class builder
 const className = [
     "layout-row",
     gap ? `gap-${gap}` : "",
     `mode-${mode}`,
     fullWidth ? "full-width" : "",
-    !isNoBottomMargin ? `has-margin` : ` `,
-    forceStretch ? "force-stretch" : ""
+    !isNoBottomMargin ? `has-margin` : "",
+    forceStretch ? "force-stretch" : "",
+    columns && columns.length > 0 ? "has-custom-columns" : ""
 ]
     .filter(Boolean)
     .join(" ");
 ---
 
-<div class={className}>
+<div 
+    class={className} 
+    style={gridTemplateColumns ? `--custom-grid-cols: ${gridTemplateColumns};` : undefined}
+>
     <slot />
 </div>
 
@@ -81,7 +94,6 @@ const className = [
         align-items: stretch;
     }
 
-    /* Ensure children inside flex stretch handle content properly */
     .layout-row.mode-flex.force-stretch > * {
         height: auto;
     }
@@ -90,6 +102,11 @@ const className = [
     .layout-row.mode-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    /* Dynamic column track injection via CSS variable */
+    .layout-row.mode-grid.has-custom-columns {
+        grid-template-columns: var(--custom-grid-cols);
     }
 
     .layout-row.mode-grid.force-stretch {
@@ -108,7 +125,6 @@ const className = [
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
-            gap: 0;
         }
     }
 
