@@ -1,0 +1,126 @@
+---
+interface FAQItem {
+	question: string;
+	answer: string;
+}
+
+interface Props {
+	title?: string;
+	description?: string;
+	items?: FAQItem[];
+}
+
+const {
+	title = 'Frequently asked questions',
+	description = 'Find answers to common questions.',
+	items = [],
+} = Astro.props;
+---
+
+<section class="faq" id="faq" aria-labelledby="faq-title">
+	<div class="faq__content">
+		<header class="faq__header">
+			<p class="faq__eyebrow">FAQ</p>
+			<h2 id="faq-title">{title}</h2>
+			<p class="faq__description">{description}</p>
+		</header>
+
+		<div class="faq__list">
+			{items.length > 0 ? (
+				items.map(({ question, answer }) => (
+					<details class="faq__item">
+						<summary>{question}</summary>
+						<p>{answer}</p>
+					</details>
+				))
+			) : (
+				<p class="faq__empty">FAQ entries will appear here.</p>
+			)}
+		</div>
+	</div>
+</section>
+
+<style>
+	.faq {
+		padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+	}
+
+	.faq__content {
+		width: min(100%, 48rem);
+		margin-inline: auto;
+	}
+
+	.faq__header {
+		margin-bottom: 2rem;
+	}
+
+	.faq__eyebrow {
+		margin: 0 0 0.5rem;
+		color: var(--color-accent, #7657d5);
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.faq h2 {
+		margin: 0;
+		font-size: clamp(2rem, 5vw, 3rem);
+		line-height: 1.1;
+	}
+
+	.faq__description,
+	.faq__empty {
+		color: var(--color-muted, #666);
+		line-height: 1.6;
+	}
+
+	.faq__description {
+		margin: 0.75rem 0 0;
+	}
+
+	.faq__item {
+		border-bottom: 1px solid var(--color-border, #ddd);
+	}
+
+	.faq__item:first-child {
+		border-top: 1px solid var(--color-border, #ddd);
+	}
+
+	.faq__item summary {
+		position: relative;
+		padding: 1.25rem 2rem 1.25rem 0;
+		font-weight: 600;
+		line-height: 1.5;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.faq__item summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq__item summary::after {
+		position: absolute;
+		top: 50%;
+		right: 0.25rem;
+		content: '+';
+		font-size: 1.4rem;
+		transform: translateY(-50%);
+	}
+
+	.faq__item[open] summary::after {
+		content: '−';
+	}
+
+	.faq__item summary:focus-visible {
+		outline: 2px solid var(--color-accent, #7657d5);
+		outline-offset: 4px;
+	}
+
+	.faq__item > p {
+		margin: -0.25rem 1.5rem 1.25rem 0;
+		color: var(--color-muted, #666);
+		line-height: 1.7;
+	}
+</style>
