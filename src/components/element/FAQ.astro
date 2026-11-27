@@ -1,0 +1,220 @@
+---
+interface Props {
+    title: string;
+    theme?: string;
+    onHover?: boolean | "true" | "false";
+    animation?: "none" | "expend" | "fade";
+}
+
+import "#src/styles/main.css";
+import "#src/styles/themes.css";
+
+const { title, theme, onHover = false, animation = "expend" } = Astro.props;
+
+const isHoverEnabled = onHover === true || onHover === "true";
+---
+
+<details
+    class={`faq__item faq--anim-${animation}`}
+    data-theme={theme}
+    data-on-hover={isHoverEnabled ? "true" : undefined}
+>
+    <summary class="faq__summary">{title}</summary>
+    <div class="faq__answer-wrapper">
+        <div class="faq__answer">
+            <slot />
+        </div>
+    </div>
+</details>
+
+<script>
+    document
+        .querySelectorAll<HTMLDetailsElement>(".faq__item")
+        .forEach((item) => {
+            const summary = item.querySelector(".faq__summary");
+            const answerWrapper = item.querySelector(
+                ".faq__answer-wrapper",
+            ) as HTMLElement;
+            const isHover = item.getAttribute("data-on-hover") === "true";
+
+            if (!summary || !answerWrapper) return;
+
+            if (item.open) {
+                answerWrapper.style.maxHeight = "none";
+            }
+
+            const toggleFaq = (e: Event) => {
+                e.preventDefault();
+
+                const isOpen = item.open;
+
+                if (isOpen) {
+                    answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
+                    requestAnimationFrame(() => {
+                        answerWrapper.style.maxHeight = "0px";
+                    });
+                    item.classList.remove("is-open");
+
+                    setTimeout(() => {
+                        if (!item.classList.contains("is-open")) {
+                            item.open = false;
+                        }
+                    }, 300);
+                } else {
+                    item.open = true;
+                    item.classList.add("is-open");
+                    answerWrapper.style.maxHeight = "0px";
+
+                    requestAnimationFrame(() => {
+                        answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
+                    });
+
+                    setTimeout(() => {
+                        if (item.open) {
+                            answerWrapper.style.maxHeight = "none";
+                        }
+                    }, 300);
+                }
+            };
+
+            summary.addEventListener("click", toggleFaq);
+
+            if (isHover) {
+                item.addEventListener("mouseenter", () => {
+                    if (!item.open) {
+                        item.open = true;
+                        item.classList.add("is-open");
+                        answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
+                        setTimeout(() => {
+                            answerWrapper.style.maxHeight = "none";
+                        }, 300);
+                    }
+                });
+                item.addEventListener("mouseleave", () => {
+                    if (item.open) {
+                        answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
+                        requestAnimationFrame(() => {
+                            answerWrapper.style.maxHeight = "0px";
+                        });
+                        item.classList.remove("is-open");
+                        setTimeout(() => {
+                            if (!item.classList.contains("is-open")) {
+                                item.open = false;
+                            }
+                        }, 300);
+                    }
+                });
+            }
+        });
+</script>
+
+<style>
+    .faq__item {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        border-bottom: 2px solid var(--bg-alt);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+    }
+
+    .faq__item:first-child {
+        border-top: 2px solid var(--bg-alt);
+    }
+
+    .faq__summary {
+        position: relative;
+        padding: var(--spacing-xs) calc(var(--spacing-sm) + 1.5rem)
+            var(--spacing-xs) var(--spacing-xs);
+        font-weight: 600;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        cursor: pointer;
+        list-style: none;
+        border-radius: var(--border-radius);
+        transition:
+            background-color var(--transition-speed),
+            color var(--transition-speed);
+    }
+
+    .faq__summary:hover {
+        background-color: var(--bg-alt);
+        color: var(--theme-primary);
+    }
+
+    .faq__summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq__summary::after {
+        position: absolute;
+        top: 50%;
+        right: var(--spacing-xs);
+        content: "+";
+        color: var(--theme-primary);
+        font-size: 1.4rem;
+        line-height: 1;
+        transform: translateY(-50%);
+        transition:
+            transform var(--transition-speed),
+            color var(--transition-speed);
+    }
+
+    .faq__summary:hover::after {
+        color: var(--theme-light);
+    }
+
+    .faq__item[open] .faq__summary::after {
+        content: "−";
+    }
+
+    .faq__summary:focus-visible {
+        outline: 2px solid var(--theme-primary);
+        outline-offset: 2px;
+    }
+
+    .faq__answer-wrapper {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+            max-height var(--transition-speed) ease-in-out,
+            opacity var(--transition-speed) ease-in-out;
+    }
+
+    .faq__item[open] .faq__answer-wrapper {
+        max-height: 500px;
+    }
+
+    .faq__answer {
+        padding: var(--spacing-sm);
+        color: var(--text-primary);
+        opacity: 0.85;
+        line-height: 1.7;
+    }
+
+    .faq__answer :global(p:first-child) {
+        margin-top: 0;
+    }
+
+    .faq__answer :global(p:last-child) {
+        margin-bottom: 0;
+    }
+
+    .faq--anim-expend .faq__answer-wrapper {
+        transition: max-height var(--transition-speed) ease-in-out;
+    }
+
+    .faq--anim-fade .faq__answer-wrapper {
+        transition:
+            max-height var(--transition-speed) ease-in-out,
+            opacity var(--transition-speed) ease-in-out;
+        opacity: 0;
+    }
+
+    .faq__item[open].faq--anim-fade .faq__answer-wrapper {
+        opacity: 0.85;
+    }
+
+    .faq--anim-none .faq__answer-wrapper {
+        transition: none;
+    }
+</style>
