@@ -39,32 +39,28 @@ const isHoverEnabled = onHover === true || onHover === "true";
 
             if (!summary || !answerWrapper) return;
 
-            // Set initial max-height if already open on load
             if (item.open) {
                 answerWrapper.style.maxHeight = "none";
             }
 
             const toggleFaq = (e: Event) => {
-                e.preventDefault(); // Prevent instant native toggle so we can animate
+                e.preventDefault();
 
                 const isOpen = item.open;
 
                 if (isOpen) {
-                    // Closing: set explicit height first, force reflow, then transition to 0
                     answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
                     requestAnimationFrame(() => {
                         answerWrapper.style.maxHeight = "0px";
                     });
                     item.classList.remove("is-open");
 
-                    // Remove 'open' after transition finishes
                     setTimeout(() => {
                         if (!item.classList.contains("is-open")) {
                             item.open = false;
                         }
-                    }, 300); // Matches CSS transition duration
+                    }, 300);
                 } else {
-                    // Opening: set open attribute, measure scrollHeight, and transition to it
                     item.open = true;
                     item.classList.add("is-open");
                     answerWrapper.style.maxHeight = "0px";
@@ -73,7 +69,6 @@ const isHoverEnabled = onHover === true || onHover === "true";
                         answerWrapper.style.maxHeight = `${answerWrapper.scrollHeight}px`;
                     });
 
-                    // Clear max-height after transition so content can resize naturally if window changes
                     setTimeout(() => {
                         if (item.open) {
                             answerWrapper.style.maxHeight = "none";
@@ -84,7 +79,6 @@ const isHoverEnabled = onHover === true || onHover === "true";
 
             summary.addEventListener("click", toggleFaq);
 
-            // Hover events if enabled
             if (isHover) {
                 item.addEventListener("mouseenter", () => {
                     if (!item.open) {
@@ -118,8 +112,9 @@ const isHoverEnabled = onHover === true || onHover === "true";
     .faq__item {
         background-color: var(--bg-primary);
         color: var(--text-primary);
-        font-family: var(--font-primary);
         border-bottom: 2px solid var(--bg-alt);
+        border-radius: var(--border-radius);
+        overflow: hidden;
     }
 
     .faq__item:first-child {
@@ -128,9 +123,10 @@ const isHoverEnabled = onHover === true || onHover === "true";
 
     .faq__summary {
         position: relative;
-        padding: var(--spacing-sm) calc(var(--spacing-sm) + 1.5rem)
-            var(--spacing-sm) var(--spacing-xs);
+        padding: var(--spacing-xs) calc(var(--spacing-sm) + 1.5rem)
+            var(--spacing-xs) var(--spacing-xs);
         font-weight: 600;
+        font-size: 1.1rem;
         line-height: 1.5;
         cursor: pointer;
         list-style: none;
@@ -176,21 +172,20 @@ const isHoverEnabled = onHover === true || onHover === "true";
         outline-offset: 2px;
     }
 
-    /* Wrapper handling smooth max-height transition */
     .faq__answer-wrapper {
         max-height: 0;
         overflow: hidden;
         transition:
-            max-height 0.3s ease-in-out,
-            opacity 0.3s ease-in-out;
+            max-height var(--transition-speed) ease-in-out,
+            opacity var(--transition-speed) ease-in-out;
     }
 
     .faq__item[open] .faq__answer-wrapper {
-        max-height: 500px; /* Fallback max-height during open transition */
+        max-height: 500px;
     }
 
     .faq__answer {
-        padding: 0 var(--spacing-sm) var(--spacing-sm) var(--spacing-xs);
+        padding: var(--spacing-sm);
         color: var(--text-primary);
         opacity: 0.85;
         line-height: 1.7;
@@ -204,17 +199,17 @@ const isHoverEnabled = onHover === true || onHover === "true";
         margin-bottom: 0;
     }
 
-    /* Animation variations */
     .faq--anim-expend .faq__answer-wrapper {
-        transition: max-height 0.3s ease-in-out;
+        transition: max-height var(--transition-speed) ease-in-out;
     }
 
     .faq--anim-fade .faq__answer-wrapper {
         transition:
-            max-height 0.3s ease-in-out,
-            opacity 0.3s ease-in-out;
+            max-height var(--transition-speed) ease-in-out,
+            opacity var(--transition-speed) ease-in-out;
         opacity: 0;
     }
+
     .faq__item[open].faq--anim-fade .faq__answer-wrapper {
         opacity: 0.85;
     }
