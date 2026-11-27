@@ -1,44 +1,11 @@
-# Welcome to my New Website!
+# Welcome to my New Website
 
-This is Ray's new website, as a project for lean Astro.
+This is Ray's new website, as part of 15h birthday website launch.
 
-## 🚀 Project Structure
+New Website Domains! Please checkout `I cannot tell you right now` and `saltflavoredlight.github.io` for the new website!
 
-Should be like this.
+## Easter Eggs?
 
-```text
-/
-├── dist/
-│
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-> When publish, make sure you are using `main` branch at `dist`
-
-
-## 🧞 Cheat Sheet (commands)
-
-Quick Cheat Sheet (in case I forgot):
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## Easter eggs?
-Try to find it, it may just right in `robots.txt`
+1. check `/src/pages` and you get the map, see if you can find a page that don't exist on sitemap!
+2. a easter egg message about Catholic
+3. and more is designing!

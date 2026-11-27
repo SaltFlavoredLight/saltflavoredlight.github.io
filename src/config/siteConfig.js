@@ -57,5 +57,10 @@ export const siteConfig = {
         { title: "About Me", href: "/about/" },
         { title: "Projects", href: "/projects/" },
         { title: "Youtube", href: "/youtube/" },
-    ]
+    ],
+
+    globalAnnouncement: {
+        message: "We just Moved to New Website!",
+        link: "/moving-from-old-website",
+    },
 };
