@@ -1,6 +1,7 @@
 ---
 import PageLayout from "#layouts/PageLayout.astro";
 import CardLink from "#components/element/CardLink.astro";
+import HStack from "#components/element/HStack.astro";
 import { getFlatSiteEntries } from "#lib/sitemap.js";
 
 // Fetch all entries from your sitemap utility
@@ -21,21 +22,26 @@ const allPosts = rawEntries.filter(post => {
 });
 ---
 
-<PageLayout title="All Projects" description="List of my works." slug="/">
+<PageLayout title="All Projects" description="List of my woks." slug="/">
+    <p>Welcome! this is library of the works!</p>
+    <p>
+        Here you can find my digital works, and I will keep updating this page
+        with new works.
+    </p>
 
-    <p>Welcome! This is the library of my works!</p>
-    <p>Here you can find my digital works, and I will keep updating this page with new works.</p>
-    
-    <hr>
+    <hr />
 
-    {allPosts.map((post) => (
-        <CardLink
-            noBottomMargin={true}
-            title={post.title}
-            href={post.path}
-        >
-            {post.description}
-        </CardLink>
-    ))}
-
+    <HStack
+        gap="md"
+        mode="grid"
+        columns={[1, 1]}
+        fullWidth={true}
+        forceStretch={false}
+    >
+        {allPosts.map((post) => (
+            <CardLink noBottomMargin={true} title={post.title} href={post.href}>
+                {post.description}
+            </CardLink>
+        ))}
+    </HStack>
 </PageLayout>
