@@ -1,0 +1,151 @@
+/* all color: red ff5733, blue 0077ff, green 28a745 gold:FFD700 purple 6A0DAD another 198573*/
+/* let everything is same */
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    color: #000000;
+    /* padding: 30px; */
+}
+        
+button {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 13px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    transition-duration: 0.4s;
+}
+        
+input {
+    margin: 15px;
+    padding: 14px;
+    font-size: 20px;
+    width: 250px;
+    border: 3px solid #28a745;
+    border-radius: 5px;
+    text-align: center;
+}
+        
+.hidden {
+    display: none;
+}
+        
+/* for the Mode Selection */
+#title {
+    font-weight: bold;
+    font-size: 48px;
+    font-family: serif;            
+}
+        
+#startGame { 
+    background-color: #28a745; 
+    color: white; 
+    width: 200px;
+}
+
+#howToPlayButton {
+    background-color: #0077ff; 
+    color: white; 
+}
+
+/* for: how to play?*/
+        
+/* for the main Game */
+#problem {
+    font-size: 44px;
+    font-weight: bold;
+    color: #0077ff;
+    padding: 20px;
+    border: 6px solid #0077ff;
+    border-radius: 12px;
+    background-color: white;
+}
+
+#timer {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff5733;
+}           
+        
+#score {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff5733;
+}
+
+#submit {
+	background-color: #28a745;
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* now for score page */
+#finalScoreScreen {
+    margin-top: 15px; 
+    padding: 5px;
+    border: 3px solid #ff5733;
+    background-color: #fff3f3;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+    
+#finalScore {
+    font-size: 60px; /* Large font for score */
+    color: #6A0DAD;
+    font-weight: bold;
+}
+
+.nav-links {
+    text-align: right;
+    flex: 1;
+    padding-right: 40px; /* Moves the right text fully to the edge */
+}
+
+a {
+    color: #ADD8E6; /* Light blue */
+	text-decoration: none; /* Removes underline if desired */
+}
+
+a:hover {
+	color: #87CEFA; /* Slightly darker blue when hovered */
+}
+
+.top-banner {
+    position: fixed;
+    height: 40px;
+    top: calc(100% - 70px);
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    color: white;
+    margin: 0;
+}
+
+.top-banner img {
+    height: 28px;
+    width: auto;
+}
+
+.top-banner a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 10px;
+}
+
+#youtube {
+    color: #FF0000;
+}
