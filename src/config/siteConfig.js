@@ -66,4 +66,5 @@ export const siteConfig = {
     },
 
     theme: "rose", // check between 5 themes: "rose", "green", "blue", "gold", "purple"
+    darkmode: false, // true or false
 };

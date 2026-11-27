@@ -33,7 +33,7 @@ interface Props {
 const {
     title,
     themeColor = siteConfig.theme || "rose",
-    darkMode = false,
+    darkMode = siteConfig.darkmode || false,
     description = "A Website About Ray. Hi! This is Ray and I love to share something!",
     slug = "/", // Slug input (e.g. "/about" or "")
     imagePath = "/cover.png", // Image path relative to your domain
