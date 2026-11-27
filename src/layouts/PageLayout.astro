@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 
+import { siteConfig } from "#src/config/siteConfig.js";
+
 type SiteLayout =
     | "full"
     | "landing"
@@ -30,8 +32,8 @@ const content = Astro.props.frontmatter || Astro.props;
 
 const {
     title = "Untitled Page",
-    themeColor = "rose",
-    darkMode = false,
+    themeColor = siteConfig.theme || "rose",
+    darkMode = siteConfig.darkmode || false,
     description = "A Website About Ray. Hi! This is Ray and I love to share something!",
     slug = "/",
     imagePath = "/cover.png",

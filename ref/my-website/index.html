@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>link tree of Rayzhi</title>
+    <!-- OG and X -->
+    <meta name="google-site-verification" content="ItFreJJJUERiC44OxgD1KLxVNBJFXybHSHvoIjH9H80" />
+    <meta property="og:url" content="https://rayzhi1130.surge.sh">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ray Studio 1130 -- Rayzhi">
+    <meta property="og:description"
+        content="Welcome! Share something I want. hello, this is Ray, and I'm like Art, Codings, Music and Math! PS: I'm a Christian">
+    <meta property="og:image" content="">
+    <!-- style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --background-color: #FFDE59;
+            --theme-color-button: #FFECA1;
+            --theme-color-button-hover: #FFE684;
+            --theme-color-border: #F4C301;
+            --theme-color-border-hover: #FDCB03;
+            --theme-color-text: #000000;
+            --theme-color-text-hover: #393838;
+            --theme-color-popup: #F6E4A2;
+        }
+
+        /* you can change theme */
+        .green-theme {
+            --background-color: #89EAC6;
+            --theme-color-button: #14C483;
+            --theme-color-button-hover: #0AEE9B;
+            --theme-color-border: #3E8D70;
+            --theme-color-border-hover: #5AC09B;
+            --theme-color-text: #000000;
+            --theme-color-text-hover: #566D65;
+            --theme-color-popup: #BCEAD9;
+        }
+
+        .red-theme {
+            --background-color: #EE8C8C;
+            --theme-color-button: #9D9FA6;
+            --theme-color-button-hover: #DBDBDC;
+            --theme-color-border: #3F434C;
+            --theme-color-border-hover: #666666;
+            --theme-color-text: #555;
+            --theme-color-text-hover: #566D65;
+            --theme-color-popup: #F1B5B5;
+        }
+
+        .gray-theme {
+            --background-color: #CBC8C8;
+            --theme-color-button: #77777B;
+            --theme-color-button-hover: #4D4D51;
+            --theme-color-border: #999;
+            --theme-color-border-hover: #313132;
+            --theme-color-text: #AAA;
+            --theme-color-text-hover: #FFF;
+            --theme-color-popup: #A1A1A1;
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0px;
+            background-color: var(--background-color);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* now for menu */
+        .head {
+            margin-top: 40px;
+            max-width: var(--max-width);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .icon img {
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+
+
+        /* for links */
+        .banners {
+            display: grid;
+            width: 100%;
+            max-width: 600px;
+            padding: 16px;
+        }
+
+        .banner {
+            color: var(--theme-color-text);
+            width: 600px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            height: 82px;
+            padding: 16px;
+
+            border-radius: 41px;
+            border: 6px solid var(--theme-color-border);
+            background-color: var(--theme-color-button);
+            transition: border 0.7s ease, box-shadow 0.7s ease, color 0.7s ease, background-color 0.7s ease, transform 0.7s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            /*testing*/
+            margin: 10px;
+        }
+
+        @media (max-width: 660px) {
+            .banner {
+                width: calc(100vw - 70px);
+            }
+        }
+
+        .banner:not(.banner-disable-hover):hover {
+            color: var(--theme-color-text-hover);
+            /* box-shadow: 0 0 0px var(--theme-color-border); */
+            /* box-shadow: 0 0 10px var(--theme-color-border); */
+            border: 6px solid var(--theme-color-border-hover);
+            background-color: var(--theme-color-button-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .banner-left,
+        .banner-right {
+            width: 50px;
+            text-align: center;
+        }
+
+        .banner-left img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .banner-text {
+            flex: 1;
+            text-align: center;
+        }
+
+
+        /* for link-extend */
+        /* that called grid icon editor, use that to accses that... */
+        .r2-grids {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .r2-grid {
+            width: 290px;
+        }
+
+        /* also has 3... */
+        .r3-grids {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .r3-grid {
+            width: 187px;
+        }
+
+
+        @media (max-width: 660px) {
+            .r2-grid {
+                width: calc(49vw - 40px);
+            }
+
+            /* also has 3... */
+            .r3-grids {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .r3-grid {
+                width: calc(30vw - 18px);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .r2-grids {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .r2-grid {
+                width: calc(100vw - 70px);
+            }
+
+            /* also has 3... */
+            .r3-grids {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .r3-grid {
+                width: calc(49vw - 40px);
+            }
+        }
+
+        @media (max-width: 350px) {
+            .r3-grids {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .r3-grid {
+                width: calc(100vw - 70px);
+            }
+        }
+
+
+
+
+        /* do you want a pop up window??? */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+
+        .popup-content {
+            transform: translateY(100px);
+            /* Start pushed down */
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            background: var(--theme-color-popup);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+            width: 600px;
+
+            max-height: 80vh;
+            /* Adjust height as needed */
+            overflow-y: auto;
+        }
+
+        @media (max-width: 600px) {
+            .popup-content {
+                width: calc(100vw);
+            }
+        }
+
+        .popup-overlay.active {
+            display: flex;
+            /* only show when popup is open */
+        }
+
+        .popup-overlay.active .popup-content {
+            transform: translateY(0);
+            /* Slide up into view */
+            opacity: 1;
+        }
+
+        /* pop up close button */
+        .popup-close-button {
+            background-color: var(--theme-color-button);
+            border: 2px solid var(--theme-color-border);
+            color: var(--theme-color-text);
+            padding: 6px 6px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .popup-close-button:hover {
+            background-color: var(--theme-color-button-hover);
+            border-color: var(--theme-color-border-hover);
+            color: var(--theme-color-text-hover);
+        }
+
+        .popup-close-button.gray-color {
+            background-color: #e0e0e0;
+            border: 2px solid #a8a8a8;
+            color: #333333;
+        }
+
+        .popup-close-button.gray-color:hover {
+            background-color: #d5d5d5;
+            border-color: #8f8f8f;
+            color: #000000;
+        }
+
+        /* OH there is the footer... */
+        footer {
+            font-size: 14px;
+            background-color: #333;
+            color: #FFF;
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- for the website... -->
+    <div class="head">
+        <div class="icon">
+            <img src="/images/Icon.webp" alt="Rayzhi's Icon">
+        </div>
+        <h1 style="font-weight: 900;"> Rayzhi </h1>
+        <p>Share something I want. <br>
+            hello, this is Ray, and I'm like Art, Codings, Music and Math!<br>
+            <span>PS: I'm a Christian</span>
+        </p>
+    </div>
+
+    <div class="banners">
+        <a href="/school" target="_blank" class="banner">
+            <div class="banner-left">
+            </div>
+            <div class="banner-text"> Please Fill out the form! </div>
+            <div class="banner-right"> </div>
+        </a>
+
+        <div class="banner banner-disable-hover" style="height: 350px;">
+            <iframe width="100%" height="300"
+                src="https://www.youtube.com/embed/moL1-jPVKEU?si=HMrzGIX2gt01foQZ&amp;start=94"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <hr>
+    <h3> There have some playable you can do with </h3>
+
+    <div class="banner">
+        <a href="/mini-prefix" target="_blank" class="banner">
+            <div class="banner-left">
+            </div>
+            <div class="banner-text"> See how Postfix work! </div>
+            <div class="banner-right"> </div>
+        </a>
+    </div>
+
+    <hr>
+    <h3> do you want to play math game? </h3>
+
+    <div class="banners">
+        <a href="/math-game/QESG" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/math.svg" alt="math symbol">
+            </div>
+            <div class="banner-text"> Quadratic Equation Solving Game </div>
+            <div class="banner-right"> </div>
+        </a>
+
+        <a href="/math-game/MSTG" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/abacus.svg" alt="abacus">
+            </div>
+            <div class="banner-text"> Mutiple Slover Testing Game </div>
+            <div class="banner-right"> </div>
+        </a>
+
+
+        <a href="/math-game/ASR" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/plus.svg" alt="abacus">
+            </div>
+            <div class="banner-text"> Addition Speed Run! (Recently released.) </div>
+            <div class="banner-right"> </div>
+        </a>
+    </div>
+
+    <hr>
+    <h3> more thing... </h3>
+
+    <div class="banners">
+        <a href="https://youtube.com/@RayStudio1130" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/youtube-color.png" alt="headphones">
+            </div>
+            <div class="banner-text"> My youtube channel (see all my videos!) </div>
+            <div class="banner-right"> </div>
+        </a>
+
+        <a href="https://musescore.com/user/101427901" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/headphones.svg" alt="headphones">
+            </div>
+            <div class="banner-text"> My all music on musescore </div>
+            <div class="banner-right"> </div>
+        </a>
+
+        <a href="mailto:rayzhi1130@gmail.com" target="_blank" class="banner">
+            <div class="banner-left">
+                <img src="/images/icon/mail-opened.svg" alt="mail opened">
+            </div>
+            <div class="banner-text"> Email me: rayzhi1130@gmail.com </div>
+            <div class="banner-right"> </div>
+        </a>
+    </div>
+
+    <hr>
+    <h3> sites-settings </h3>
+
+    <div class="banners r2-grids">
+        <div class="banner r2-grid banner-disable-hover gray-theme">
+            <div class="banner-text"> Change themes? (upcoming) </div>
+        </div>
+
+        <a href="https://forms.gle/tUSECSCn4PTzTqxQ8" target="_blank" class="banner r2-grid">
+            <div class="banner-text"> Feedback? cilck there! </div>
+        </a>
+    </div>
+
+    <footer>
+        <p>Copyright &copy; 2025 RayStudio. All rights reserved. </p>
+        <p>Love the Lord your God with all your heart and with all your soul and with all your mind. <br>
+            from Matthew 22:37)</p>
+    </footer>
+</body>
+
+</html>
