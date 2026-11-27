@@ -62,5 +62,6 @@ export const siteConfig = {
     globalAnnouncement: {
         message: "We just Moved to New Website!",
         link: "/moving-from-old-website",
+        updatedAt: Math.round(Date.now() / 60_000) * 60_000,
     },
 };

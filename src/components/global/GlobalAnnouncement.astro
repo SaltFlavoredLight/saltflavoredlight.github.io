@@ -45,6 +45,7 @@ const oldWebsiteAnnouncement = {
         oldLink: oldWebsiteAnnouncement.link,
         globalMessage: siteConfig.globalAnnouncement.message,
         globalLink: siteConfig.globalAnnouncement.link,
+        announcementUpdatedAt: siteConfig.globalAnnouncement.updatedAt,
     }}
 >
     const announcement = document.querySelector(
@@ -52,6 +53,53 @@ const oldWebsiteAnnouncement = {
     );
 
     if (announcement) {
+        const dismissalCookieName = "global-announcement-dismissed";
+        const cookiePath = "; Path=/; SameSite=Lax";
+        const clearDismissalCookie = () => {
+            document.cookie =
+                `${dismissalCookieName}=; Max-Age=0${cookiePath}`;
+        };
+        const getDismissal = () => {
+            const cookie = document.cookie
+                .split("; ")
+                .find((entry) =>
+                    entry.startsWith(`${dismissalCookieName}=`),
+                );
+
+            if (!cookie) return null;
+
+            const value = cookie.slice(dismissalCookieName.length + 1);
+            const separatorIndex = value.lastIndexOf("~");
+
+            if (separatorIndex === -1) {
+                clearDismissalCookie();
+                return null;
+            }
+
+            const timestamp = Number(value.slice(separatorIndex + 1));
+
+            if (!Number.isFinite(timestamp)) {
+                clearDismissalCookie();
+                return null;
+            }
+
+            try {
+                return {
+                    message: decodeURIComponent(
+                        value.slice(0, separatorIndex),
+                    ),
+                    timestamp,
+                };
+            } catch (error) {
+                console.warn(
+                    "Could not read the announcement dismissal cookie.",
+                    error,
+                );
+                clearDismissalCookie();
+                return null;
+            }
+        };
+
         const messageElement = announcement.querySelector(
             ".announcement-message",
         );
@@ -77,12 +125,23 @@ const oldWebsiteAnnouncement = {
             isOldWebsiteVisitor ? oldLink : globalLink
         )?.trim() ?? "";
 
+        const dismissal = getDismissal();
+        const isNewAnnouncement =
+            dismissal &&
+            dismissal.message !== message &&
+            dismissal.timestamp !== announcementUpdatedAt;
+        if (isNewAnnouncement) clearDismissalCookie();
+
+        const shouldShowAnnouncement =
+            !dismissal || isNewAnnouncement;
+
         if (
             message &&
             href &&
             messageElement &&
             link &&
-            dismissButton
+            dismissButton &&
+            shouldShowAnnouncement
         ) {
             messageElement.textContent = message;
             link.href = href;
@@ -112,6 +171,8 @@ const oldWebsiteAnnouncement = {
 
             dismissButton.addEventListener("click", () => {
                 window.clearTimeout(autoCloseTimer);
+                document.cookie =
+                    `${dismissalCookieName}=${encodeURIComponent(message)}~${announcementUpdatedAt}; Max-Age=31536000${cookiePath}`;
                 closeAnnouncement();
             });
         }
