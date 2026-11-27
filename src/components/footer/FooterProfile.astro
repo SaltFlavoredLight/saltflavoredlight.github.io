@@ -11,11 +11,11 @@ import HomeButton from "#components/site/HomeButtons.astro";
 ---
 
 <div class="site-info">
-    <a class="profile-link" href="/">
+    <div class="profile-link">
         <Image alt="Ray's Avatar" src={logo} class="avatar" />
         <h2>{siteConfig.footerTitle}</h2>
         <p>{siteConfig.aboutMessageShort}</p>
-    </a>
+    </div>
     <hr>
     <HomeButton />
 </div>
@@ -39,12 +39,6 @@ import HomeButton from "#components/site/HomeButtons.astro";
         margin: 0;
         font: inherit;
         text-decoration: none;
-    }
-
-    .profile-link:hover,
-    .profile-link:hover h2,
-    .profile-link:hover p {
-        color: var(--text-primary);
     }
 
     p,
