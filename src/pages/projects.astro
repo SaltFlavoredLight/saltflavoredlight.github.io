@@ -5,10 +5,7 @@ import HStack from "#components/element/HStack.astro";
 import { getFlatSiteEntries } from "#lib/sitemap.js";
 
 // Fetch all entries from your sitemap utility
-const rawEntries = await getFlatSiteEntries({
-    includeCollections: true,
-    collections: ["labs", "math"], 
-});
+const rawEntries = await getFlatSiteEntries();
 
 // Filter to ONLY include sub-pages under /labs/* and /math/* 
 // (excluding /labs/ and /math/ root pages, and all other site pages)

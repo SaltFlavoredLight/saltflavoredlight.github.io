@@ -17,7 +17,15 @@ interface Props extends HTMLAttributes<'button'>, Omit<HTMLAttributes<'a'>, 'typ
 import "#src/styles/main.css";
 import "#src/styles/themes.css";
 
-const { href, format = "fill", jsid, noBottomMargin = true } = Astro.props;
+const {
+    href,
+    format = "fill",
+    jsid,
+    id,
+    class: className,
+    noBottomMargin = true,
+    ...attributes
+} = Astro.props;
 
 const isNoBottomMargin = noBottomMargin === true || noBottomMargin === "true";
 
@@ -26,11 +34,20 @@ const finalStyle =
 ---
 
 {href ? (
-    <a href={href} class={finalStyle} id={jsid}>
+    <a
+        {...attributes}
+        href={href}
+        class:list={[finalStyle, className]}
+        id={id ?? jsid}
+    >
         <slot />
     </a>
 ) : (
-    <button class={finalStyle} id={jsid}>
+    <button
+        {...attributes}
+        class:list={[finalStyle, className]}
+        id={id ?? jsid}
+    >
         <slot />
     </button>
 )}

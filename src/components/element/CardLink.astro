@@ -43,8 +43,8 @@ finalClass += !isNoBottomMargin ? "has-margin " : "";
 finalClass += theme ? `theme-${theme}` : "";
 ---
 
-<a class={finalClass} href={href}>
-    <Card noBottomMargin hover={hover} theme={theme} borderless={borderless} target={target}>
+<a class={finalClass} href={href} target={target}>
+    <Card noBottomMargin hover={hover} theme={theme} borderless={borderless}>
         {title && title.trim() !== "" && (
             <h3>
                 {title}

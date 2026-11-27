@@ -150,7 +150,9 @@ const oldWebsiteAnnouncement = {
             announcement.setAttribute("aria-hidden", "false");
 
             requestAnimationFrame(() => {
-                announcement.classList.add("is-visible");
+                requestAnimationFrame(() => {
+                    announcement.classList.add("is-visible");
+                });
             });
 
             let isClosing = false;
@@ -253,7 +255,7 @@ const oldWebsiteAnnouncement = {
         line-height: 1;
     }
 
-    .announcement-link:finish-visible,
+    .announcement-link:focus-visible,
     .announcement-dismiss:focus-visible {
         outline: 2px solid currentColor;
         outline-offset: 3px;
