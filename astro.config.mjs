@@ -20,7 +20,19 @@ export default defineConfig({
     scopedStyleStrategy: 'class', 
     integrations: [
         mdx(),
-        sitemap()
+        sitemap({
+            filter: (page) => {
+                const pathname = new URL(page).pathname;
+                
+                // Add paths you want to exclude from the sitemap
+                const excludedPaths = ['/hidden', '/old-website', '/drafts'];
+                if (excludedPaths.some(p => pathname.startsWith(p))) {
+                    return false;
+                }
+
+                return true;
+            }
+        })
     ],
     vite: {
         resolve: {
