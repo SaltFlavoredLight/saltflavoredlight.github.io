@@ -38,10 +38,14 @@ const allPosts = rawEntries.filter(post => {
         fullWidth={true}
         forceStretch={false}
     >
-        {allPosts.map((post) => (
-            <CardLink noBottomMargin={true} title={post.title} href={post.href}>
-                {post.description}
-            </CardLink>
-        ))}
+    {allPosts.map((post) => (
+        <CardLink
+            noBottomMargin={true}
+            title={post.title}
+            href={post.path}
+        >
+            {post.description}
+        </CardLink>
+    ))}
     </HStack>
 </PageLayout>
