@@ -15,11 +15,6 @@ const oldWebsiteAnnouncement = {
     class="global-announcement"
     aria-label="Site announcement"
     aria-hidden="true"
-    data-old-source={oldWebsiteAnnouncement.source}
-    data-old-message={oldWebsiteAnnouncement.message}
-    data-old-link={oldWebsiteAnnouncement.link}
-    data-global-message={siteConfig.globalAnnouncement.message}
-    data-global-link={siteConfig.globalAnnouncement.link}
     hidden
 >
     <svg
@@ -43,8 +38,16 @@ const oldWebsiteAnnouncement = {
     </button>
 </aside>
 
-<script>
-    const announcement = document.querySelector<HTMLElement>(
+<script
+    define:vars={{
+        oldSource: oldWebsiteAnnouncement.source,
+        oldMessage: oldWebsiteAnnouncement.message,
+        oldLink: oldWebsiteAnnouncement.link,
+        globalMessage: siteConfig.globalAnnouncement.message,
+        globalLink: siteConfig.globalAnnouncement.link,
+    }}
+>
+    const announcement = document.querySelector(
         ".global-announcement",
     );
 
@@ -52,27 +55,26 @@ const oldWebsiteAnnouncement = {
         const messageElement = announcement.querySelector(
             ".announcement-message",
         );
-        const link = announcement.querySelector<HTMLAnchorElement>(
+        const link = announcement.querySelector(
             ".announcement-link",
         );
-        const dismissButton = announcement.querySelector<HTMLButtonElement>(
+        const dismissButton = announcement.querySelector(
             ".announcement-dismiss",
         );
-        const oldSource = announcement.dataset.oldSource?.trim() ?? "";
+        
         const requestedSource = new URLSearchParams(
             window.location.search,
         ).get("utm_source");
+        
         const isOldWebsiteVisitor =
-            oldSource !== "" && requestedSource === oldSource;
+            oldSource.trim() !== "" && requestedSource === oldSource.trim();
+        
         const message = (
-            isOldWebsiteVisitor
-                ? announcement.dataset.oldMessage
-                : announcement.dataset.globalMessage
+            isOldWebsiteVisitor ? oldMessage : globalMessage
         )?.trim() ?? "";
+        
         const href = (
-            isOldWebsiteVisitor
-                ? announcement.dataset.oldLink
-                : announcement.dataset.globalLink
+            isOldWebsiteVisitor ? oldLink : globalLink
         )?.trim() ?? "";
 
         if (
@@ -190,7 +192,7 @@ const oldWebsiteAnnouncement = {
         line-height: 1;
     }
 
-    .announcement-link:focus-visible,
+    .announcement-link:finish-visible,
     .announcement-dismiss:focus-visible {
         outline: 2px solid currentColor;
         outline-offset: 3px;
