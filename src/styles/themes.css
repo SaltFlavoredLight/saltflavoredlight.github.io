@@ -81,6 +81,21 @@
     --purple-theme-1: #4A2E7D; 
     --purple-theme-2: #211436; 
     --purple-theme-3: #6C42B3; 
+
+    /* ------------------------------------------
+       THEME 5: SKY BLUE
+       ------------------------------------------ */
+    --skyblue-dark-1: #111;
+    --skyblue-dark-2: #111;
+    --skyblue-dark-3: #111;
+
+    --skyblue-light-1: #FFFFFF;
+    --skyblue-light-2: #F1F6FC;
+    --skyblue-light-3: #DCE9F7;
+
+    --skyblue-theme-1: #0e4e9c;
+    --skyblue-theme-2: #082C57;
+    --skyblue-theme-3: #2878C7;
     /* #endregion */
 }
 
@@ -175,4 +190,27 @@ body, .theme-rose {
     --theme-dark: var(--purple-theme-1);
     --theme-light: var(--purple-light-3);
     --border-color: var(--purple-theme-1);
+}
+
+.theme-blue {
+    --bg-primary: var(--skyblue-light-1);
+    --bg-surface: var(--skyblue-light-2);
+    --bg-alt: var(--skyblue-light-3);
+    --text-primary: var(--skyblue-dark-1);
+    --text-muted: var(--skyblue-theme-2);
+    --theme-primary: var(--skyblue-theme-1);
+    --theme-dark: var(--skyblue-theme-2);
+    --theme-light: var(--skyblue-theme-3);
+    --border-color: var(--skyblue-theme-3);
+}
+.theme-blue.dark-mode {
+    --bg-primary: var(--skyblue-dark-1);
+    --bg-surface: var(--skyblue-theme-2);
+    --bg-alt: var(--skyblue-dark-3);
+    --text-primary: var(--skyblue-light-1);
+    --text-muted: var(--skyblue-light-2);
+    --theme-primary: var(--skyblue-theme-3);
+    --theme-dark: var(--skyblue-theme-1);
+    --theme-light: var(--skyblue-light-3);
+    --border-color: var(--skyblue-theme-1);
 }

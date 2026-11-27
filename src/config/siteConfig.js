@@ -64,4 +64,6 @@ export const siteConfig = {
         link: "/moving-from-old-website",
         updatedAt: Math.round(Date.now() / 60_000) * 60_000,
     },
+
+    theme: "rose", // check between 5 themes: "rose", "green", "blue", "gold", "purple"
 };
