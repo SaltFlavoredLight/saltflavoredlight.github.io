@@ -190,3 +190,52 @@ export async function generateSitemap({
 
   return buildTree(entries);
 }
+
+// Add this new function to your existing lib/sitemap.js
+
+export async function getFlatSiteEntries({
+  includeCollections = true, // Set to true to test/enable Content Collections
+  collections = ["labs", "math"], // Add your collection names here
+  excludedRoutes = EXCLUDED_ROUTES,
+} = {}) {
+  // 1. Collect normal pages (adjust glob if you are targeting specific folders like labs/math)
+  const pageModules = import.meta.glob(
+    ["/src/pages/**/*.{astro,md,mdx}", "/src/content/**/*.{md,mdx}"], 
+    { eager: true, query: "?raw", import: "default" }
+  );
+
+  const pages = Object.entries(pageModules)
+    .map(([file, source]) => {
+      const path = normalizePath(file);
+      return {
+        title: extractTitle(source, path),
+        path,
+        type: "page",
+        description: `Explore content for ${extractTitle(source, path)}`,
+      };
+    })
+    .filter(page => !isExcluded(page.path, excludedRoutes));
+
+  // 2. Collect CMS entries safely (catches errors if a collection doesn't exist yet)
+  const cmsEntries = includeCollections
+    ? await collectCollections(collections)
+    : [];
+
+  const filteredCMS = cmsEntries.map(entry => ({
+    title: entry.title,
+    path: entry.path,
+    type: "collection",
+    collection: entry.collection,
+    description: `Collection entry for ${entry.title}`,
+  })).filter(entry => !isExcluded(entry.path, excludedRoutes));
+
+  // 3. Merge, remove duplicates, and sort
+  const entries = [
+    ...new Map(
+      [...pages, ...filteredCMS].map(entry => [entry.path, entry])
+    ).values(),
+  ];
+
+  entries.sort((a, b) => a.path.localeCompare(b.path));
+  return entries;
+}
