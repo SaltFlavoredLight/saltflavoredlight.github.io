@@ -5,6 +5,7 @@ import "#src/styles/themes.css";
 import SiteHeader from "#src/components/header/SiteHeader.astro";
 import SiteFooter from "#src/components/footer/SiteFooter.astro";
 import GlobalAnnouncement from "#src/components/global/GlobalAnnouncement.astro";
+import CustomizeWeight from "#src/components/global/CustomizeWeight.astro";
 
 // All 9 mathematical combinations of Header & Footer states
 type SiteLayout =
@@ -148,7 +149,10 @@ switch (pageLayout) {
                 <SiteFooter landing={true} singlePage={pageLayout} />
             )
         }
+
         <GlobalAnnouncement />
+
+        <CustomizeWeight />
     </body>
 </html>
 
